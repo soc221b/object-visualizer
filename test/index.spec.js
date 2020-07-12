@@ -1,5 +1,3 @@
-const template = require('../dist/template.cjs.node.js')
+const preEl = document.getElementById("app");
 
-test('template', () => {
-  expect(template.default()).toBe(true)
-})
+ObjectVisualizer.mount(data, preEl);

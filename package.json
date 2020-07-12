@@ -1,35 +1,38 @@
 {
-  "name": "template",
+  "name": "object-visualizer",
   "version": "0.0.1",
-  "description": "template",
+  "description": "object-visualizer",
   "main": "index.js",
-  "module": "dist/template.esm.min.js",
-  "unpkg": "dist/template.iife.min.js",
-  "jsdelivr": "dist/template.iife.js",
+  "module": "dist/object-visualizer.esm.min.js",
+  "unpkg": "dist/object-visualizer.iife.min.js",
+  "jsdelivr": "dist/object-visualizer.iife.js",
   "author": "Ernest Chang <iattempt.net@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iendeavor/template"
+    "url": "git+https://github.com/iendeavor/object-visualizer"
   },
   "bugs": {
-    "url": "https://github.com/iendeavor/template/issues"
+    "url": "https://github.com/iendeavor/object-visualizer/issues"
   },
-  "homepage": "https://github.com/iendeavor/template#readme",
+  "homepage": "https://github.com/iendeavor/object-visualizer#readme",
   "keywords": [
-    "template"
+    "object",
+    "JSON",
+    "DOM",
+    "visualize",
+    "view"
   ],
   "scripts": {
     "build": "node script/build.js",
-    "lint": "prettier . --write",
-    "test": "jest ."
+    "lint": "prettier . --write"
   },
   "devDependencies": {
     "esbuild": "^0.6.1",
-    "jest": "^26.1.0",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "vue": "^3.0.0-beta.20"
   },
   "husky": {
     "hooks": {
