@@ -1,0 +1,39 @@
+{
+  "name": "template",
+  "version": "0.0.1",
+  "description": "template",
+  "main": "index.js",
+  "module": "dist/template.esm.min.js",
+  "unpkg": "dist/template.iife.min.js",
+  "jsdelivr": "dist/template.iife.js",
+  "author": "Ernest Chang <iattempt.net@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iendeavor/template"
+  },
+  "bugs": {
+    "url": "https://github.com/iendeavor/template/issues"
+  },
+  "homepage": "https://github.com/iendeavor/template#readme",
+  "keywords": [
+    "template"
+  ],
+  "scripts": {
+    "build": "node script/build.js",
+    "lint": "prettier . --write",
+    "test": "jest ."
+  },
+  "devDependencies": {
+    "esbuild": "^0.6.1",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "git diff --exit-code && git diff --staged --exit-code && yarn lint"
+    }
+  }
+}
