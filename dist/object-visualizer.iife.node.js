@@ -9950,17 +9950,15 @@ ${codeFrame}` : message);
     },
     setup(props) {
       const isExpanding = ref(false);
-      const expand = () => isExpanding.value = !isExpanding.value;
       const innerCollapseSignal = ref(false);
       const innerExpandSignal = ref(false);
-      const collapseRecursive = async () => {
+      const expand = () => isExpanding.value = !isExpanding.value;
+      const collapseRecursive = () => {
         isExpanding.value = false;
-        await nextTick();
         innerCollapseSignal.value = !innerCollapseSignal.value;
       };
-      const expandRecursive = async () => {
+      const expandRecursive = () => {
         isExpanding.value = true;
-        await nextTick();
         innerExpandSignal.value = !innerExpandSignal.value;
       };
       watch(() => props.expandSignal, expandRecursive);
@@ -9968,12 +9966,12 @@ ${codeFrame}` : message);
       return {
         representingType: toString(props.data),
         config: config_default,
+        isExpanding,
         expand,
         innerExpandSignal,
         innerCollapseSignal,
-        isExpanding,
-        collapseRecursive,
-        expandRecursive
+        expandRecursive,
+        collapseRecursive
       };
     },
     components: {
@@ -10023,8 +10021,8 @@ ${codeFrame}` : message);
         <span
           class="key"
           @click.exact="expand"
-          @click.meta.exact="collapseRecursive"
-          @click.shift.exact="expandRecursive"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
         <span v-show="isExpanding" class="value">
@@ -10032,8 +10030,8 @@ ${codeFrame}` : message);
             v-for="(value, index) of data"
             :name="index + ''"
             :data="data[index]"
-            :collapseSignal="innerCollapseSignal"
             :expandSignal="innerExpandSignal"
+            :collapseSignal="innerCollapseSignal"
           ></wrapper>
         </span>
       </span>
@@ -10048,8 +10046,8 @@ ${codeFrame}` : message);
         <span
           class="key"
           @click.exact="expand"
-          @click.meta.exact="collapseRecursive"
-          @click.shift.exact="expandRecursive"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
         <span v-show="isExpanding" class="value">
@@ -10058,8 +10056,8 @@ ${codeFrame}` : message);
             class="value"
             :name="key"
             :data="data[key]"
-            :collapseSignal="innerCollapseSignal"
             :expandSignal="innerExpandSignal"
+            :collapseSignal="innerCollapseSignal"
           ></wrapper>
         </span>
       </span>
