@@ -14,6 +14,10 @@ export default {
     },
   },
   template: `
-    <span class="ov null">{{ name }}: {{ data }}</span>
+    <span class="ov null">
+      <span class="ov null key">{{ name }}</span>
+      <span class="ov null separator">:&nbsp;</span>
+      <span class="ov null value">null</span>
+    </span>
   `.trim(),
 };
