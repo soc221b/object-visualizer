@@ -1,74 +1,51 @@
-body {
-  padding: 20px;
-}
-
 pre {
-  background-color: #eee;
-  border-radius: 5px;
+  border-radius: 4px;
+  overflow-x: auto;
   margin: 0;
   padding: 10px;
-  padding-left: 30px;
-  overflow-y: auto;
+  font-family: monospace;
+  font-size: 1.2rem;
+  line-height: 1.2;
 }
 
-.ov {
-  display: inline-flex;
+.array > .value,
+.object > .value {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.key {
+  color: purple;
+}
+
+.string > .value {
+  color: red;
+}
+
+.boolean > .value,
+.number > .value {
+  color: blue;
+}
+
+.null > .value,
+.undefined > .value {
+  color: #999;
 }
 
 .indicator {
   cursor: pointer;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
 }
 
-.indicator > span:first-child {
-  font-size: 0.7rem;
+.array > .key,
+.object > .key {
+  cursor: pointer;
 }
 
-.ov.array.wrapper,
-.ov.object.wrapper {
-  display: block;
-}
-
-.ov.array.wrapper > *,
-.ov.object.wrapper > * {
-  margin-left: 20px;
-}
-
-.ov.array.wrapper > .indicator,
-.ov.object.wrapper > .indicator {
-  margin-left: -16px;
-}
-
-.ov.array.wrapper > .indicator > .key,
-.ov.object.wrapper > .indicator > .key {
-  margin-left: 5px;
-}
-
-.ov.array,
-.ov.object {
-  display: block;
-}
-
-.ov.array.indicator,
-.ov.object.indicator,
-.ov.array.key,
-.ov.object.key {
-  display: inline;
-}
-
-.ov .key {
-  color: purple;
-}
-
-.ov.string .value {
-  color: red;
-}
-
-.ov.boolean .value,
-.ov.number .value {
-  color: blue;
-}
-
-.ov.null.value,
-.ov.undefined.value {
-  color: #999;
+.value > .array,
+.value > .object {
+  position: relative;
+  left: -1rem;
 }
