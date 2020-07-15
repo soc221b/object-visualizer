@@ -90,7 +90,7 @@ export default {
           @click="expand"
         >
           <span>{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? '[]' : '(' + data.length + ') [...]' }}</span>
+          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
         </span>
 
         <template v-if="isExpanding">
