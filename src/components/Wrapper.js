@@ -1,4 +1,4 @@
-import { ref } from "vue/dist/vue.esm-browser";
+import { ref, watch, nextTick } from "vue/dist/vue.esm-browser";
 import UndefinedWrapper from "./UndefinedWrapper";
 import NullWrapper from "./NullWrapper";
 import BooleanWrapper from "./BooleanWrapper";
@@ -32,15 +32,42 @@ export default {
       required: true,
       type: String,
     },
+    collapseSignal: {
+      default: false,
+      type: Boolean,
+    },
+    expandSignal: {
+      default: false,
+      type: Boolean,
+    },
   },
   setup(props) {
     const isExpanding = ref(false);
     const expand = () => (isExpanding.value = !isExpanding.value);
+    const innerCollapseSignal = ref(false);
+    const innerExpandSignal = ref(false);
+    const collapseRecursive = async () => {
+      isExpanding.value = false;
+      await nextTick();
+      innerCollapseSignal.value = !innerCollapseSignal.value;
+    };
+    const expandRecursive = async () => {
+      isExpanding.value = true;
+      await nextTick();
+      innerExpandSignal.value = !innerExpandSignal.value;
+    };
+
+    watch(() => props.expandSignal, expandRecursive);
+    watch(() => props.collapseSignal, collapseRecursive);
     return {
       representingType: toString(props.data),
       config,
       expand,
+      innerExpandSignal,
+      innerCollapseSignal,
       isExpanding,
+      collapseRecursive,
+      expandRecursive,
     };
   },
   components: {
@@ -91,18 +118,20 @@ export default {
         >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
         <span
           class="key"
-          @click="expand"
+          @click.exact="expand"
+          @click.meta.exact="collapseRecursive"
+          @click.shift.exact="expandRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
-        <template v-if="isExpanding">
-          <span class="value">
-            <wrapper
-              v-for="(value, index) of data"
-              :name="index + ''"
-              :data="data[index]"
-            ></wrapper>
-          </span>
-        </template>
+        <span v-show="isExpanding" class="value">
+          <wrapper
+            v-for="(value, index) of data"
+            :name="index + ''"
+            :data="data[index]"
+            :collapseSignal="innerCollapseSignal"
+            :expandSignal="innerExpandSignal"
+          ></wrapper>
+        </span>
       </span>
     </template>
 
@@ -114,19 +143,21 @@ export default {
         >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
         <span
           class="key"
-          @click="expand"
+          @click.exact="expand"
+          @click.meta.exact="collapseRecursive"
+          @click.shift.exact="expandRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
-        <template v-if="isExpanding">
-          <span class="value">
-            <wrapper
-              v-for="key of Object.keys(data).sort()"
-              class="value"
-              :name="key"
-              :data="data[key]"
-            ></wrapper>
-          </span>
-        </template>
+        <span v-show="isExpanding" class="value">
+          <wrapper
+            v-for="key of Object.keys(data).sort()"
+            class="value"
+            :name="key"
+            :data="data[key]"
+            :collapseSignal="innerCollapseSignal"
+            :expandSignal="innerExpandSignal"
+          ></wrapper>
+        </span>
       </span>
     </template>
   `,
