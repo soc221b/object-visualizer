@@ -17,6 +17,7 @@ pre {
 
 .key {
   color: purple;
+  user-select: none;
 }
 
 .string > .value {
@@ -37,6 +38,7 @@ pre {
   cursor: pointer;
   font-size: 0.8rem;
   margin-right: 0.3rem;
+  user-select: none;
 }
 
 .array > .key,
