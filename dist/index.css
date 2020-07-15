@@ -47,5 +47,5 @@ pre {
 .value > .array,
 .value > .object {
   position: relative;
-  left: -1rem;
+  left: -0.8rem;
 }

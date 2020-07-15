@@ -1,0 +1,51 @@
+pre {
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.array > .value,
+.object > .value {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.key {
+  color: purple;
+}
+
+.string > .value {
+  color: red;
+}
+
+.boolean > .value,
+.number > .value {
+  color: blue;
+}
+
+.null > .value,
+.undefined > .value {
+  color: #999;
+}
+
+.indicator {
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+}
+
+.array > .key,
+.object > .key {
+  cursor: pointer;
+}
+
+.value > .array,
+.value > .object {
+  position: relative;
+  left: -0.8rem;
+}
