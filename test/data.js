@@ -1,5 +1,10 @@
 const data = [
   {
+    aaa: undefined,
+    bbb: null,
+    ccc: false,
+    ddd: 123,
+    eee: "str",
     name: {
       first: "Stacie",
       last: "Anthony",
