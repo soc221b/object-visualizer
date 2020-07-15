@@ -117,7 +117,7 @@ export default {
 
         <template v-if="isExpanding">
           <span
-            v-for="(value, key) of data" class="ov object"
+            v-for="key of Object.keys(data).sort()" class="ov object"
           >
             <wrapper
               class="ov object value"
