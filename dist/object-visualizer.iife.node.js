@@ -9995,7 +9995,7 @@ ${codeFrame}` : message);
           @click="expand"
         >
           <span>{{ isExpanding ? '▼' : '▶' }}</span>
-          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? '[]' : '(' + data.length + ') [...]' }}</span>
+          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
         </span>
 
         <template v-if="isExpanding">
