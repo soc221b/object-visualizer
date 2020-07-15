@@ -84,19 +84,20 @@ export default {
     ></string-wrapper>
 
     <template v-else-if="representingType === 'Array'">
-      <span class="ov wrapper array">
+      <span class="array">
         <span
-          class="ov array indicator"
+          class="indicator"
           @click="expand"
-        >
-          <span>{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
-        </span>
+        >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
+        <span
+          class="key"
+          @click="expand"
+        >{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
         <template v-if="isExpanding">
-          <span v-for="(value, index) of data" class="ov array">
+          <span class="value">
             <wrapper
-              class="ov array value"
+              v-for="(value, index) of data"
               :name="index + ''"
               :data="data[index]"
             ></wrapper>
@@ -106,21 +107,21 @@ export default {
     </template>
 
     <template v-else-if="representingType === 'Object'">
-      <span class="ov wrapper object">
+      <span class="object">
         <span
-          class="ov object indicator"
+          class="indicator"
           @click="expand"
-        >
-          <span>{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-          <span class="ov object key">{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
-        </span>
+        >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
+        <span
+          class="key"
+          @click="expand"
+        >{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
         <template v-if="isExpanding">
-          <span
-            v-for="key of Object.keys(data).sort()" class="ov object"
-          >
+          <span class="value">
             <wrapper
-              class="ov object value"
+              v-for="key of Object.keys(data).sort()"
+              class="value"
               :name="key"
               :data="data[key]"
             ></wrapper>

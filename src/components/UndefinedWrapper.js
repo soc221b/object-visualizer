@@ -14,10 +14,10 @@ export default {
     },
   },
   template: `
-    <span class="ov undefined">
-      <span class="ov undefined key">{{ name }}</span>
-      <span class="ov undefined separator">:&nbsp;</span>
-      <span class="ov undefined value">undefined</span>
+    <span class="undefined">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">undefined</span>
     </span>
   `.trim(),
 };

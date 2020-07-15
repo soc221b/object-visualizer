@@ -14,10 +14,10 @@ export default {
     },
   },
   template: `
-    <span class="ov boolean">
-      <span class="ov boolean key">{{ name }}</span>
-      <span class="ov boolean separator">:&nbsp;</span>
-      <span class="ov boolean value">{{ data }}</span>
+    <span class="boolean">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">{{ data }}</span>
     </span>
   `.trim(),
 };
