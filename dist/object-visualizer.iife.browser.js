@@ -9793,7 +9793,11 @@ ${codeFrame}` : message);
       }
     },
     template: `
-    <span class="ov undefined">{{ name }}: {{ data }}</span>
+    <span class="ov undefined">
+      <span class="ov undefined key">{{ name }}</span>
+      <span class="ov undefined separator">:&nbsp;</span>
+      <span class="ov undefined value">undefined</span>
+    </span>
   `.trim()
   };
 
@@ -9812,7 +9816,11 @@ ${codeFrame}` : message);
       }
     },
     template: `
-    <span class="ov null">{{ name }}: {{ data }}</span>
+    <span class="ov null">
+      <span class="ov null key">{{ name }}</span>
+      <span class="ov null separator">:&nbsp;</span>
+      <span class="ov null value">null</span>
+    </span>
   `.trim()
   };
 
@@ -9831,7 +9839,11 @@ ${codeFrame}` : message);
       }
     },
     template: `
-    <span class="ov boolean">{{ name }}: {{ data }}</span>
+    <span class="ov boolean">
+      <span class="ov boolean key">{{ name }}</span>
+      <span class="ov boolean separator">:&nbsp;</span>
+      <span class="ov boolean value">{{ data }}</span>
+    </span>
   `.trim()
   };
 
@@ -9850,7 +9862,11 @@ ${codeFrame}` : message);
       }
     },
     template: `
-    <span class="ov number">{{ name }}: {{ data }}</span>
+    <span class="ov number">
+      <span class="ov number key">{{ name }}</span>
+      <span class="ov number separator">:&nbsp;</span>
+      <span class="ov number value">{{ data }}</span>
+    </span>
   `.trim()
   };
 
@@ -9869,7 +9885,11 @@ ${codeFrame}` : message);
       }
     },
     template: `
-    <span class="ov string">{{ name }}: '{{ data }}'</span>
+    <span class="ov string">
+      <span class="ov string key">{{ name }}</span>
+      <span class="ov string separator">:&nbsp;</span>
+      <span class="ov string value">"{{ data }}"</span>
+    </span>
   `.trim()
   };
 
@@ -10002,7 +10022,7 @@ ${codeFrame}` : message);
 
         <template v-if="isExpanding">
           <span
-            v-for="(value, key) of data" class="ov object"
+            v-for="key of Object.keys(data).sort()" class="ov object"
           >
             <wrapper
               class="ov object value"
