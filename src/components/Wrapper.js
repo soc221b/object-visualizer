@@ -1,4 +1,4 @@
-import { ref, watch, nextTick } from "vue/dist/vue.esm-browser";
+import { ref, watch } from "vue/dist/vue.esm-browser";
 import UndefinedWrapper from "./UndefinedWrapper";
 import NullWrapper from "./NullWrapper";
 import BooleanWrapper from "./BooleanWrapper";
@@ -43,17 +43,15 @@ export default {
   },
   setup(props) {
     const isExpanding = ref(false);
-    const expand = () => (isExpanding.value = !isExpanding.value);
     const innerCollapseSignal = ref(false);
     const innerExpandSignal = ref(false);
-    const collapseRecursive = async () => {
+    const expand = () => (isExpanding.value = !isExpanding.value);
+    const collapseRecursive = () => {
       isExpanding.value = false;
-      await nextTick();
       innerCollapseSignal.value = !innerCollapseSignal.value;
     };
-    const expandRecursive = async () => {
+    const expandRecursive = () => {
       isExpanding.value = true;
-      await nextTick();
       innerExpandSignal.value = !innerExpandSignal.value;
     };
 
@@ -62,12 +60,12 @@ export default {
     return {
       representingType: toString(props.data),
       config,
+      isExpanding,
       expand,
       innerExpandSignal,
       innerCollapseSignal,
-      isExpanding,
-      collapseRecursive,
       expandRecursive,
+      collapseRecursive,
     };
   },
   components: {
@@ -128,8 +126,8 @@ export default {
             v-for="(value, index) of data"
             :name="index + ''"
             :data="data[index]"
-            :collapseSignal="innerCollapseSignal"
             :expandSignal="innerExpandSignal"
+            :collapseSignal="innerCollapseSignal"
           ></wrapper>
         </span>
       </span>
@@ -154,8 +152,8 @@ export default {
             class="value"
             :name="key"
             :data="data[key]"
-            :collapseSignal="innerCollapseSignal"
             :expandSignal="innerExpandSignal"
+            :collapseSignal="innerCollapseSignal"
           ></wrapper>
         </span>
       </span>
