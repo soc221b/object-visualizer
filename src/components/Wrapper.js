@@ -117,8 +117,8 @@ export default {
         <span
           class="key"
           @click.exact="expand"
-          @click.meta.exact="collapseRecursive"
-          @click.shift.exact="expandRecursive"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
         <span v-show="isExpanding" class="value">
@@ -142,8 +142,8 @@ export default {
         <span
           class="key"
           @click.exact="expand"
-          @click.meta.exact="collapseRecursive"
-          @click.shift.exact="expandRecursive"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
         >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
         <span v-show="isExpanding" class="value">
