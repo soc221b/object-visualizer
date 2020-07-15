@@ -5,7 +5,7 @@ export const mount = (
   data,
   preEl,
   options = {
-    rootName: "$",
+    rootName: "",
   }
 ) => {
   createApp(Wrapper, { data: data, name: options.rootName }).mount(preEl);

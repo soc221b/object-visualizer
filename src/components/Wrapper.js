@@ -92,7 +92,7 @@ export default {
         <span
           class="key"
           @click="expand"
-        >{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
+        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
         <template v-if="isExpanding">
           <span class="value">
@@ -115,7 +115,7 @@ export default {
         <span
           class="key"
           @click="expand"
-        >{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
+        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
         <template v-if="isExpanding">
           <span class="value">
