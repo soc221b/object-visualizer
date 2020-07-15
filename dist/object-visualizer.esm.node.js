@@ -9763,10 +9763,10 @@ var UndefinedWrapper_default = {
     }
   },
   template: `
-    <span class="ov undefined">
-      <span class="ov undefined key">{{ name }}</span>
-      <span class="ov undefined separator">:&nbsp;</span>
-      <span class="ov undefined value">undefined</span>
+    <span class="undefined">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">undefined</span>
     </span>
   `.trim()
 };
@@ -9786,10 +9786,10 @@ var NullWrapper_default = {
     }
   },
   template: `
-    <span class="ov null">
-      <span class="ov null key">{{ name }}</span>
-      <span class="ov null separator">:&nbsp;</span>
-      <span class="ov null value">null</span>
+    <span class="null">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">null</span>
     </span>
   `.trim()
 };
@@ -9809,10 +9809,10 @@ var BooleanWrapper_default = {
     }
   },
   template: `
-    <span class="ov boolean">
-      <span class="ov boolean key">{{ name }}</span>
-      <span class="ov boolean separator">:&nbsp;</span>
-      <span class="ov boolean value">{{ data }}</span>
+    <span class="boolean">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">{{ data }}</span>
     </span>
   `.trim()
 };
@@ -9832,10 +9832,10 @@ var NumberWrapper_default = {
     }
   },
   template: `
-    <span class="ov number">
-      <span class="ov number key">{{ name }}</span>
-      <span class="ov number separator">:&nbsp;</span>
-      <span class="ov number value">{{ data }}</span>
+    <span class="number">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">{{ data }}</span>
     </span>
   `.trim()
 };
@@ -9855,10 +9855,10 @@ var StringWrapper_default = {
     }
   },
   template: `
-    <span class="ov string">
-      <span class="ov string key">{{ name }}</span>
-      <span class="ov string separator">:&nbsp;</span>
-      <span class="ov string value">"{{ data }}"</span>
+    <span class="string">
+      <span class="key">{{ name }}</span>
+      <span class="separator">:&nbsp;</span>
+      <span class="value">"{{ data }}"</span>
     </span>
   `.trim()
 };
@@ -9959,19 +9959,20 @@ var Wrapper_default = {
     ></string-wrapper>
 
     <template v-else-if="representingType === 'Array'">
-      <span class="ov wrapper array">
+      <span class="array">
         <span
-          class="ov array indicator"
+          class="indicator"
           @click="expand"
-        >
-          <span>{{ isExpanding ? '▼' : '▶' }}</span>
-          <span class="ov array key">{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
-        </span>
+        >{{ isExpanding ? '▼' : '▶' }}</span>
+        <span
+          class="key"
+          @click="expand"
+        >{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
         <template v-if="isExpanding">
-          <span v-for="(value, index) of data" class="ov array">
+          <span class="value">
             <wrapper
-              class="ov array value"
+              v-for="(value, index) of data"
               :name="index + ''"
               :data="data[index]"
             ></wrapper>
@@ -9981,21 +9982,21 @@ var Wrapper_default = {
     </template>
 
     <template v-else-if="representingType === 'Object'">
-      <span class="ov wrapper object">
+      <span class="object">
         <span
-          class="ov object indicator"
+          class="indicator"
           @click="expand"
-        >
-          <span>{{ isExpanding ? '▼' : '▶' }}</span>
-          <span class="ov object key">{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
-        </span>
+        >{{ isExpanding ? '▼' : '▶' }}</span>
+        <span
+          class="key"
+          @click="expand"
+        >{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
         <template v-if="isExpanding">
-          <span
-            v-for="key of Object.keys(data).sort()" class="ov object"
-          >
+          <span class="value">
             <wrapper
-              class="ov object value"
+              v-for="key of Object.keys(data).sort()"
+              class="value"
               :name="key"
               :data="data[key]"
             ></wrapper>
