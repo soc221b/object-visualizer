@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require("fs");
 const rimraf = require("rimraf");
 const esbuild = require("esbuild");
 const packageJson = require("../package.json");
@@ -39,4 +39,6 @@ for (const format of formats) {
   }
 }
 
-fs.createReadStream('src/index.css').pipe(fs.createWriteStream('dist/index.css'));
+fs.createReadStream("src/index.css").pipe(
+  fs.createWriteStream("dist/index.css")
+);
