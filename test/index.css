@@ -19,6 +19,10 @@ pre {
   cursor: pointer;
 }
 
+.indicator > span:first-child {
+  font-size: .7rem
+}
+
 .ov.array.wrapper,
 .ov.object.wrapper {
   display: block;
@@ -31,7 +35,7 @@ pre {
 
 .ov.array.wrapper > .indicator,
 .ov.object.wrapper > .indicator {
-  margin-left: -15px;
+  margin-left: -16px;
 }
 
 .ov.array.wrapper > .indicator > .key,
@@ -49,4 +53,22 @@ pre {
 .ov.array.key,
 .ov.object.key {
   display: inline;
+}
+
+.ov .key {
+  color: purple;
+}
+
+.ov.string .value {
+  color: red;
+}
+
+.ov.boolean .value,
+.ov.number .value {
+  color: blue;
+}
+
+.ov.null.value,
+.ov.undefined.value {
+  color: #999;
 }
