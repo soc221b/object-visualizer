@@ -9908,16 +9908,42 @@ var Wrapper_default = {
     name: {
       required: true,
       type: String
+    },
+    collapseSignal: {
+      default: false,
+      type: Boolean
+    },
+    expandSignal: {
+      default: false,
+      type: Boolean
     }
   },
   setup(props) {
     const isExpanding = ref(false);
     const expand = () => isExpanding.value = !isExpanding.value;
+    const innerCollapseSignal = ref(false);
+    const innerExpandSignal = ref(false);
+    const collapseRecursive = async () => {
+      isExpanding.value = false;
+      await nextTick();
+      innerCollapseSignal.value = !innerCollapseSignal.value;
+    };
+    const expandRecursive = async () => {
+      isExpanding.value = true;
+      await nextTick();
+      innerExpandSignal.value = !innerExpandSignal.value;
+    };
+    watch(() => props.expandSignal, expandRecursive);
+    watch(() => props.collapseSignal, collapseRecursive);
     return {
       representingType: toString(props.data),
       config: config_default,
       expand,
-      isExpanding
+      innerExpandSignal,
+      innerCollapseSignal,
+      isExpanding,
+      collapseRecursive,
+      expandRecursive
     };
   },
   components: {
@@ -9966,18 +9992,20 @@ var Wrapper_default = {
         >{{ isExpanding ? '▼' : '▶' }}</span>
         <span
           class="key"
-          @click="expand"
-        >{{ name }} {{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
+          @click.exact="expand"
+          @click.meta.exact="collapseRecursive"
+          @click.shift.exact="expandRecursive"
+        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
 
-        <template v-if="isExpanding">
-          <span class="value">
-            <wrapper
-              v-for="(value, index) of data"
-              :name="index + ''"
-              :data="data[index]"
-            ></wrapper>
-          </span>
-        </template>
+        <span v-show="isExpanding" class="value">
+          <wrapper
+            v-for="(value, index) of data"
+            :name="index + ''"
+            :data="data[index]"
+            :collapseSignal="innerCollapseSignal"
+            :expandSignal="innerExpandSignal"
+          ></wrapper>
+        </span>
       </span>
     </template>
 
@@ -9989,19 +10017,21 @@ var Wrapper_default = {
         >{{ isExpanding ? '▼' : '▶' }}</span>
         <span
           class="key"
-          @click="expand"
-        >{{ name }} {{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
+          @click.exact="expand"
+          @click.meta.exact="collapseRecursive"
+          @click.shift.exact="expandRecursive"
+        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
 
-        <template v-if="isExpanding">
-          <span class="value">
-            <wrapper
-              v-for="key of Object.keys(data).sort()"
-              class="value"
-              :name="key"
-              :data="data[key]"
-            ></wrapper>
-          </span>
-        </template>
+        <span v-show="isExpanding" class="value">
+          <wrapper
+            v-for="key of Object.keys(data).sort()"
+            class="value"
+            :name="key"
+            :data="data[key]"
+            :collapseSignal="innerCollapseSignal"
+            :expandSignal="innerExpandSignal"
+          ></wrapper>
+        </span>
       </span>
     </template>
   `
@@ -10009,7 +10039,7 @@ var Wrapper_default = {
 
 // src/index.js
 const mount = (data, preEl, options = {
-  rootName: "$"
+  rootName: ""
 }) => {
   createApp(Wrapper_default, {data, name: options.rootName}).mount(preEl);
 };
