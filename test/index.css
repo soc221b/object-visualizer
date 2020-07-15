@@ -20,7 +20,7 @@ pre {
 }
 
 .indicator > span:first-child {
-  font-size: .7rem
+  font-size: 0.7rem;
 }
 
 .ov.array.wrapper,
