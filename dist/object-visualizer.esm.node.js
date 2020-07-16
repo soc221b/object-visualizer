@@ -9858,7 +9858,9 @@ var StringWrapper_default = {
     <span class="string">
       <span class="key">{{ name }}</span>
       <span class="separator">:&nbsp;</span>
-      <span class="value">"{{ data }}"</span>
+      <span class="quotes">"</span>
+      <span class="value">{{ data }}</span>
+      <span class="quotes">"</span>
     </span>
   `.trim()
 };
@@ -9993,7 +9995,29 @@ var Wrapper_default = {
           @click.exact="expand"
           @click.meta.exact="expandRecursive"
           @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && data.length > 0 ? 'Array(' + data.length + ')' : '(' + data.length + ') [...]' }}</span>
+        >{{ name === '' ? '' : name }}</span>
+        <span
+          class="separator"
+          @click.exact="expand"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
+        >{{ name === '' ? '' : ': ' }}</span>
+        <span
+          class="count"
+          @click.exact="expand"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
+        >
+          {{ isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : '' }}
+        </span>
+        <span
+          class="preview"
+          @click.exact="expand"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
+        >
+          {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
+        </span>
 
         <span v-show="isExpanding" class="value">
           <wrapper
@@ -10018,7 +10042,23 @@ var Wrapper_default = {
           @click.exact="expand"
           @click.meta.exact="expandRecursive"
           @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name + ': ' }}{{ isExpanding && Object.keys(data).length > 0 ? '{}' : '{...}' }}</span>
+        >{{ name === '' ? '' : name }}</span>
+        <span
+          class="separator"
+          @click.exact="expand"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
+        >
+          {{ name === '' ? '' : ': ' }}
+        </span>
+        <span
+          class="preview"
+          @click.exact="expand"
+          @click.meta.exact="expandRecursive"
+          @click.meta.shift.exact="collapseRecursive"
+        >
+          {{ isExpanding ? '' : '{...}' }}
+        </span>
 
         <span v-show="isExpanding" class="value">
           <wrapper

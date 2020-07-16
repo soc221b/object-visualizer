@@ -3,9 +3,10 @@ pre {
   overflow-x: auto;
   margin: 0;
   padding: 10px;
-  font-family: monospace;
-  font-size: 1.2rem;
-  line-height: 1.2;
+  font-family: Menlo;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  background-color: hsl(0, 0%, 13%);
 }
 
 .array > .value,
@@ -16,22 +17,29 @@ pre {
 }
 
 .key {
-  color: purple;
+  color: hsl(300, 60%, 65%);
   user-select: none;
 }
 
 .string > .value {
-  color: red;
+  color: hsl(12, 100%, 40%);
 }
 
 .boolean > .value,
 .number > .value {
-  color: blue;
+  color: hsl(250, 70%, 65%);
 }
 
 .null > .value,
 .undefined > .value {
-  color: #999;
+  color: hsl(0, 0%, 40%);
+}
+
+.separator {
+  cursor: pointer;
+  font-size: 0.8rem;
+  user-select: none;
+  color: hsl(0, 0%, 80%);
 }
 
 .indicator {
@@ -39,6 +47,7 @@ pre {
   font-size: 0.8rem;
   margin-right: 0.3rem;
   user-select: none;
+  color: hsl(0, 0%, 50%);
 }
 
 .array > .key,
@@ -50,4 +59,13 @@ pre {
 .value > .object {
   position: relative;
   left: -0.8rem;
+}
+
+.count,
+.preview,
+.quotes {
+  cursor: pointer;
+  font-size: 0.8rem;
+  user-select: none;
+  color: hsl(0, 0%, 80%);
 }
