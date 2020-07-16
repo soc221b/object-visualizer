@@ -17,7 +17,9 @@ export default {
     <span class="string">
       <span class="key">{{ name }}</span>
       <span class="separator">:&nbsp;</span>
-      <span class="value">"{{ data }}"</span>
+      <span class="quotes">"</span>
+      <span class="value">{{ data }}</span>
+      <span class="quotes">"</span>
     </span>
   `.trim(),
 };
