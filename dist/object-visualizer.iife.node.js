@@ -9795,7 +9795,7 @@ ${codeFrame}` : message);
     template: `
     <span class="undefined">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">undefined</span>
     </span>
   `.trim()
@@ -9818,7 +9818,7 @@ ${codeFrame}` : message);
     template: `
     <span class="null">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">null</span>
     </span>
   `.trim()
@@ -9841,7 +9841,7 @@ ${codeFrame}` : message);
     template: `
     <span class="boolean">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">{{ data }}</span>
     </span>
   `.trim()
@@ -9864,7 +9864,7 @@ ${codeFrame}` : message);
     template: `
     <span class="number">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">{{ data }}</span>
     </span>
   `.trim()
@@ -9887,7 +9887,7 @@ ${codeFrame}` : message);
     template: `
     <span class="string">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="quotes">"</span>
       <span class="value">{{ data }}</span>
       <span class="quotes">"</span>

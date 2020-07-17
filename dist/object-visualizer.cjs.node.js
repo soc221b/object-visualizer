@@ -9775,7 +9775,7 @@ var UndefinedWrapper_default = {
   template: `
     <span class="undefined">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">undefined</span>
     </span>
   `.trim()
@@ -9798,7 +9798,7 @@ var NullWrapper_default = {
   template: `
     <span class="null">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">null</span>
     </span>
   `.trim()
@@ -9821,7 +9821,7 @@ var BooleanWrapper_default = {
   template: `
     <span class="boolean">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">{{ data }}</span>
     </span>
   `.trim()
@@ -9844,7 +9844,7 @@ var NumberWrapper_default = {
   template: `
     <span class="number">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">{{ data }}</span>
     </span>
   `.trim()
@@ -9867,7 +9867,7 @@ var StringWrapper_default = {
   template: `
     <span class="string">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="quotes">"</span>
       <span class="value">{{ data }}</span>
       <span class="quotes">"</span>
