@@ -16,7 +16,7 @@ export default {
   template: `
     <span class="null">
       <span class="key">{{ name }}</span>
-      <span class="separator">:&nbsp;</span>
+      <span v-if="name !== ''" class="separator">:&nbsp;</span>
       <span class="value">null</span>
     </span>
   `.trim(),
