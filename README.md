@@ -13,6 +13,17 @@ Nested values
 - Recursive expand `Meta+Click`
 - Recursive collapse `Meta+Shift+Click`
 
+## Installation
+
+```
+$ npm install object-visualizer
+```
+
+```html
+<script src="https://unpkg.com/object-visualizer"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/object-visualizer/dist/index.css">
+```
+
 ## How to use
 
 1. Import the **mount** function from the module
