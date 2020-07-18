@@ -9911,7 +9911,7 @@ function useExpand(props = {collapseSignal, expandSignal}) {
 }
 
 // src/components/ArrayWrapper.js
-var ArrayWrapper_default = ArrayWrapper = {
+var ArrayWrapper_default = {
   name: "array-wrapper",
   props: {
     data: {
@@ -9990,7 +9990,7 @@ var ArrayWrapper_default = ArrayWrapper = {
 };
 
 // src/components/ObjectWrapper.js
-var ObjectWrapper_default = ObjectWrapper = {
+var ObjectWrapper_default = {
   name: "object-wrapper",
   props: {
     data: {

@@ -9926,7 +9926,7 @@ ${codeFrame}` : message);
   }
 
   // src/components/ArrayWrapper.js
-  var ArrayWrapper_default = ArrayWrapper = {
+  var ArrayWrapper_default = {
     name: "array-wrapper",
     props: {
       data: {
@@ -10005,7 +10005,7 @@ ${codeFrame}` : message);
   };
 
   // src/components/ObjectWrapper.js
-  var ObjectWrapper_default = ObjectWrapper = {
+  var ObjectWrapper_default = {
     name: "object-wrapper",
     props: {
       data: {
