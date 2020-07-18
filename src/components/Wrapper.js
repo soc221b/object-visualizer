@@ -7,24 +7,11 @@ import ArrayWrapper from "./ArrayWrapper";
 import ObjectWrapper from "./ObjectWrapper";
 import { toString } from "../util";
 
-const types = new Set([
-  "Undefined",
-  "Null",
-  "Boolean",
-  "Number",
-  "String",
-  "Array",
-  "Object",
-]);
-
 const Wrapper = {
   name: "wrapper",
   props: {
     data: {
       required: true,
-      validator(data) {
-        return types.has(toString(data));
-      },
     },
     name: {
       required: true,
