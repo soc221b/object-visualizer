@@ -1,4 +1,4 @@
-import { createApp } from "vue/dist/vue.esm-browser";
+import { createApp, render } from "vue/dist/vue.esm-browser";
 import Wrapper from "./components/Wrapper";
 
 export default (
@@ -9,5 +9,6 @@ export default (
   }
 ) => {
   el.classList.add("object-visualizer");
+  render(null, el);
   createApp(Wrapper, { data: data, name: options.rootName }).mount(el);
 };
