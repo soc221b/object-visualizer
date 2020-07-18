@@ -32,7 +32,6 @@ export default {
     } = useExpand(props);
 
     return {
-      representingType: toString(props.data),
       isExpanding,
       innerExpandSignal,
       innerCollapseSignal,
