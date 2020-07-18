@@ -49,7 +49,7 @@ const preEl = $("#app");
 
 3. Have your data on a variable
 
-```
+```js
 const data = {}
 ```
 
