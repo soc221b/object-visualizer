@@ -10183,6 +10183,7 @@ ${codeFrame}` : message);
     rootName: ""
   }) => {
     el.classList.add("object-visualizer");
+    render(null, el);
     createApp(Wrapper_default, {data, name: options.rootName}).mount(el);
   };
   return require_src();

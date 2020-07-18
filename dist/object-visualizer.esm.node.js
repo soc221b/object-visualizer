@@ -10158,6 +10158,7 @@ var mount_default = (data, el, options = {
   rootName: ""
 }) => {
   el.classList.add("object-visualizer");
+  render(null, el);
   createApp(Wrapper_default, {data, name: options.rootName}).mount(el);
 };
 
