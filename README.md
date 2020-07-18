@@ -21,7 +21,11 @@ $ npm install object-visualizer
 
 ```html
 <script src="https://unpkg.com/object-visualizer"></script>
-<link type="text/css" rel="stylesheet" href="https://unpkg.com/object-visualizer/dist/index.css">
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="https://unpkg.com/object-visualizer/dist/index.css"
+/>
 ```
 
 ## How to use
