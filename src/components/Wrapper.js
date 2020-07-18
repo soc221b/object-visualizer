@@ -1,13 +1,11 @@
-import { ref, watch } from "vue/dist/vue.esm-browser";
 import UndefinedWrapper from "./UndefinedWrapper";
 import NullWrapper from "./NullWrapper";
 import BooleanWrapper from "./BooleanWrapper";
 import NumberWrapper from "./NumberWrapper";
 import StringWrapper from "./StringWrapper";
-// import ArrayWrapper from "./ArrayWrapper";
-// import ObjectWrapper from "./ObjectWrapper";
 import { toString } from "../util";
 import config from "../config";
+import { useExpand } from "../hooks";
 
 const types = new Set([
   "Undefined",
@@ -19,7 +17,168 @@ const types = new Set([
   "Object",
 ]);
 
-export default {
+const ArrayWrapper = {
+  name: "array-wrapper",
+  props: {
+    data: {
+      required: true,
+      validator(data) {
+        return toString(data) === "Array";
+      },
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    collapseSignal: {
+      default: false,
+      type: Boolean,
+    },
+    expandSignal: {
+      default: false,
+      type: Boolean,
+    },
+  },
+  setup(props) {
+    const {
+      isExpanding,
+      innerExpandSignal,
+      innerCollapseSignal,
+      handleClick,
+    } = useExpand(props);
+
+    return {
+      representingType: toString(props.data),
+      config,
+      isExpanding,
+      innerExpandSignal,
+      innerCollapseSignal,
+      handleClick,
+    };
+  },
+  components: {
+    // Wrapper,
+  },
+  template: `
+    <span class="array">
+      <span
+        class="indicator"
+        @click="handleClick"
+      >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
+      <span
+        class="key"
+        @click="handleClick"
+      >{{ name === '' ? '' : name }}</span>
+      <span
+        class="separator"
+        @click="handleClick"
+      >{{ name === '' ? '' : ': ' }}</span>
+      <span
+        class="count"
+        @click="handleClick"
+      >
+        {{ isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : '' }}
+      </span>
+      <span
+        class="preview"
+        @click="handleClick"
+      >
+        {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
+      </span>
+
+      <span v-show="isExpanding" class="value">
+        <wrapper
+          v-for="(value, index) of data"
+          :name="index + ''"
+          :data="data[index]"
+          :expand-signal="innerExpandSignal"
+          :collapse-signal="innerCollapseSignal"
+        ></wrapper>
+      </span>
+    </span>
+  `,
+};
+
+const ObjectWrapper = {
+  name: "object-wrapper",
+  props: {
+    data: {
+      required: true,
+      validator(data) {
+        return toString(data) === "Object";
+      },
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    collapseSignal: {
+      default: false,
+      type: Boolean,
+    },
+    expandSignal: {
+      default: false,
+      type: Boolean,
+    },
+  },
+  setup(props) {
+    const {
+      isExpanding,
+      innerExpandSignal,
+      innerCollapseSignal,
+      handleClick,
+    } = useExpand(props);
+
+    return {
+      representingType: toString(props.data),
+      config,
+      isExpanding,
+      innerExpandSignal,
+      innerCollapseSignal,
+      handleClick,
+    };
+  },
+  components: {
+    // Wrapper,
+  },
+  template: `
+    <span class="object">
+      <span
+        class="indicator"
+        @click="handleClick"
+      >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
+      <span
+        class="key"
+        @click="handleClick"
+      >{{ name === '' ? '' : name }}</span>
+      <span
+        class="separator"
+        @click="handleClick"
+      >
+        {{ name === '' ? '' : ': ' }}
+      </span>
+      <span
+        class="preview"
+        @click="handleClick"
+      >
+        {{ isExpanding ? '' : '{...}' }}
+      </span>
+
+      <span v-show="isExpanding" class="value">
+        <wrapper
+          v-for="key of Object.keys(data).sort()"
+          class="value"
+          :name="key"
+          :data="data[key]"
+          :expand-signal="innerExpandSignal"
+          :collapse-signal="innerCollapseSignal"
+        ></wrapper>
+      </span>
+    </span>
+  `,
+};
+
+const Wrapper = {
   name: "wrapper",
   props: {
     data: {
@@ -42,30 +201,9 @@ export default {
     },
   },
   setup(props) {
-    const isExpanding = ref(false);
-    const innerCollapseSignal = ref(false);
-    const innerExpandSignal = ref(false);
-    const expand = () => (isExpanding.value = !isExpanding.value);
-    const collapseRecursive = () => {
-      isExpanding.value = false;
-      innerCollapseSignal.value = !innerCollapseSignal.value;
-    };
-    const expandRecursive = () => {
-      isExpanding.value = true;
-      innerExpandSignal.value = !innerExpandSignal.value;
-    };
-
-    watch(() => props.expandSignal, expandRecursive);
-    watch(() => props.collapseSignal, collapseRecursive);
     return {
       representingType: toString(props.data),
       config,
-      isExpanding,
-      expand,
-      innerExpandSignal,
-      innerCollapseSignal,
-      expandRecursive,
-      collapseRecursive,
     };
   },
   components: {
@@ -74,8 +212,8 @@ export default {
     BooleanWrapper,
     NumberWrapper,
     StringWrapper,
-    // ArrayWrapper,
-    // ObjectWrapper,
+    ArrayWrapper,
+    ObjectWrapper,
   },
   template: `
     <undefined-wrapper
@@ -108,93 +246,25 @@ export default {
       :data="data"
     ></string-wrapper>
 
-    <template v-else-if="representingType === 'Array'">
-      <span class="array">
-        <span
-          class="indicator"
-          @click="expand"
-        >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-        <span
-          class="key"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name }}</span>
-        <span
-          class="separator"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : ': ' }}</span>
-        <span
-          class="count"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : '' }}
-        </span>
-        <span
-          class="preview"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
-        </span>
+    <array-wrapper
+      v-else-if="representingType === 'Array'"
+      :name="name"
+      :data="data"
+      :collapse-signal="collapseSignal"
+      :expand-signal="expandSignal"
+    ></array-wrapper>
 
-        <span v-show="isExpanding" class="value">
-          <wrapper
-            v-for="(value, index) of data"
-            :name="index + ''"
-            :data="data[index]"
-            :expandSignal="innerExpandSignal"
-            :collapseSignal="innerCollapseSignal"
-          ></wrapper>
-        </span>
-      </span>
-    </template>
-
-    <template v-else-if="representingType === 'Object'">
-      <span class="object">
-        <span
-          class="indicator"
-          @click="expand"
-        >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-        <span
-          class="key"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name }}</span>
-        <span
-          class="separator"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ name === '' ? '' : ': ' }}
-        </span>
-        <span
-          class="preview"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding ? '' : '{...}' }}
-        </span>
-
-        <span v-show="isExpanding" class="value">
-          <wrapper
-            v-for="key of Object.keys(data).sort()"
-            class="value"
-            :name="key"
-            :data="data[key]"
-            :expandSignal="innerExpandSignal"
-            :collapseSignal="innerCollapseSignal"
-          ></wrapper>
-        </span>
-      </span>
-    </template>
+    <object-wrapper
+      v-else-if="representingType === 'Object'"
+      :name="name"
+      :data="data"
+      :collapse-signal="collapseSignal"
+      :expand-signal="expandSignal"
+    ></object-wrapper>
   `,
 };
+
+ArrayWrapper.components.Wrapper = Wrapper;
+ObjectWrapper.components.Wrapper = Wrapper;
+
+export default Wrapper;
