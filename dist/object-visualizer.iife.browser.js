@@ -19,13 +19,8 @@ var ObjectVisualizer = (() => {
   // src/index.js
   var require_src = __commonJS((exports) => {
     __export(exports, {
-      mount: () => mount
+      mount: () => mount_default
     });
-    const mount = (data, preEl, options = {
-      rootName: ""
-    }) => {
-      createApp(Wrapper_default, {data, name: options.rootName}).mount(preEl);
-    };
   });
 
   // node_modules/vue/dist/vue.esm-browser.js
@@ -5576,7 +5571,7 @@ Component that was made reactive: `, type);
   }
   function injectHook(type, hook, target = currentInstance, prepend = false) {
     if (target) {
-      const hooks = target[type] || (target[type] = []);
+      const hooks3 = target[type] || (target[type] = []);
       const wrappedHook = hook.__weh || (hook.__weh = (...args) => {
         if (target.isUnmounted) {
           return;
@@ -5589,9 +5584,9 @@ Component that was made reactive: `, type);
         return res;
       });
       if (prepend) {
-        hooks.unshift(wrappedHook);
+        hooks3.unshift(wrappedHook);
       } else {
-        hooks.push(wrappedHook);
+        hooks3.push(wrappedHook);
       }
     } else {
       const apiName = `on${capitalize(ErrorTypeStrings[type].replace(/ hook$/, ""))}`;
@@ -5726,7 +5721,7 @@ Component that was made reactive: `, type);
     const callHook = (hook, args) => {
       hook && callWithAsyncErrorHandling(hook, instance, 9, args);
     };
-    const hooks = {
+    const hooks3 = {
       persisted,
       beforeEnter(el) {
         let hook = onBeforeEnter;
@@ -5769,8 +5764,8 @@ Component that was made reactive: `, type);
           } else {
             callHook(afterHook, [el]);
           }
-          if (hooks.delayedLeave) {
-            hooks.delayedLeave();
+          if (hooks3.delayedLeave) {
+            hooks3.delayedLeave();
           }
           el._enterCb = void 0;
         };
@@ -5819,7 +5814,7 @@ Component that was made reactive: `, type);
         }
       }
     };
-    return hooks;
+    return hooks3;
   }
   function emptyPlaceholder(vnode) {
     if (isKeepAlive(vnode)) {
@@ -5831,11 +5826,11 @@ Component that was made reactive: `, type);
   function getKeepAliveChild(vnode) {
     return isKeepAlive(vnode) ? vnode.children ? vnode.children[0] : void 0 : vnode;
   }
-  function setTransitionHooks(vnode, hooks) {
+  function setTransitionHooks(vnode, hooks3) {
     if (vnode.shapeFlag & 6 && vnode.component) {
-      setTransitionHooks(vnode.component.subTree, hooks);
+      setTransitionHooks(vnode.component.subTree, hooks3);
     } else {
-      vnode.transition = hooks;
+      vnode.transition = hooks3;
     }
   }
   function getTransitionRawChildren(children, keepComment = false) {
@@ -8269,8 +8264,8 @@ If you want to remount the same app, move your app creation logic into a factory
     currentInstance = instance;
   };
   const isBuiltInTag = /* @__PURE__ */ makeMap("slot,component");
-  function validateComponentName(name, config2) {
-    const appIsNativeTag = config2.isNativeTag || NO;
+  function validateComponentName(name, config) {
+    const appIsNativeTag = config.isNativeTag || NO;
     if (isBuiltInTag(name) || appIsNativeTag(name)) {
       warn("Do not use built-in or reserved HTML elements as component id: " + name);
     }
@@ -9895,28 +9890,195 @@ ${codeFrame}` : message);
   `.trim()
   };
 
-  // src/config.js
-  const defaultConfig = Object.freeze({
-    keyColors: {
-      null: "rebeccapurple",
-      boolean: "rebeccapurple",
-      number: "rebeccapurple",
-      string: "rebeccapurple",
-      array: "rebeccapurple",
-      object: "rebeccapurple"
+  // src/hooks.js
+  function useExpand(props = {collapseSignal, expandSignal}) {
+    const isExpanding = ref(false);
+    const expandOrCollapse = () => {
+      isExpanding.value = !isExpanding.value;
+    };
+    const innerCollapseSignal = ref(false);
+    const collapseRecursive = (ev) => {
+      isExpanding.value = false;
+      innerCollapseSignal.value = !innerCollapseSignal.value;
+    };
+    watch(() => props.collapseSignal, collapseRecursive);
+    const innerExpandSignal = ref(false);
+    const expandRecursive = () => {
+      isExpanding.value = true;
+      innerExpandSignal.value = !innerExpandSignal.value;
+    };
+    watch(() => props.expandSignal, expandRecursive);
+    const handleClick = (ev) => {
+      if (ev.metaKey === true && ev.shiftKey === true) {
+        collapseRecursive(ev);
+      } else if (ev.metaKey === true) {
+        expandRecursive(ev);
+      } else {
+        expandOrCollapse(ev);
+      }
+    };
+    return {
+      isExpanding,
+      innerCollapseSignal,
+      innerExpandSignal,
+      handleClick
+    };
+  }
+
+  // src/components/ArrayWrapper.js
+  var ArrayWrapper_default = ArrayWrapper = {
+    name: "array-wrapper",
+    props: {
+      data: {
+        required: true,
+        validator(data) {
+          return toString(data) === "Array";
+        }
+      },
+      name: {
+        required: true,
+        type: String
+      },
+      collapseSignal: {
+        default: false,
+        type: Boolean
+      },
+      expandSignal: {
+        default: false,
+        type: Boolean
+      }
     },
-    valueColors: {
-      null: "blue",
-      boolean: "blue",
-      number: "blue",
-      string: "indianred",
-      array: "black",
-      object: "black"
+    setup(props) {
+      const {
+        isExpanding,
+        innerExpandSignal,
+        innerCollapseSignal,
+        handleClick
+      } = useExpand(props);
+      return {
+        representingType: toString(props.data),
+        isExpanding,
+        innerExpandSignal,
+        innerCollapseSignal,
+        handleClick
+      };
     },
-    ignorePathCallback: (path) => false,
-    defaultExpandCallback: (path) => path.length <= 1
-  });
-  var config_default = defaultConfig;
+    components: {},
+    template: `
+    <span class="array">
+      <span
+        class="indicator"
+        @click="handleClick"
+      >{{ isExpanding ? '▼' : '▶' }}</span>
+      <span
+        class="key"
+        @click="handleClick"
+      >{{ name === '' ? '' : name }}</span>
+      <span
+        class="separator"
+        @click="handleClick"
+      >{{ name === '' ? '' : ': ' }}</span>
+      <span
+        class="count"
+        @click="handleClick"
+      >
+        {{ isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : '' }}
+      </span>
+      <span
+        class="preview"
+        @click="handleClick"
+      >
+        {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
+      </span>
+
+      <span v-show="isExpanding" class="value">
+        <wrapper
+          v-for="(value, index) of data"
+          :name="index + ''"
+          :data="data[index]"
+          :expand-signal="innerExpandSignal"
+          :collapse-signal="innerCollapseSignal"
+        ></wrapper>
+      </span>
+    </span>
+  `
+  };
+
+  // src/components/ObjectWrapper.js
+  var ObjectWrapper_default = ObjectWrapper = {
+    name: "object-wrapper",
+    props: {
+      data: {
+        required: true,
+        validator(data) {
+          return toString(data) === "Object";
+        }
+      },
+      name: {
+        required: true,
+        type: String
+      },
+      collapseSignal: {
+        default: false,
+        type: Boolean
+      },
+      expandSignal: {
+        default: false,
+        type: Boolean
+      }
+    },
+    setup(props) {
+      const {
+        isExpanding,
+        innerExpandSignal,
+        innerCollapseSignal,
+        handleClick
+      } = useExpand(props);
+      return {
+        representingType: toString(props.data),
+        isExpanding,
+        innerExpandSignal,
+        innerCollapseSignal,
+        handleClick
+      };
+    },
+    components: {},
+    template: `
+    <span class="object">
+      <span
+        class="indicator"
+        @click="handleClick"
+      >{{ isExpanding ? '▼' : '▶' }}</span>
+      <span
+        class="key"
+        @click="handleClick"
+      >{{ name === '' ? '' : name }}</span>
+      <span
+        class="separator"
+        @click="handleClick"
+      >
+        {{ name === '' ? '' : ': ' }}
+      </span>
+      <span
+        class="preview"
+        @click="handleClick"
+      >
+        {{ isExpanding ? '' : '{...}' }}
+      </span>
+
+      <span v-show="isExpanding" class="value">
+        <wrapper
+          v-for="key of Object.keys(data).sort()"
+          class="value"
+          :name="key"
+          :data="data[key]"
+          :expand-signal="innerExpandSignal"
+          :collapse-signal="innerCollapseSignal"
+        ></wrapper>
+      </span>
+    </span>
+  `
+  };
 
   // src/components/Wrapper.js
   const types = new Set([
@@ -9928,7 +10090,7 @@ ${codeFrame}` : message);
     "Array",
     "Object"
   ]);
-  var Wrapper_default = {
+  const Wrapper = {
     name: "wrapper",
     props: {
       data: {
@@ -9951,29 +10113,8 @@ ${codeFrame}` : message);
       }
     },
     setup(props) {
-      const isExpanding = ref(false);
-      const innerCollapseSignal = ref(false);
-      const innerExpandSignal = ref(false);
-      const expand = () => isExpanding.value = !isExpanding.value;
-      const collapseRecursive = () => {
-        isExpanding.value = false;
-        innerCollapseSignal.value = !innerCollapseSignal.value;
-      };
-      const expandRecursive = () => {
-        isExpanding.value = true;
-        innerExpandSignal.value = !innerExpandSignal.value;
-      };
-      watch(() => props.expandSignal, expandRecursive);
-      watch(() => props.collapseSignal, collapseRecursive);
       return {
-        representingType: toString(props.data),
-        config: config_default,
-        isExpanding,
-        expand,
-        innerExpandSignal,
-        innerCollapseSignal,
-        expandRecursive,
-        collapseRecursive
+        representingType: toString(props.data)
       };
     },
     components: {
@@ -9981,7 +10122,9 @@ ${codeFrame}` : message);
       NullWrapper: NullWrapper_default,
       BooleanWrapper: BooleanWrapper_default,
       NumberWrapper: NumberWrapper_default,
-      StringWrapper: StringWrapper_default
+      StringWrapper: StringWrapper_default,
+      ArrayWrapper: ArrayWrapper_default,
+      ObjectWrapper: ObjectWrapper_default
     },
     template: `
     <undefined-wrapper
@@ -10014,95 +10157,33 @@ ${codeFrame}` : message);
       :data="data"
     ></string-wrapper>
 
-    <template v-else-if="representingType === 'Array'">
-      <span class="array">
-        <span
-          class="indicator"
-          @click="expand"
-        >{{ isExpanding ? '▼' : '▶' }}</span>
-        <span
-          class="key"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name }}</span>
-        <span
-          class="separator"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : ': ' }}</span>
-        <span
-          class="count"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : '' }}
-        </span>
-        <span
-          class="preview"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
-        </span>
+    <array-wrapper
+      v-else-if="representingType === 'Array'"
+      :name="name"
+      :data="data"
+      :collapse-signal="collapseSignal"
+      :expand-signal="expandSignal"
+    ></array-wrapper>
 
-        <span v-show="isExpanding" class="value">
-          <wrapper
-            v-for="(value, index) of data"
-            :name="index + ''"
-            :data="data[index]"
-            :expandSignal="innerExpandSignal"
-            :collapseSignal="innerCollapseSignal"
-          ></wrapper>
-        </span>
-      </span>
-    </template>
-
-    <template v-else-if="representingType === 'Object'">
-      <span class="object">
-        <span
-          class="indicator"
-          @click="expand"
-        >{{ isExpanding ? '▼' : '▶' }}</span>
-        <span
-          class="key"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >{{ name === '' ? '' : name }}</span>
-        <span
-          class="separator"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ name === '' ? '' : ': ' }}
-        </span>
-        <span
-          class="preview"
-          @click.exact="expand"
-          @click.meta.exact="expandRecursive"
-          @click.meta.shift.exact="collapseRecursive"
-        >
-          {{ isExpanding ? '' : '{...}' }}
-        </span>
-
-        <span v-show="isExpanding" class="value">
-          <wrapper
-            v-for="key of Object.keys(data).sort()"
-            class="value"
-            :name="key"
-            :data="data[key]"
-            :expandSignal="innerExpandSignal"
-            :collapseSignal="innerCollapseSignal"
-          ></wrapper>
-        </span>
-      </span>
-    </template>
+    <object-wrapper
+      v-else-if="representingType === 'Object'"
+      :name="name"
+      :data="data"
+      :collapse-signal="collapseSignal"
+      :expand-signal="expandSignal"
+    ></object-wrapper>
   `
+  };
+  ArrayWrapper_default.components.Wrapper = Wrapper;
+  ObjectWrapper_default.components.Wrapper = Wrapper;
+  var Wrapper_default = Wrapper;
+
+  // src/mount.js
+  var mount_default = (data, el, options = {
+    rootName: ""
+  }) => {
+    el.classList.add("object-visualizer");
+    createApp(Wrapper_default, {data, name: options.rootName}).mount(el);
   };
   return require_src();
 })();
