@@ -1,7 +1,7 @@
 import { toString } from "../util";
 import { useExpand } from "../hooks";
 
-export default ArrayWrapper = {
+export default {
   name: "array-wrapper",
   props: {
     data: {

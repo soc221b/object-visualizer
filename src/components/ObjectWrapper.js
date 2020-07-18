@@ -1,7 +1,7 @@
 import { toString } from "../util";
 import { useExpand } from "../hooks";
 
-export default ObjectWrapper = {
+export default {
   name: "object-wrapper",
   props: {
     data: {
