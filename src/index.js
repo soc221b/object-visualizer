@@ -3,10 +3,11 @@ import Wrapper from "./components/Wrapper";
 
 export const mount = (
   data,
-  preEl,
+  el,
   options = {
     rootName: "",
   }
 ) => {
-  createApp(Wrapper, { data: data, name: options.rootName }).mount(preEl);
+  el.classList.add("object-visualizer");
+  createApp(Wrapper, { data: data, name: options.rootName }).mount(el);
 };
