@@ -4,7 +4,6 @@ import BooleanWrapper from "./BooleanWrapper";
 import NumberWrapper from "./NumberWrapper";
 import StringWrapper from "./StringWrapper";
 import { toString } from "../util";
-import config from "../config";
 import { useExpand } from "../hooks";
 
 const types = new Set([
@@ -49,7 +48,6 @@ const ArrayWrapper = {
 
     return {
       representingType: toString(props.data),
-      config,
       isExpanding,
       innerExpandSignal,
       innerCollapseSignal,
@@ -131,7 +129,6 @@ const ObjectWrapper = {
 
     return {
       representingType: toString(props.data),
-      config,
       isExpanding,
       innerExpandSignal,
       innerCollapseSignal,
@@ -203,7 +200,6 @@ const Wrapper = {
   setup(props) {
     return {
       representingType: toString(props.data),
-      config,
     };
   },
   components: {
