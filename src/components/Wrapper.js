@@ -39,9 +39,9 @@ const Wrapper = {
       type: Boolean,
     },
   },
-  setup(props) {
+  setup() {
     return {
-      representingType: toString(props.data),
+      toString,
     };
   },
   components: {
@@ -55,37 +55,37 @@ const Wrapper = {
   },
   template: `
     <undefined-wrapper
-      v-if="representingType === 'Undefined'"
+      v-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
 
     <null-wrapper
-      v-else-if="representingType === 'Null'"
+      v-else-if="toString(data) === 'Null'"
       :name="name"
       :data="data"
     ></null-wrapper>
 
     <boolean-wrapper
-      v-else-if="representingType === 'Boolean'"
+      v-else-if="toString(data) === 'Boolean'"
       :name="name"
       :data="data"
     ></boolean-wrapper>
 
     <number-wrapper
-      v-else-if="representingType === 'Number'"
+      v-else-if="toString(data) === 'Number'"
       :name="name"
       :data="data"
     ></number-wrapper>
 
     <string-wrapper
-      v-else-if="representingType === 'String'"
+      v-else-if="toString(data) === 'String'"
       :name="name"
       :data="data"
     ></string-wrapper>
 
     <array-wrapper
-      v-else-if="representingType === 'Array'"
+      v-else-if="toString(data) === 'Array'"
       :name="name"
       :data="data"
       :collapse-signal="collapseSignal"
@@ -93,7 +93,7 @@ const Wrapper = {
     ></array-wrapper>
 
     <object-wrapper
-      v-else-if="representingType === 'Object'"
+      v-else-if="toString(data) === 'Object'"
       :name="name"
       :data="data"
       :collapse-signal="collapseSignal"
