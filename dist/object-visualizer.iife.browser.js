@@ -19,7 +19,8 @@ var ObjectVisualizer = (() => {
   // src/index.js
   var require_src = __commonJS((exports) => {
     __export(exports, {
-      mount: () => mount_default
+      mount: () => mount_default,
+      reactive: () => reactive
     });
   });
 
@@ -5500,10 +5501,10 @@ Component that was made reactive: `, type);
     }
     if (type != null && type !== true) {
       let isValid = false;
-      const types2 = isArray(type) ? type : [type];
+      const types = isArray(type) ? type : [type];
       const expectedTypes = [];
-      for (let i = 0; i < types2.length && !isValid; i++) {
-        const {valid, expectedType} = assertType(value, types2[i]);
+      for (let i = 0; i < types.length && !isValid; i++) {
+        const {valid, expectedType} = assertType(value, types[i]);
         expectedTypes.push(expectedType || "");
         isValid = valid;
       }
@@ -9956,7 +9957,6 @@ ${codeFrame}` : message);
         handleClick
       } = useExpand(props);
       return {
-        representingType: toString(props.data),
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
@@ -10035,7 +10035,6 @@ ${codeFrame}` : message);
         handleClick
       } = useExpand(props);
       return {
-        representingType: toString(props.data),
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
@@ -10081,23 +10080,11 @@ ${codeFrame}` : message);
   };
 
   // src/components/Wrapper.js
-  const types = new Set([
-    "Undefined",
-    "Null",
-    "Boolean",
-    "Number",
-    "String",
-    "Array",
-    "Object"
-  ]);
   const Wrapper = {
     name: "wrapper",
     props: {
       data: {
-        required: true,
-        validator(data) {
-          return types.has(toString(data));
-        }
+        required: true
       },
       name: {
         required: true,
@@ -10112,9 +10099,9 @@ ${codeFrame}` : message);
         type: Boolean
       }
     },
-    setup(props) {
+    setup() {
       return {
-        representingType: toString(props.data)
+        toString
       };
     },
     components: {
@@ -10128,37 +10115,37 @@ ${codeFrame}` : message);
     },
     template: `
     <undefined-wrapper
-      v-if="representingType === 'Undefined'"
+      v-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
 
     <null-wrapper
-      v-else-if="representingType === 'Null'"
+      v-else-if="toString(data) === 'Null'"
       :name="name"
       :data="data"
     ></null-wrapper>
 
     <boolean-wrapper
-      v-else-if="representingType === 'Boolean'"
+      v-else-if="toString(data) === 'Boolean'"
       :name="name"
       :data="data"
     ></boolean-wrapper>
 
     <number-wrapper
-      v-else-if="representingType === 'Number'"
+      v-else-if="toString(data) === 'Number'"
       :name="name"
       :data="data"
     ></number-wrapper>
 
     <string-wrapper
-      v-else-if="representingType === 'String'"
+      v-else-if="toString(data) === 'String'"
       :name="name"
       :data="data"
     ></string-wrapper>
 
     <array-wrapper
-      v-else-if="representingType === 'Array'"
+      v-else-if="toString(data) === 'Array'"
       :name="name"
       :data="data"
       :collapse-signal="collapseSignal"
@@ -10166,7 +10153,7 @@ ${codeFrame}` : message);
     ></array-wrapper>
 
     <object-wrapper
-      v-else-if="representingType === 'Object'"
+      v-else-if="toString(data) === 'Object'"
       :name="name"
       :data="data"
       :collapse-signal="collapseSignal"

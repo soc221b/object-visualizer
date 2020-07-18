@@ -45,7 +45,7 @@
 .indicator {
   cursor: pointer;
   font-size: 0.8rem;
-  margin-right: 0.3rem;
+  padding-right: 0.3rem;
   user-select: none;
   vertical-align: text-bottom;
   color: hsl(0, 0%, 50%);
