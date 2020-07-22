@@ -50,15 +50,15 @@ const preEl = $("#app");
 3. Have your data on a variable
 
 ```js
-const data = {}
+const data = {};
 ```
 
 > Optional: To make DOM reactivity, just wrap your data via reactive function before mount it.
 
 ```js
-import { reactive } from 'object-visualizer'
+import { reactive } from "object-visualizer";
 
-const data = reactive({})
+const data = reactive({});
 ```
 
 4. Use mount function
