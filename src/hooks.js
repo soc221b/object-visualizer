@@ -30,6 +30,23 @@ export function useExpand(props = { collapseSignal, expandSignal }) {
     }
   };
 
+  watch(
+    () => props.data,
+    () => {
+      const [shouldExpand, isRecursive] = props.expandOnCreatedAndUpdated(
+        props.path
+      );
+      if (shouldExpand) {
+        if (isRecursive) expandRecursive();
+        else isExpanding.value = true;
+      } else {
+        if (isRecursive) expandRecursive();
+        else isExpanding.value = false;
+      }
+    },
+    { immediate: true }
+  );
+
   return {
     isExpanding,
     innerCollapseSignal,

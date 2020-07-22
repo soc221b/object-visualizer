@@ -34,6 +34,14 @@ const Wrapper = {
       default: false,
       type: Boolean,
     },
+    expandOnCreatedAndUpdated: {
+      required: true,
+      type: Function,
+    },
+    ignore: {
+      required: true,
+      type: Function,
+    },
   },
   setup() {
     return {
@@ -50,8 +58,14 @@ const Wrapper = {
     ObjectWrapper,
   },
   template: `
+    <template
+      v-if="ignore(path)"
+    >
+      <span></span>
+    </template>
+
     <undefined-wrapper
-      v-if="toString(data) === 'Undefined'"
+      v-else-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
@@ -87,6 +101,8 @@ const Wrapper = {
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
+      :ignore="ignore"
+      :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     ></array-wrapper>
 
     <object-wrapper
@@ -96,6 +112,8 @@ const Wrapper = {
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
+      :ignore="ignore"
+      :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     ></object-wrapper>
   `,
 };

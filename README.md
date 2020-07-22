@@ -69,6 +69,23 @@ mount(data, preEl);
 
 5. Thats it!!
 
+## Options
+
+```js
+// path will be string[]
+const options = {
+  ignore: (path) => {
+    return false;
+  },
+  expandOnCreatedAndUpdated: (path) => {
+    // [shouldExpand, isRecursive]
+    return [true, true];
+  },
+};
+
+mount(data, preEl, options);
+```
+
 ## License
 
 [MIT](https://github.com/iendeavor/object-visualizer/blob/master/LICENSE)

@@ -31,6 +31,14 @@ export default {
       default: false,
       type: Boolean,
     },
+    expandOnCreatedAndUpdated: {
+      required: true,
+      type: Function,
+    },
+    ignore: {
+      required: true,
+      type: Function,
+    },
   },
   setup(props) {
     const {
@@ -74,15 +82,21 @@ export default {
       </span>
 
       <span v-show="isExpanding" class="value">
-        <wrapper
+        <template
           v-for="key of Object.keys(data).sort()"
-          class="value"
-          :name="key"
-          :path="path.concat(key)"
-          :data="data[key]"
-          :expand-signal="innerExpandSignal"
-          :collapse-signal="innerCollapseSignal"
-        ></wrapper>
+        >
+          <wrapper
+            v-if="ignore(path) === false"
+            class="value"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :ignore="ignore"
+            :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+          ></wrapper>
+        </template>
       </span>
     </span>
   `,
