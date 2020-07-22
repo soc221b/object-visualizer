@@ -4,6 +4,15 @@ import { useExpand } from "../hooks";
 export default {
   name: "array-wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return (
+          toString(path) === "Array" &&
+          path.every((key) => toString(key) === "String")
+        );
+      },
+    },
     data: {
       required: true,
       validator(data) {
@@ -72,6 +81,7 @@ export default {
         <wrapper
           v-for="(value, index) of data"
           :name="index + ''"
+          :path="path.concat(index + '')"
           :data="data[index]"
           :expand-signal="innerExpandSignal"
           :collapse-signal="innerCollapseSignal"

@@ -10,6 +10,15 @@ import { toString } from "../util";
 const Wrapper = {
   name: "wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return (
+          toString(path) === "Array" &&
+          path.every((key) => toString(key) === "String")
+        );
+      },
+    },
     data: {
       required: true,
     },
@@ -74,6 +83,7 @@ const Wrapper = {
     <array-wrapper
       v-else-if="toString(data) === 'Array'"
       :name="name"
+      :path="path"
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
@@ -82,6 +92,7 @@ const Wrapper = {
     <object-wrapper
       v-else-if="toString(data) === 'Object'"
       :name="name"
+      :path="path"
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"

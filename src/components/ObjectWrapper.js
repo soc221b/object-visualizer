@@ -4,6 +4,15 @@ import { useExpand } from "../hooks";
 export default {
   name: "object-wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return (
+          toString(path) === "Array" &&
+          path.every((key) => toString(key) === "String")
+        );
+      },
+    },
     data: {
       required: true,
       validator(data) {
@@ -69,6 +78,7 @@ export default {
           v-for="key of Object.keys(data).sort()"
           class="value"
           :name="key"
+          :path="path.concat(key)"
           :data="data[key]"
           :expand-signal="innerExpandSignal"
           :collapse-signal="innerCollapseSignal"

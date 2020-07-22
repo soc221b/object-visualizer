@@ -10,5 +10,9 @@ export default (
 ) => {
   el.classList.add("object-visualizer");
   render(null, el);
-  createApp(Wrapper, { data: data, name: options.rootName }).mount(el);
+  createApp(Wrapper, {
+    data: data,
+    name: options.rootName,
+    path: [],
+  }).mount(el);
 };
