@@ -8239,8 +8239,8 @@ const setCurrentInstance = (instance) => {
   currentInstance = instance;
 };
 const isBuiltInTag = /* @__PURE__ */ makeMap("slot,component");
-function validateComponentName(name, config) {
-  const appIsNativeTag = config.isNativeTag || NO;
+function validateComponentName(name, config2) {
+  const appIsNativeTag = config2.isNativeTag || NO;
   if (isBuiltInTag(name) || appIsNativeTag(name)) {
     warn("Do not use built-in or reserved HTML elements as component id: " + name);
   }
@@ -9892,6 +9892,20 @@ function useExpand(props = {collapseSignal, expandSignal}) {
       expandOrCollapse(ev);
     }
   };
+  watch(() => props.data, () => {
+    const [shouldExpand, isRecursive] = props.expandOnCreatedAndUpdated(props.path);
+    if (shouldExpand) {
+      if (isRecursive)
+        expandRecursive();
+      else
+        isExpanding.value = true;
+    } else {
+      if (isRecursive)
+        expandRecursive();
+      else
+        isExpanding.value = false;
+    }
+  }, {immediate: true});
   return {
     isExpanding,
     innerCollapseSignal,
@@ -9904,6 +9918,12 @@ function useExpand(props = {collapseSignal, expandSignal}) {
 var ArrayWrapper_default = {
   name: "array-wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+      }
+    },
     data: {
       required: true,
       validator(data) {
@@ -9921,6 +9941,14 @@ var ArrayWrapper_default = {
     expandSignal: {
       default: false,
       type: Boolean
+    },
+    expandOnCreatedAndUpdated: {
+      required: true,
+      type: Function
+    },
+    ignore: {
+      required: true,
+      type: Function
     }
   },
   setup(props) {
@@ -9966,13 +9994,20 @@ var ArrayWrapper_default = {
       </span>
 
       <span v-show="isExpanding" class="value">
-        <wrapper
+        <template
           v-for="(value, index) of data"
-          :name="index + ''"
-          :data="data[index]"
-          :expand-signal="innerExpandSignal"
-          :collapse-signal="innerCollapseSignal"
-        ></wrapper>
+        >
+          <wrapper
+            v-if="ignore(path) === false"
+            :name="index + ''"
+            :path="path.concat(index + '')"
+            :data="data[index]"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :ignore="ignore"
+            :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+          ></wrapper>
+        </template>
       </span>
     </span>
   `
@@ -9982,6 +10017,12 @@ var ArrayWrapper_default = {
 var ObjectWrapper_default = {
   name: "object-wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+      }
+    },
     data: {
       required: true,
       validator(data) {
@@ -9999,6 +10040,14 @@ var ObjectWrapper_default = {
     expandSignal: {
       default: false,
       type: Boolean
+    },
+    expandOnCreatedAndUpdated: {
+      required: true,
+      type: Function
+    },
+    ignore: {
+      required: true,
+      type: Function
     }
   },
   setup(props) {
@@ -10040,14 +10089,21 @@ var ObjectWrapper_default = {
       </span>
 
       <span v-show="isExpanding" class="value">
-        <wrapper
+        <template
           v-for="key of Object.keys(data).sort()"
-          class="value"
-          :name="key"
-          :data="data[key]"
-          :expand-signal="innerExpandSignal"
-          :collapse-signal="innerCollapseSignal"
-        ></wrapper>
+        >
+          <wrapper
+            v-if="ignore(path) === false"
+            class="value"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :ignore="ignore"
+            :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+          ></wrapper>
+        </template>
       </span>
     </span>
   `
@@ -10057,6 +10113,12 @@ var ObjectWrapper_default = {
 const Wrapper = {
   name: "wrapper",
   props: {
+    path: {
+      required: true,
+      validator(path) {
+        return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+      }
+    },
     data: {
       required: true
     },
@@ -10071,6 +10133,14 @@ const Wrapper = {
     expandSignal: {
       default: false,
       type: Boolean
+    },
+    expandOnCreatedAndUpdated: {
+      required: true,
+      type: Function
+    },
+    ignore: {
+      required: true,
+      type: Function
     }
   },
   setup() {
@@ -10088,8 +10158,14 @@ const Wrapper = {
     ObjectWrapper: ObjectWrapper_default
   },
   template: `
+    <template
+      v-if="ignore(path)"
+    >
+      <span></span>
+    </template>
+
     <undefined-wrapper
-      v-if="toString(data) === 'Undefined'"
+      v-else-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
@@ -10121,17 +10197,23 @@ const Wrapper = {
     <array-wrapper
       v-else-if="toString(data) === 'Array'"
       :name="name"
+      :path="path"
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
+      :ignore="ignore"
+      :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     ></array-wrapper>
 
     <object-wrapper
       v-else-if="toString(data) === 'Object'"
       :name="name"
+      :path="path"
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
+      :ignore="ignore"
+      :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     ></object-wrapper>
   `
 };
@@ -10139,13 +10221,29 @@ ArrayWrapper_default.components.Wrapper = Wrapper;
 ObjectWrapper_default.components.Wrapper = Wrapper;
 var Wrapper_default = Wrapper;
 
+// src/config.js
+const defaultConfig = Object.freeze({
+  ignore: (path) => false,
+  expandOnCreatedAndUpdated: (path) => [false, false]
+});
+
 // src/mount.js
-var mount_default = (data, el, options = {
-  rootName: ""
-}) => {
+var mount_default = (data, el, options = {}) => {
+  if (options.rootName === void 0)
+    options.rootName = "";
+  if (options.ignore === void 0)
+    options.ignore = defaultConfig.ignore;
+  if (options.expandOnCreatedAndUpdated === void 0)
+    options.expandOnCreatedAndUpdated = defaultConfig.expandOnCreatedAndUpdated;
   el.classList.add("object-visualizer");
   render(null, el);
-  createApp(Wrapper_default, {data, name: options.rootName}).mount(el);
+  createApp(Wrapper_default, {
+    data,
+    name: options.rootName,
+    path: [],
+    ignore: options.ignore,
+    expandOnCreatedAndUpdated: options.expandOnCreatedAndUpdated
+  }).mount(el);
 };
 
 // src/index.js
