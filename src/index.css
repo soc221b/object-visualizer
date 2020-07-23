@@ -22,7 +22,7 @@
 }
 
 .string > .value {
-  color: hsl(12, 100%, 40%);
+  color: hsl(15, 100%, 70%);
 }
 
 .boolean > .value,
