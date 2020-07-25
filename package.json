@@ -1,6 +1,6 @@
 {
   "name": "object-visualizer",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "object-visualizer",
   "main": "dist/object-visualizer.cjs.node.min.js",
   "module": "dist/object-visualizer.esm.node.min.js",
