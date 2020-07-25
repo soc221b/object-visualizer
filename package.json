@@ -5,7 +5,7 @@
   "main": "dist/object-visualizer.cjs.node.min.js",
   "module": "dist/object-visualizer.esm.node.min.js",
   "unpkg": "dist/object-visualizer.iife.browser.min.js",
-  "jsdelivr": "dist/object-visualizer.iife.browser.js",
+  "jsdelivr": "dist/object-visualizer.iife.browser.min.js",
   "author": "Ernest Chang <iattempt.net@gmail.com>",
   "license": "MIT",
   "repository": {
