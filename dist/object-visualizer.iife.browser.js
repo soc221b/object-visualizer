@@ -9947,7 +9947,7 @@ ${codeFrame}` : message);
       path: {
         required: true,
         validator(path) {
-          return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+          return toString(path) === "Array" && path.every((key) => toString(key) === "String" || toString(key) === "Number");
         }
       },
       data: {
@@ -9972,7 +9972,7 @@ ${codeFrame}` : message);
         required: true,
         type: Function
       },
-      ignore: {
+      getKeys: {
         required: true,
         type: Function
       }
@@ -9984,7 +9984,11 @@ ${codeFrame}` : message);
         innerCollapseSignal,
         handleClick
       } = useExpand(props);
+      const keys = computed$1(() => {
+        return props.getKeys(props.data, props.path);
+      });
       return {
+        keys,
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
@@ -10021,17 +10025,16 @@ ${codeFrame}` : message);
 
       <span v-show="isExpanding" class="value">
         <template
-          v-for="(value, index) of data"
+          v-for="key of keys"
         >
           <wrapper
-            v-if="ignore(path) === false"
-            :name="index + ''"
-            :path="path.concat(index + '')"
-            :data="data[index]"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
-            :ignore="ignore"
             :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+            :getKeys="getKeys"
           ></wrapper>
         </template>
       </span>
@@ -10046,7 +10049,7 @@ ${codeFrame}` : message);
       path: {
         required: true,
         validator(path) {
-          return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+          return toString(path) === "Array" && path.every((key) => toString(key) === "String" || toString(key) === "Number");
         }
       },
       data: {
@@ -10071,7 +10074,7 @@ ${codeFrame}` : message);
         required: true,
         type: Function
       },
-      ignore: {
+      getKeys: {
         required: true,
         type: Function
       }
@@ -10083,7 +10086,11 @@ ${codeFrame}` : message);
         innerCollapseSignal,
         handleClick
       } = useExpand(props);
+      const keys = computed$1(() => {
+        return props.getKeys(props.data, props.path);
+      });
       return {
+        keys,
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
@@ -10116,18 +10123,17 @@ ${codeFrame}` : message);
 
       <span v-show="isExpanding" class="value">
         <template
-          v-for="key of Object.keys(data).sort()"
+          v-for="key of keys"
         >
           <wrapper
-            v-if="ignore(path) === false"
             class="value"
             :name="key"
             :path="path.concat(key)"
             :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
-            :ignore="ignore"
             :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+            :getKeys="getKeys"
           ></wrapper>
         </template>
       </span>
@@ -10142,7 +10148,7 @@ ${codeFrame}` : message);
       path: {
         required: true,
         validator(path) {
-          return toString(path) === "Array" && path.every((key) => toString(key) === "String");
+          return toString(path) === "Array" && path.every((key) => toString(key) === "String" || toString(key) === "Number");
         }
       },
       data: {
@@ -10164,7 +10170,7 @@ ${codeFrame}` : message);
         required: true,
         type: Function
       },
-      ignore: {
+      getKeys: {
         required: true,
         type: Function
       }
@@ -10184,14 +10190,8 @@ ${codeFrame}` : message);
       ObjectWrapper: ObjectWrapper_default
     },
     template: `
-    <template
-      v-if="ignore(path)"
-    >
-      <span></span>
-    </template>
-
     <undefined-wrapper
-      v-else-if="toString(data) === 'Undefined'"
+      v-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
@@ -10227,8 +10227,8 @@ ${codeFrame}` : message);
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
-      :ignore="ignore"
       :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+      :getKeys="getKeys"
     ></array-wrapper>
 
     <object-wrapper
@@ -10238,8 +10238,8 @@ ${codeFrame}` : message);
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
-      :ignore="ignore"
       :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+      :getKeys="getKeys"
     ></object-wrapper>
   `
   };
@@ -10249,16 +10249,16 @@ ${codeFrame}` : message);
 
   // src/config.js
   const defaultConfig = Object.freeze({
-    ignore: (path) => false,
-    expandOnCreatedAndUpdated: (path) => [false, false]
+    expandOnCreatedAndUpdated: (path) => [false, false],
+    getKeys: (object, path) => Object.keys(object)
   });
 
   // src/mount.js
   var mount_default = (data, el, options = {}) => {
     if (options.rootName === void 0)
       options.rootName = "";
-    if (options.ignore === void 0)
-      options.ignore = defaultConfig.ignore;
+    if (options.getKeys === void 0)
+      options.getKeys = defaultConfig.getKeys;
     if (options.expandOnCreatedAndUpdated === void 0)
       options.expandOnCreatedAndUpdated = defaultConfig.expandOnCreatedAndUpdated;
     el.classList.add("object-visualizer");
@@ -10267,8 +10267,8 @@ ${codeFrame}` : message);
       data,
       name: options.rootName,
       path: [],
-      ignore: options.ignore,
-      expandOnCreatedAndUpdated: options.expandOnCreatedAndUpdated
+      expandOnCreatedAndUpdated: options.expandOnCreatedAndUpdated,
+      getKeys: options.getKeys
     }).mount(el);
   };
   return require_src();
