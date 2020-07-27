@@ -15,7 +15,9 @@ const Wrapper = {
       validator(path) {
         return (
           toString(path) === "Array" &&
-          path.every((key) => toString(key) === "String")
+          path.every(
+            (key) => toString(key) === "String" || toString(key) === "Number"
+          )
         );
       },
     },
@@ -38,7 +40,7 @@ const Wrapper = {
       required: true,
       type: Function,
     },
-    ignore: {
+    getKeys: {
       required: true,
       type: Function,
     },
@@ -58,14 +60,8 @@ const Wrapper = {
     ObjectWrapper,
   },
   template: `
-    <template
-      v-if="ignore(path)"
-    >
-      <span></span>
-    </template>
-
     <undefined-wrapper
-      v-else-if="toString(data) === 'Undefined'"
+      v-if="toString(data) === 'Undefined'"
       :name="name"
       :data="data"
     ></undefined-wrapper>
@@ -101,8 +97,8 @@ const Wrapper = {
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
-      :ignore="ignore"
       :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+      :getKeys="getKeys"
     ></array-wrapper>
 
     <object-wrapper
@@ -112,8 +108,8 @@ const Wrapper = {
       :data="data"
       :collapse-signal="collapseSignal"
       :expand-signal="expandSignal"
-      :ignore="ignore"
       :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+      :getKeys="getKeys"
     ></object-wrapper>
   `,
 };

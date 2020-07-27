@@ -4,7 +4,7 @@ import { defaultConfig } from "./config";
 
 export default (data, el, options = {}) => {
   if (options.rootName === undefined) options.rootName = "";
-  if (options.ignore === undefined) options.ignore = defaultConfig.ignore;
+  if (options.getKeys === undefined) options.getKeys = defaultConfig.getKeys;
   if (options.expandOnCreatedAndUpdated === undefined)
     options.expandOnCreatedAndUpdated = defaultConfig.expandOnCreatedAndUpdated;
 
@@ -14,7 +14,7 @@ export default (data, el, options = {}) => {
     data: data,
     name: options.rootName,
     path: [],
-    ignore: options.ignore,
     expandOnCreatedAndUpdated: options.expandOnCreatedAndUpdated,
+    getKeys: options.getKeys,
   }).mount(el);
 };

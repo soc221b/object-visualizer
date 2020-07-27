@@ -1,3 +1,4 @@
+import { computed } from "vue/dist/vue.esm-browser";
 import { toString } from "../util";
 import { useExpand } from "../hooks";
 
@@ -9,7 +10,9 @@ export default {
       validator(path) {
         return (
           toString(path) === "Array" &&
-          path.every((key) => toString(key) === "String")
+          path.every(
+            (key) => toString(key) === "String" || toString(key) === "Number"
+          )
         );
       },
     },
@@ -35,7 +38,7 @@ export default {
       required: true,
       type: Function,
     },
-    ignore: {
+    getKeys: {
       required: true,
       type: Function,
     },
@@ -48,7 +51,12 @@ export default {
       handleClick,
     } = useExpand(props);
 
+    const keys = computed(() => {
+      return props.getKeys(props.data, props.path);
+    });
+
     return {
+      keys,
       isExpanding,
       innerExpandSignal,
       innerCollapseSignal,
@@ -87,17 +95,16 @@ export default {
 
       <span v-show="isExpanding" class="value">
         <template
-          v-for="(value, index) of data"
+          v-for="key of keys"
         >
           <wrapper
-            v-if="ignore(path) === false"
-            :name="index + ''"
-            :path="path.concat(index + '')"
-            :data="data[index]"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
-            :ignore="ignore"
             :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+            :getKeys="getKeys"
           ></wrapper>
         </template>
       </span>

@@ -8,7 +8,14 @@ Visualize the JSON object to the DOM.
 
 ## Feature
 
-Nested values
+### Reactivity
+
+### Fully Configurable
+
+- option.getKeys: customize visible keys in any nested data
+- option.expandOnCreatedAndUpdated: expand or collapse after created or updated
+
+### Expand/Collapse Hot Keys
 
 - Recursive expand `Meta+Click`
 - Recursive collapse `Meta+Shift+Click`
@@ -74,8 +81,8 @@ mount(data, preEl);
 ```js
 // path will be string[]
 const options = {
-  ignore: (path) => {
-    return false;
+  getKeys: (object, path) => {
+    return Object.keys(object).sort();
   },
   expandOnCreatedAndUpdated: (path) => {
     // [shouldExpand, isRecursive]
