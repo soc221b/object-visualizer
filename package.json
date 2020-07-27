@@ -28,6 +28,7 @@
     "lint": "prettier . --write"
   },
   "devDependencies": {
+    "csso": "^4.0.3",
     "esbuild": "^0.6.1",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",

@@ -2,6 +2,7 @@ const fs = require("fs");
 const rimraf = require("rimraf");
 const esbuild = require("esbuild");
 const packageJson = require("../package.json");
+const csso = require("csso");
 
 const toCamelCase = (name) =>
   name
@@ -41,4 +42,8 @@ for (const format of formats) {
 
 fs.createReadStream("src/index.css").pipe(
   fs.createWriteStream("dist/index.css")
+);
+fs.writeFileSync(
+  "dist/index.min.css",
+  csso.minify(fs.readFileSync("src/index.css", { encoding: "utf8" })).css
 );
