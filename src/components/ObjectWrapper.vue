@@ -1,3 +1,35 @@
+<template>
+  <span class="object">
+    <span class="indicator" @click="handleClick">{{
+      isExpanding ? "\u25BC" : "\u25B6"
+    }}</span>
+    <span class="key" @click="handleClick">{{ name === "" ? "" : name }}</span>
+    <span class="separator" @click="handleClick">
+      {{ name === "" ? "" : ": " }}
+    </span>
+    <span class="preview" @click="handleClick">
+      {{ isExpanding ? "" : "{...}" }}
+    </span>
+
+    <span v-show="isExpanding" class="value">
+      <template v-for="key of keys">
+        <wrapper
+          :key="key"
+          class="value"
+          :name="key"
+          :path="path.concat(key)"
+          :data="data[key]"
+          :expand-signal="innerExpandSignal"
+          :collapse-signal="innerCollapseSignal"
+          :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+          :getKeys="getKeys"
+        ></wrapper>
+      </template>
+    </span>
+  </span>
+</template>
+
+<script>
 import { computed } from "vue";
 import { toString } from "../util";
 import { useExpand } from "../hooks";
@@ -66,45 +98,5 @@ export default {
   components: {
     // Wrapper,
   },
-  template: `
-    <span class="object">
-      <span
-        class="indicator"
-        @click="handleClick"
-      >{{ isExpanding ? '\u25BC' : '\u25B6' }}</span>
-      <span
-        class="key"
-        @click="handleClick"
-      >{{ name === '' ? '' : name }}</span>
-      <span
-        class="separator"
-        @click="handleClick"
-      >
-        {{ name === '' ? '' : ': ' }}
-      </span>
-      <span
-        class="preview"
-        @click="handleClick"
-      >
-        {{ isExpanding ? '' : '{...}' }}
-      </span>
-
-      <span v-show="isExpanding" class="value">
-        <template
-          v-for="key of keys"
-        >
-          <wrapper
-            class="value"
-            :name="key"
-            :path="path.concat(key)"
-            :data="data[key]"
-            :expand-signal="innerExpandSignal"
-            :collapse-signal="innerCollapseSignal"
-            :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
-            :getKeys="getKeys"
-          ></wrapper>
-        </template>
-      </span>
-    </span>
-  `,
 };
+</script>

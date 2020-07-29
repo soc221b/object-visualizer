@@ -1,6 +1,7 @@
 import { terser } from "rollup-plugin-terser";
 import del from "rollup-plugin-delete";
 import copy from "rollup-plugin-copy";
+import vue from "rollup-plugin-vue";
 import csso from "csso";
 
 export default {
@@ -60,6 +61,7 @@ export default {
     },
   ],
   plugins: [
+    vue(),
     del({
       targets: "dist/*",
     }),

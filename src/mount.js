@@ -1,5 +1,5 @@
 import { createApp, render } from "vue";
-import Wrapper from "./components/Wrapper";
+import Wrapper from "./components/Wrapper.vue";
 import { defaultConfig } from "./config";
 
 export default (data, el, options = {}) => {
