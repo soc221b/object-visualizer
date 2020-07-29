@@ -1,4 +1,4 @@
-import { createApp, render } from "vue/dist/vue.esm-browser";
+import { createApp, render } from "vue";
 import Wrapper from "./components/Wrapper";
 import { defaultConfig } from "./config";
 

@@ -1,4 +1,4 @@
-import { ref, watch } from "vue/dist/vue.esm-browser";
+import { ref, watch } from "vue";
 
 export function useExpand(props = { collapseSignal, expandSignal }) {
   const isExpanding = ref(false);

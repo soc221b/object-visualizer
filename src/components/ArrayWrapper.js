@@ -1,4 +1,4 @@
-import { computed } from "vue/dist/vue.esm-browser";
+import { computed } from "vue";
 import { toString } from "../util";
 import { useExpand } from "../hooks";
 

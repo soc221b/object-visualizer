@@ -24,15 +24,19 @@
     "view"
   ],
   "scripts": {
-    "build": "node script/build.js",
+    "build": "rollup --config rollup.config.js",
     "lint": "prettier . --write"
   },
   "devDependencies": {
     "csso": "^4.0.3",
-    "esbuild": "^0.6.1",
     "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "shelljs": "^0.8.4",
+    "rollup": "^2.23.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-terser": "^6.1.0",
+    "vue": "^3.0.0-beta.20"
+  },
+  "peerDependencies": {
     "vue": "^3.0.0-beta.20"
   },
   "husky": {
