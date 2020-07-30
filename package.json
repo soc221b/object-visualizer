@@ -36,10 +36,10 @@
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-vue": "^6.0.0-beta.9",
-    "vue": "^3.0.0-beta.20"
+    "vue": "next"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-beta.20"
+    "vue": "next"
   },
   "husky": {
     "hooks": {
