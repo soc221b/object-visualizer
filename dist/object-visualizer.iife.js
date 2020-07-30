@@ -1,7 +1,7 @@
 var ObjectVisualizer = (function (exports, vue) {
   'use strict';
 
-  const toString = (...args) =>
+  const objectToString = (...args) =>
     Object.prototype.toString.call(...args).slice(8, -1);
 
   var script = {
@@ -9,7 +9,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Undefined";
+          return objectToString(data) === "Undefined";
         },
       },
       name: {
@@ -45,7 +45,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Null";
+          return objectToString(data) === "Null";
         },
       },
       name: {
@@ -81,7 +81,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Boolean";
+          return objectToString(data) === "Boolean";
         },
       },
       name: {
@@ -117,7 +117,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Number";
+          return objectToString(data) === "Number";
         },
       },
       name: {
@@ -153,7 +153,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "String";
+          return objectToString(data) === "String";
         },
       },
       name: {
@@ -250,9 +250,11 @@ var ObjectVisualizer = (function (exports, vue) {
         required: true,
         validator(path) {
           return (
-            toString(path) === "Array" &&
+            objectToString(path) === "Array" &&
             path.every(
-              (key) => toString(key) === "String" || toString(key) === "Number"
+              (key) =>
+                objectToString(key) === "String" ||
+                objectToString(key) === "Number"
             )
           );
         },
@@ -260,7 +262,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Array";
+          return objectToString(data) === "Array";
         },
       },
       name: {
@@ -319,23 +321,23 @@ var ObjectVisualizer = (function (exports, vue) {
       vue.createVNode("span", {
         class: "indicator",
         onClick: _cache[1] || (_cache[1] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.isExpanding ? '\u25BC' : '\u25B6'), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.isExpanding ? "\u25BC" : "\u25B6"), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "key",
         onClick: _cache[2] || (_cache[2] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.name === '' ? '' : _ctx.name), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.name === "" ? "" : _ctx.name), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "separator",
         onClick: _cache[3] || (_cache[3] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.name === '' ? '' : ': '), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.name === "" ? "" : ": "), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "count",
         onClick: _cache[4] || (_cache[4] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.isExpanding === false && _ctx.data.length >= 2 ? '(' + _ctx.data.length + ')' : ''), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.isExpanding === false && _ctx.data.length >= 2 ? "(" + _ctx.data.length + ")" : ""), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "preview",
         onClick: _cache[5] || (_cache[5] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.isExpanding ? 'Array(' + _ctx.data.length + ')' : '[...]'), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.isExpanding ? "Array(" + _ctx.data.length + ")" : "[...]"), 1 /* TEXT */),
       vue.withDirectives(vue.createVNode("span", _hoisted_2$5, [
         (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
           return (vue.openBlock(), vue.createBlock(_component_wrapper, {
@@ -365,9 +367,11 @@ var ObjectVisualizer = (function (exports, vue) {
         required: true,
         validator(path) {
           return (
-            toString(path) === "Array" &&
+            objectToString(path) === "Array" &&
             path.every(
-              (key) => toString(key) === "String" || toString(key) === "Number"
+              (key) =>
+                objectToString(key) === "String" ||
+                objectToString(key) === "Number"
             )
           );
         },
@@ -375,7 +379,7 @@ var ObjectVisualizer = (function (exports, vue) {
       data: {
         required: true,
         validator(data) {
-          return toString(data) === "Object";
+          return objectToString(data) === "Object";
         },
       },
       name: {
@@ -434,19 +438,19 @@ var ObjectVisualizer = (function (exports, vue) {
       vue.createVNode("span", {
         class: "indicator",
         onClick: _cache[1] || (_cache[1] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.isExpanding ? '\u25BC' : '\u25B6'), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.isExpanding ? "\u25BC" : "\u25B6"), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "key",
         onClick: _cache[2] || (_cache[2] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.name === '' ? '' : _ctx.name), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.name === "" ? "" : _ctx.name), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "separator",
         onClick: _cache[3] || (_cache[3] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.name === '' ? '' : ': '), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.name === "" ? "" : ": "), 1 /* TEXT */),
       vue.createVNode("span", {
         class: "preview",
         onClick: _cache[4] || (_cache[4] = (...args) => (_ctx.handleClick(...args)))
-      }, vue.toDisplayString(_ctx.isExpanding ? '' : '{...}'), 1 /* TEXT */),
+      }, vue.toDisplayString(_ctx.isExpanding ? "" : "{...}"), 1 /* TEXT */),
       vue.withDirectives(vue.createVNode("span", _hoisted_2$6, [
         (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
           return (vue.openBlock(), vue.createBlock(_component_wrapper, {
@@ -477,9 +481,11 @@ var ObjectVisualizer = (function (exports, vue) {
         required: true,
         validator(path) {
           return (
-            toString(path) === "Array" &&
+            objectToString(path) === "Array" &&
             path.every(
-              (key) => toString(key) === "String" || toString(key) === "Number"
+              (key) =>
+                objectToString(key) === "String" ||
+                objectToString(key) === "Number"
             )
           );
         },
@@ -510,7 +516,7 @@ var ObjectVisualizer = (function (exports, vue) {
     },
     setup() {
       return {
-        toString,
+        objectToString,
       };
     },
     components: {
@@ -536,37 +542,37 @@ var ObjectVisualizer = (function (exports, vue) {
     const _component_array_wrapper = vue.resolveComponent("array-wrapper");
     const _component_object_wrapper = vue.resolveComponent("object-wrapper");
 
-    return (_ctx.toString(_ctx.data) === 'Undefined')
+    return (_ctx.objectToString(_ctx.data) === 'Undefined')
       ? vue.createVNode(_component_undefined_wrapper, {
           key: 0,
           name: _ctx.name,
           data: _ctx.data
         }, null, 8 /* PROPS */, ["name", "data"])
-      : (_ctx.toString(_ctx.data) === 'Null')
+      : (_ctx.objectToString(_ctx.data) === 'Null')
         ? vue.createVNode(_component_null_wrapper, {
             key: 1,
             name: _ctx.name,
             data: _ctx.data
           }, null, 8 /* PROPS */, ["name", "data"])
-        : (_ctx.toString(_ctx.data) === 'Boolean')
+        : (_ctx.objectToString(_ctx.data) === 'Boolean')
           ? vue.createVNode(_component_boolean_wrapper, {
               key: 2,
               name: _ctx.name,
               data: _ctx.data
             }, null, 8 /* PROPS */, ["name", "data"])
-          : (_ctx.toString(_ctx.data) === 'Number')
+          : (_ctx.objectToString(_ctx.data) === 'Number')
             ? vue.createVNode(_component_number_wrapper, {
                 key: 3,
                 name: _ctx.name,
                 data: _ctx.data
               }, null, 8 /* PROPS */, ["name", "data"])
-            : (_ctx.toString(_ctx.data) === 'String')
+            : (_ctx.objectToString(_ctx.data) === 'String')
               ? vue.createVNode(_component_string_wrapper, {
                   key: 4,
                   name: _ctx.name,
                   data: _ctx.data
                 }, null, 8 /* PROPS */, ["name", "data"])
-              : (_ctx.toString(_ctx.data) === 'Array')
+              : (_ctx.objectToString(_ctx.data) === 'Array')
                 ? vue.createVNode(_component_array_wrapper, {
                     key: 5,
                     name: _ctx.name,
@@ -577,7 +583,7 @@ var ObjectVisualizer = (function (exports, vue) {
                     expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
                     getKeys: _ctx.getKeys
                   }, null, 8 /* PROPS */, ["name", "path", "data", "collapse-signal", "expand-signal", "expandOnCreatedAndUpdated", "getKeys"])
-                : (_ctx.toString(_ctx.data) === 'Object')
+                : (_ctx.objectToString(_ctx.data) === 'Object')
                   ? vue.createVNode(_component_object_wrapper, {
                       key: 6,
                       name: _ctx.name,
