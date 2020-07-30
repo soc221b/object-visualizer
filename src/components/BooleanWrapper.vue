@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import { toString } from "../util";
+import { objectToString } from "../util";
 
 export default {
   props: {
     data: {
       required: true,
       validator(data) {
-        return toString(data) === "Boolean";
+        return objectToString(data) === "Boolean";
       },
     },
     name: {

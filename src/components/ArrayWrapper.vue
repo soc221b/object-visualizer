@@ -35,7 +35,7 @@
 
 <script>
 import { computed } from "vue";
-import { toString } from "../util";
+import { objectToString } from "../util";
 import { useExpand } from "../hooks";
 
 export default {
@@ -45,9 +45,11 @@ export default {
       required: true,
       validator(path) {
         return (
-          toString(path) === "Array" &&
+          objectToString(path) === "Array" &&
           path.every(
-            (key) => toString(key) === "String" || toString(key) === "Number"
+            (key) =>
+              objectToString(key) === "String" ||
+              objectToString(key) === "Number"
           )
         );
       },
@@ -55,7 +57,7 @@ export default {
     data: {
       required: true,
       validator(data) {
-        return toString(data) === "Array";
+        return objectToString(data) === "Array";
       },
     },
     name: {

@@ -1,36 +1,36 @@
 <template>
   <undefined-wrapper
-    v-if="toString(data) === 'Undefined'"
+    v-if="objectToString(data) === 'Undefined'"
     :name="name"
     :data="data"
   ></undefined-wrapper>
 
   <null-wrapper
-    v-else-if="toString(data) === 'Null'"
+    v-else-if="objectToString(data) === 'Null'"
     :name="name"
     :data="data"
   ></null-wrapper>
 
   <boolean-wrapper
-    v-else-if="toString(data) === 'Boolean'"
+    v-else-if="objectToString(data) === 'Boolean'"
     :name="name"
     :data="data"
   ></boolean-wrapper>
 
   <number-wrapper
-    v-else-if="toString(data) === 'Number'"
+    v-else-if="objectToString(data) === 'Number'"
     :name="name"
     :data="data"
   ></number-wrapper>
 
   <string-wrapper
-    v-else-if="toString(data) === 'String'"
+    v-else-if="objectToString(data) === 'String'"
     :name="name"
     :data="data"
   ></string-wrapper>
 
   <array-wrapper
-    v-else-if="toString(data) === 'Array'"
+    v-else-if="objectToString(data) === 'Array'"
     :name="name"
     :path="path"
     :data="data"
@@ -41,7 +41,7 @@
   ></array-wrapper>
 
   <object-wrapper
-    v-else-if="toString(data) === 'Object'"
+    v-else-if="objectToString(data) === 'Object'"
     :name="name"
     :path="path"
     :data="data"
@@ -60,7 +60,7 @@ import NumberWrapper from "./NumberWrapper.vue";
 import StringWrapper from "./StringWrapper.vue";
 import ArrayWrapper from "./ArrayWrapper.vue";
 import ObjectWrapper from "./ObjectWrapper.vue";
-import { toString } from "../util";
+import { objectToString } from "../util";
 
 const Wrapper = {
   name: "wrapper",
@@ -69,9 +69,11 @@ const Wrapper = {
       required: true,
       validator(path) {
         return (
-          toString(path) === "Array" &&
+          objectToString(path) === "Array" &&
           path.every(
-            (key) => toString(key) === "String" || toString(key) === "Number"
+            (key) =>
+              objectToString(key) === "String" ||
+              objectToString(key) === "Number"
           )
         );
       },
@@ -102,7 +104,7 @@ const Wrapper = {
   },
   setup() {
     return {
-      toString,
+      objectToString,
     };
   },
   components: {
