@@ -115,3 +115,5 @@ out
 .pnp.*
 
 .DS_Store
+
+.vscode
