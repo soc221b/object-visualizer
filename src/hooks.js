@@ -1,5 +1,7 @@
 import { ref, watch } from "vue";
 
+export const cache = new Set();
+
 export function useExpand(props = { collapseSignal, expandSignal }) {
   const isExpanding = ref(false);
   const expandOrCollapse = () => {
@@ -21,6 +23,8 @@ export function useExpand(props = { collapseSignal, expandSignal }) {
   watch(() => props.expandSignal, expandRecursive);
 
   const handleClick = (ev) => {
+    cache.clear();
+
     if (ev.metaKey === true && ev.shiftKey === true) {
       collapseRecursive(ev);
     } else if (ev.metaKey === true) {

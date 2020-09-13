@@ -16,27 +16,46 @@
       {{ isExpanding ? "Array(" + data.length + ")" : "[...]" }}
     </span>
 
-    <span v-show="isExpanding" class="value">
-      <template v-for="key of keys">
-        <wrapper
-          :key="key"
-          :name="key"
-          :path="path.concat(key)"
-          :data="data[key]"
-          :expand-signal="innerExpandSignal"
-          :collapse-signal="innerCollapseSignal"
-          :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
-          :getKeys="getKeys"
-        ></wrapper>
-      </template>
-    </span>
+    <template v-if="isCircular">
+      <span v-if="isExpanding" class="value">
+        <template v-for="key of keys">
+          <wrapper
+            :key="key"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :expandOnCreatedAndUpdated="() => [false, false]"
+            :getKeys="getKeys"
+          ></wrapper>
+        </template>
+      </span>
+    </template>
+
+    <template v-else>
+      <span v-show="isExpanding" class="value">
+        <template v-for="key of keys">
+          <wrapper
+            :key="key"
+            :name="key"
+            :path="path.concat(key)"
+            :data="data[key]"
+            :expand-signal="innerExpandSignal"
+            :collapse-signal="innerCollapseSignal"
+            :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
+            :getKeys="getKeys"
+          ></wrapper>
+        </template>
+      </span>
+    </template>
   </span>
 </template>
 
 <script>
 import { computed } from "vue";
 import { objectToString } from "../util";
-import { useExpand } from "../hooks";
+import { useExpand, cache } from "../hooks";
 
 export default {
   name: "array-wrapper",
@@ -93,12 +112,16 @@ export default {
       return props.getKeys(props.data, props.path);
     });
 
+    const isCircular = cache.has(props.data);
+    cache.add(props.data);
+
     return {
       keys,
       isExpanding,
       innerExpandSignal,
       innerCollapseSignal,
       handleClick,
+      isCircular,
     };
   },
   components: {
