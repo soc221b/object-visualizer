@@ -188,6 +188,8 @@ var ObjectVisualizer = (function (exports, vue) {
   script$4.render = render$4;
   script$4.__file = "src/components/StringWrapper.vue";
 
+  const cache = new Set();
+
   function useExpand(props = { collapseSignal, expandSignal }) {
     const isExpanding = vue.ref(false);
     const expandOrCollapse = () => {
@@ -209,6 +211,8 @@ var ObjectVisualizer = (function (exports, vue) {
     vue.watch(() => props.expandSignal, expandRecursive);
 
     const handleClick = (ev) => {
+      cache.clear();
+
       if (ev.metaKey === true && ev.shiftKey === true) {
         collapseRecursive();
       } else if (ev.metaKey === true) {
@@ -298,12 +302,16 @@ var ObjectVisualizer = (function (exports, vue) {
         return props.getKeys(props.data, props.path);
       });
 
+      const isCircular = cache.has(props.data);
+      cache.add(props.data);
+
       return {
         keys,
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
         handleClick,
+        isCircular,
       };
     },
     components: {
@@ -312,7 +320,14 @@ var ObjectVisualizer = (function (exports, vue) {
   };
 
   const _hoisted_1$5 = { class: "array" };
-  const _hoisted_2$5 = { class: "value" };
+  const _hoisted_2$5 = {
+    key: 0,
+    class: "value"
+  };
+  const _hoisted_3$5 = {
+    key: 1,
+    class: "value"
+  };
 
   function render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wrapper = vue.resolveComponent("wrapper");
@@ -338,22 +353,41 @@ var ObjectVisualizer = (function (exports, vue) {
         class: "preview",
         onClick: _cache[5] || (_cache[5] = (...args) => (_ctx.handleClick(...args)))
       }, vue.toDisplayString(_ctx.isExpanding ? "Array(" + _ctx.data.length + ")" : "[...]"), 1 /* TEXT */),
-      vue.withDirectives(vue.createVNode("span", _hoisted_2$5, [
-        (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
-          return (vue.openBlock(), vue.createBlock(_component_wrapper, {
-            key: key,
-            name: key,
-            path: _ctx.path.concat(key),
-            data: _ctx.data[key],
-            "expand-signal": _ctx.innerExpandSignal,
-            "collapse-signal": _ctx.innerCollapseSignal,
-            expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
-            getKeys: _ctx.getKeys
-          }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
-        }), 256 /* UNKEYED_FRAGMENT */))
-      ], 512 /* NEED_PATCH */), [
-        [vue.vShow, _ctx.isExpanding]
-      ])
+      (_ctx.isCircular)
+        ? (vue.openBlock(), vue.createBlock(vue.Fragment, { key: 0 }, [
+            (_ctx.isExpanding)
+              ? (vue.openBlock(), vue.createBlock("span", _hoisted_2$5, [
+                  (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
+                    return (vue.openBlock(), vue.createBlock(_component_wrapper, {
+                      key: key,
+                      name: key,
+                      path: _ctx.path.concat(key),
+                      data: _ctx.data[key],
+                      "expand-signal": _ctx.innerExpandSignal,
+                      "collapse-signal": _ctx.innerCollapseSignal,
+                      expandOnCreatedAndUpdated: () => [false, false],
+                      getKeys: _ctx.getKeys
+                    }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
+                  }), 256 /* UNKEYED_FRAGMENT */))
+                ]))
+              : vue.createCommentVNode("v-if", true)
+          ], 64 /* STABLE_FRAGMENT */))
+        : vue.withDirectives((vue.openBlock(), vue.createBlock("span", _hoisted_3$5, [
+            (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
+              return (vue.openBlock(), vue.createBlock(_component_wrapper, {
+                key: key,
+                name: key,
+                path: _ctx.path.concat(key),
+                data: _ctx.data[key],
+                "expand-signal": _ctx.innerExpandSignal,
+                "collapse-signal": _ctx.innerCollapseSignal,
+                expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
+                getKeys: _ctx.getKeys
+              }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
+            }), 256 /* UNKEYED_FRAGMENT */))
+          ], 512 /* NEED_PATCH */)), [
+            [vue.vShow, _ctx.isExpanding]
+          ])
     ]))
   }
 
@@ -415,12 +449,16 @@ var ObjectVisualizer = (function (exports, vue) {
         return props.getKeys(props.data, props.path);
       });
 
+      const isCircular = cache.has(props.data);
+      cache.add(props.data);
+
       return {
         keys,
         isExpanding,
         innerExpandSignal,
         innerCollapseSignal,
         handleClick,
+        isCircular,
       };
     },
     components: {
@@ -429,7 +467,14 @@ var ObjectVisualizer = (function (exports, vue) {
   };
 
   const _hoisted_1$6 = { class: "object" };
-  const _hoisted_2$6 = { class: "value" };
+  const _hoisted_2$6 = {
+    key: 0,
+    class: "value"
+  };
+  const _hoisted_3$6 = {
+    key: 1,
+    class: "value"
+  };
 
   function render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wrapper = vue.resolveComponent("wrapper");
@@ -451,23 +496,43 @@ var ObjectVisualizer = (function (exports, vue) {
         class: "preview",
         onClick: _cache[4] || (_cache[4] = (...args) => (_ctx.handleClick(...args)))
       }, vue.toDisplayString(_ctx.isExpanding ? "" : "{...}"), 1 /* TEXT */),
-      vue.withDirectives(vue.createVNode("span", _hoisted_2$6, [
-        (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
-          return (vue.openBlock(), vue.createBlock(_component_wrapper, {
-            key: key,
-            class: "value",
-            name: key,
-            path: _ctx.path.concat(key),
-            data: _ctx.data[key],
-            "expand-signal": _ctx.innerExpandSignal,
-            "collapse-signal": _ctx.innerCollapseSignal,
-            expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
-            getKeys: _ctx.getKeys
-          }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
-        }), 256 /* UNKEYED_FRAGMENT */))
-      ], 512 /* NEED_PATCH */), [
-        [vue.vShow, _ctx.isExpanding]
-      ])
+      (_ctx.isCircular)
+        ? (vue.openBlock(), vue.createBlock(vue.Fragment, { key: 0 }, [
+            (_ctx.isExpanding)
+              ? (vue.openBlock(), vue.createBlock("span", _hoisted_2$6, [
+                  (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
+                    return (vue.openBlock(), vue.createBlock(_component_wrapper, {
+                      key: key,
+                      class: "value",
+                      name: key,
+                      path: _ctx.path.concat(key),
+                      data: _ctx.data[key],
+                      "expand-signal": _ctx.innerExpandSignal,
+                      "collapse-signal": _ctx.innerCollapseSignal,
+                      expandOnCreatedAndUpdated: () => [false, false],
+                      getKeys: _ctx.getKeys
+                    }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
+                  }), 256 /* UNKEYED_FRAGMENT */))
+                ]))
+              : vue.createCommentVNode("v-if", true)
+          ], 64 /* STABLE_FRAGMENT */))
+        : vue.withDirectives((vue.openBlock(), vue.createBlock("span", _hoisted_3$6, [
+            (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.keys, (key) => {
+              return (vue.openBlock(), vue.createBlock(_component_wrapper, {
+                key: key,
+                class: "value",
+                name: key,
+                path: _ctx.path.concat(key),
+                data: _ctx.data[key],
+                "expand-signal": _ctx.innerExpandSignal,
+                "collapse-signal": _ctx.innerCollapseSignal,
+                expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
+                getKeys: _ctx.getKeys
+              }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
+            }), 256 /* UNKEYED_FRAGMENT */))
+          ], 512 /* NEED_PATCH */)), [
+            [vue.vShow, _ctx.isExpanding]
+          ])
     ]))
   }
 
