@@ -117,3 +117,7 @@ out
 .DS_Store
 
 .vscode
+
+# cypress
+cypress/videos/
+cypress/screenshots/
