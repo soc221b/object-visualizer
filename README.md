@@ -3,6 +3,7 @@
 Visualize the JSON object to the DOM.
 
 ![E2E on Chrome](https://github.com/iendeavor/object-visualizer/workflows/E2E%20on%20Chrome/badge.svg)
+[![HitCount](http://hits.dwyl.com/iendeavor/object-visualizer.svg)](http://hits.dwyl.com/iendeavor/object-visualizer)
 
 ## Live Demo
 
