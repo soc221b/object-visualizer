@@ -34,23 +34,6 @@ export default {
       plugins: [terser()],
     },
     {
-      format: "umd",
-      file: "dist/object-visualizer.umd.js",
-      name: "ObjectVisualizer",
-      globals: {
-        vue: "Vue",
-      },
-    },
-    {
-      format: "umd",
-      file: "dist/object-visualizer.umd.min.js",
-      plugins: [terser()],
-      name: "ObjectVisualizer",
-      globals: {
-        vue: "Vue",
-      },
-    },
-    {
       format: "esm",
       file: "dist/object-visualizer.esm.js",
     },
