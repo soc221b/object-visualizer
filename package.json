@@ -36,7 +36,7 @@
     "csso": "^4.0.3",
     "cypress": "^5.5.0",
     "prettier": "^2.1.2",
-    "rollup": "^2.23.0",
+    "rollup": "^2.33.1",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-terser": "^6.1.0",
