@@ -3,6 +3,8 @@ import del from "rollup-plugin-delete";
 import copy from "rollup-plugin-copy";
 import vue from "rollup-plugin-vue";
 import csso from "csso";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import replace from "rollup-plugin-replace";
 
 export default {
   input: "src/index.js",
@@ -58,6 +60,10 @@ export default {
           transform: (content) => csso.minify(content).css,
         },
       ],
+    }),
+    nodeResolve(),
+    replace({
+      "process.env.NODE_ENV": JSON.stringify("production"),
     }),
   ],
 };
