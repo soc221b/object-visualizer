@@ -32,7 +32,7 @@
     "lint": "prettier --check ."
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-rc.5",
+    "@vue/compiler-sfc": "^3.0.2",
     "csso": "^4.0.3",
     "cypress": "^5.5.0",
     "prettier": "^2.1.2",
