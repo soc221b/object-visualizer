@@ -13,9 +13,8 @@
 
     <template v-if="isCircular">
       <span v-if="isExpanding" class="value">
-        <template v-for="key of keys">
+        <template v-for="key of keys" :key="key">
           <wrapper
-            :key="key"
             class="value"
             :name="key"
             :path="path.concat(key)"
@@ -31,9 +30,8 @@
 
     <template v-else>
       <span v-show="isExpanding" class="value">
-        <template v-for="key of keys">
+        <template v-for="key of keys" :key="key">
           <wrapper
-            :key="key"
             class="value"
             :name="key"
             :path="path.concat(key)"
