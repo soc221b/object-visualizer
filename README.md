@@ -99,3 +99,9 @@ mount(data, preEl, options);
 ## License
 
 [MIT](https://github.com/iendeavor/object-visualizer/blob/master/LICENSE)
+
+## Donate
+
+If this library helped you out feel free to donate.
+
+<a href="https://www.buymeacoffee.com/iendeavor"><img src="https://img.buymeacoffee.com/button-api/?text=Help me keep working on OSS&emoji=&slug=iendeavor&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00"></a>
