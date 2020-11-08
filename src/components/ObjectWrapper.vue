@@ -21,7 +21,7 @@
             :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
-            :expandOnCreatedAndUpdated="() => [false, false]"
+            :expandOnCreatedAndUpdated="() => false"
             :getKeys="getKeys"
           ></wrapper>
         </template>

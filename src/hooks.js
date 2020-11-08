@@ -4,48 +4,44 @@ export const cache = new Set();
 
 export function useExpand(props = { collapseSignal, expandSignal }) {
   const isExpanding = ref(false);
-  const expandOrCollapse = () => {
+  const toggle = () => {
     isExpanding.value = !isExpanding.value;
   };
 
   const innerCollapseSignal = ref(false);
-  const collapseRecursive = (ev) => {
+  const collapse = () => {
     isExpanding.value = false;
     innerCollapseSignal.value = !innerCollapseSignal.value;
   };
-  watch(() => props.collapseSignal, collapseRecursive);
+  watch(() => props.collapseSignal, collapse);
 
   const innerExpandSignal = ref(false);
-  const expandRecursive = () => {
+  const expand = () => {
     isExpanding.value = true;
     innerExpandSignal.value = !innerExpandSignal.value;
   };
-  watch(() => props.expandSignal, expandRecursive);
+  watch(() => props.expandSignal, expand);
 
   const handleClick = (ev) => {
     cache.clear();
 
     if (ev.metaKey === true && ev.shiftKey === true) {
-      collapseRecursive(ev);
+      collapse(ev);
     } else if (ev.metaKey === true) {
-      expandRecursive(ev);
+      expand(ev);
     } else {
-      expandOrCollapse(ev);
+      toggle(ev);
     }
   };
 
   watch(
     () => props.data,
     () => {
-      const [shouldExpand, isRecursive] = props.expandOnCreatedAndUpdated(
-        props.path
-      );
+      const shouldExpand = props.expandOnCreatedAndUpdated(props.path);
       if (shouldExpand) {
-        if (isRecursive) expandRecursive();
-        else isExpanding.value = true;
+        expand();
       } else {
-        if (isRecursive) expandRecursive();
-        else isExpanding.value = false;
+        collapse();
       }
     },
     { immediate: true }

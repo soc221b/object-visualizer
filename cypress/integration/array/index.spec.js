@@ -10,7 +10,7 @@ import {
 
 const options = {
   rootName: "$",
-  expandOnCreatedAndUpdated: () => [true, true],
+  expandOnCreatedAndUpdated: () => true,
 };
 
 describe("array", () => {

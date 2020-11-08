@@ -1,4 +1,4 @@
 export const defaultConfig = Object.freeze({
-  expandOnCreatedAndUpdated: (path) => [false, false],
+  expandOnCreatedAndUpdated: (path) => false,
   getKeys: (object, path) => Object.keys(object),
 });

@@ -88,8 +88,7 @@ const options = {
     return Object.keys(object).sort();
   },
   expandOnCreatedAndUpdated: (path) => {
-    // [shouldExpand, isRecursive]
-    return [true, true];
+    return true;
   },
 };
 
