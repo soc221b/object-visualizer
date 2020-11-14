@@ -57,7 +57,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "git diff --exit-code && git diff --staged --exit-code && yarn lint"
+      "pre-push": "git diff --exit-code && git diff --staged --exit-code && yarn lint && yarn build && yarn test"
     }
   }
 }
