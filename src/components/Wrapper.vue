@@ -73,6 +73,16 @@ const Wrapper = {
     },
     data: {
       required: true,
+      validator(data) {
+        return (
+          objectToString(data) === "Null" ||
+          objectToString(data) === "Boolean" ||
+          objectToString(data) === "Number" ||
+          objectToString(data) === "String" ||
+          objectToString(data) === "Array" ||
+          objectToString(data) === "Object"
+        );
+      },
     },
     name: {
       required: true,
