@@ -5398,48 +5398,44 @@ const cache = new Set();
 
 function useExpand(props = { collapseSignal, expandSignal }) {
   const isExpanding = ref(false);
-  const expandOrCollapse = () => {
+  const toggle = () => {
     isExpanding.value = !isExpanding.value;
   };
 
   const innerCollapseSignal = ref(false);
-  const collapseRecursive = (ev) => {
+  const collapse = () => {
     isExpanding.value = false;
     innerCollapseSignal.value = !innerCollapseSignal.value;
   };
-  watch(() => props.collapseSignal, collapseRecursive);
+  watch(() => props.collapseSignal, collapse);
 
   const innerExpandSignal = ref(false);
-  const expandRecursive = () => {
+  const expand = () => {
     isExpanding.value = true;
     innerExpandSignal.value = !innerExpandSignal.value;
   };
-  watch(() => props.expandSignal, expandRecursive);
+  watch(() => props.expandSignal, expand);
 
   const handleClick = (ev) => {
     cache.clear();
 
     if (ev.metaKey === true && ev.shiftKey === true) {
-      collapseRecursive();
+      collapse();
     } else if (ev.metaKey === true) {
-      expandRecursive();
+      expand();
     } else {
-      expandOrCollapse();
+      toggle();
     }
   };
 
   watch(
     () => props.data,
     () => {
-      const [shouldExpand, isRecursive] = props.expandOnCreatedAndUpdated(
-        props.path
-      );
+      const shouldExpand = props.expandOnCreatedAndUpdated(props.path);
       if (shouldExpand) {
-        if (isRecursive) expandRecursive();
-        else isExpanding.value = true;
+        expand();
       } else {
-        if (isRecursive) expandRecursive();
-        else isExpanding.value = false;
+        collapse();
       }
     },
     { immediate: true }
@@ -5571,7 +5567,7 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
                     data: $props.data[key],
                     "expand-signal": $setup.innerExpandSignal,
                     "collapse-signal": $setup.innerCollapseSignal,
-                    expandOnCreatedAndUpdated: () => [false, false],
+                    expandOnCreatedAndUpdated: () => false,
                     getKeys: $props.getKeys
                   }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
                 }), 128 /* KEYED_FRAGMENT */))
@@ -5715,7 +5711,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
                     data: $props.data[key],
                     "expand-signal": $setup.innerExpandSignal,
                     "collapse-signal": $setup.innerCollapseSignal,
-                    expandOnCreatedAndUpdated: () => [false, false],
+                    expandOnCreatedAndUpdated: () => false,
                     getKeys: $props.getKeys
                   }, null, 8 /* PROPS */, ["name", "path", "data", "expand-signal", "collapse-signal", "expandOnCreatedAndUpdated", "getKeys"]))
                 }), 128 /* KEYED_FRAGMENT */))
@@ -5872,7 +5868,7 @@ Wrapper.render = render$8;
 Wrapper.__file = "src/components/Wrapper.vue";
 
 const defaultConfig = Object.freeze({
-  expandOnCreatedAndUpdated: (path) => [false, false],
+  expandOnCreatedAndUpdated: (path) => false,
   getKeys: (object, path) => Object.keys(object),
 });
 
