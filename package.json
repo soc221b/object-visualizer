@@ -9,6 +9,9 @@
   "module": "dist/object-visualizer.esm.min.js",
   "unpkg": "dist/object-visualizer.iife.min.js",
   "jsdelivr": "dist/object-visualizer.iife.min.js",
+  "files": [
+    "dist"
+  ],
   "author": "Ernest Chang <iattempt.net@gmail.com>",
   "license": "MIT",
   "repository": {
