@@ -1,12 +1,6 @@
 <template>
-  <undefined-wrapper
-    v-if="objectToString(data) === 'Undefined'"
-    :name="name"
-    :data="data"
-  ></undefined-wrapper>
-
   <null-wrapper
-    v-else-if="objectToString(data) === 'Null'"
+    v-if="objectToString(data) === 'Null'"
     :name="name"
     :data="data"
   ></null-wrapper>
@@ -53,7 +47,6 @@
 </template>
 
 <script>
-import UndefinedWrapper from "./UndefinedWrapper.vue";
 import NullWrapper from "./NullWrapper.vue";
 import BooleanWrapper from "./BooleanWrapper.vue";
 import NumberWrapper from "./NumberWrapper.vue";
@@ -108,7 +101,6 @@ const Wrapper = {
     };
   },
   components: {
-    UndefinedWrapper,
     NullWrapper,
     BooleanWrapper,
     NumberWrapper,

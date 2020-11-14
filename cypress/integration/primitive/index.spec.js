@@ -8,15 +8,6 @@ const options = {
 };
 
 describe("primitive", () => {
-  it("should works with undefined", () => {
-    cy.visit(path.join(__dirname, "../../fixtures/index.html"));
-    cy.get("#app")
-      .then((app) => {
-        mount(undefined, app[0], options);
-      })
-      .should("contain.text", "undefined");
-  });
-
   it("should works with null", () => {
     cy.visit(path.join(__dirname, "../../fixtures/index.html"));
     cy.get("#app")

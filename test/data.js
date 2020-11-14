@@ -1,6 +1,5 @@
 const data = [
   {
-    aaa: undefined,
     bbb: null,
     ccc: false,
     ddd: 123,

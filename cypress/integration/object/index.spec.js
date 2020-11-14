@@ -21,7 +21,6 @@ describe("object", () => {
       .then((app) => {
         mount(primitiveInObject, app[0], options);
       })
-      .should("contain.text", "undefined")
       .should("contain.text", "null")
       .should("contain.text", "false")
       .should("contain.text", "42")
@@ -35,7 +34,6 @@ describe("object", () => {
       .then((app) => {
         mount(arrayInObject, app[0], options);
       })
-      .should("contain.text", "undefined")
       .should("contain.text", "null")
       .should("contain.text", "false")
       .should("contain.text", "42")
@@ -49,7 +47,6 @@ describe("object", () => {
       .then((app) => {
         mount(objectInObject, app[0], options);
       })
-      .should("contain.text", "undefined")
       .should("contain.text", "null")
       .should("contain.text", "false")
       .should("contain.text", "42")
