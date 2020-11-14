@@ -121,3 +121,5 @@ out
 # cypress
 cypress/videos/
 cypress/screenshots/
+
+.DS_Store
