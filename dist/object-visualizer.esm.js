@@ -5215,7 +5215,7 @@ var script = {
     data: {
       required: true,
       validator(data) {
-        return objectToString$1(data) === "Undefined";
+        return objectToString$1(data) === "Null";
       },
     },
     name: {
@@ -5225,13 +5225,13 @@ var script = {
   },
 };
 
-const _hoisted_1 = { class: "undefined" };
+const _hoisted_1 = { class: "null" };
 const _hoisted_2 = { class: "key" };
 const _hoisted_3 = {
   key: 0,
   class: "separator"
 };
-const _hoisted_4 = /*#__PURE__*/createVNode("span", { class: "value" }, "undefined", -1 /* HOISTED */);
+const _hoisted_4 = /*#__PURE__*/createVNode("span", { class: "value" }, "null", -1 /* HOISTED */);
 
 function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("span", _hoisted_1, [
@@ -5244,45 +5244,9 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script.render = render$1;
-script.__file = "src/components/UndefinedWrapper.vue";
+script.__file = "src/components/NullWrapper.vue";
 
 var script$1 = {
-  props: {
-    data: {
-      required: true,
-      validator(data) {
-        return objectToString$1(data) === "Null";
-      },
-    },
-    name: {
-      required: true,
-      type: String,
-    },
-  },
-};
-
-const _hoisted_1$1 = { class: "null" };
-const _hoisted_2$1 = { class: "key" };
-const _hoisted_3$1 = {
-  key: 0,
-  class: "separator"
-};
-const _hoisted_4$1 = /*#__PURE__*/createVNode("span", { class: "value" }, "null", -1 /* HOISTED */);
-
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("span", _hoisted_1$1, [
-    createVNode("span", _hoisted_2$1, toDisplayString($props.name), 1 /* TEXT */),
-    ($props.name !== '')
-      ? (openBlock(), createBlock("span", _hoisted_3$1, ": "))
-      : createCommentVNode("v-if", true),
-    _hoisted_4$1
-  ]))
-}
-
-script$1.render = render$2;
-script$1.__file = "src/components/NullWrapper.vue";
-
-var script$2 = {
   props: {
     data: {
       required: true,
@@ -5297,7 +5261,43 @@ var script$2 = {
   },
 };
 
-const _hoisted_1$2 = { class: "boolean" };
+const _hoisted_1$1 = { class: "boolean" };
+const _hoisted_2$1 = { class: "key" };
+const _hoisted_3$1 = {
+  key: 0,
+  class: "separator"
+};
+const _hoisted_4$1 = { class: "value" };
+
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createBlock("span", _hoisted_1$1, [
+    createVNode("span", _hoisted_2$1, toDisplayString($props.name), 1 /* TEXT */),
+    ($props.name !== '')
+      ? (openBlock(), createBlock("span", _hoisted_3$1, ": "))
+      : createCommentVNode("v-if", true),
+    createVNode("span", _hoisted_4$1, toDisplayString($props.data), 1 /* TEXT */)
+  ]))
+}
+
+script$1.render = render$2;
+script$1.__file = "src/components/BooleanWrapper.vue";
+
+var script$2 = {
+  props: {
+    data: {
+      required: true,
+      validator(data) {
+        return objectToString$1(data) === "Number";
+      },
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+  },
+};
+
+const _hoisted_1$2 = { class: "number" };
 const _hoisted_2$2 = { class: "key" };
 const _hoisted_3$2 = {
   key: 0,
@@ -5316,45 +5316,9 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
 }
 
 script$2.render = render$3;
-script$2.__file = "src/components/BooleanWrapper.vue";
+script$2.__file = "src/components/NumberWrapper.vue";
 
 var script$3 = {
-  props: {
-    data: {
-      required: true,
-      validator(data) {
-        return objectToString$1(data) === "Number";
-      },
-    },
-    name: {
-      required: true,
-      type: String,
-    },
-  },
-};
-
-const _hoisted_1$3 = { class: "number" };
-const _hoisted_2$3 = { class: "key" };
-const _hoisted_3$3 = {
-  key: 0,
-  class: "separator"
-};
-const _hoisted_4$3 = { class: "value" };
-
-function render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("span", _hoisted_1$3, [
-    createVNode("span", _hoisted_2$3, toDisplayString($props.name), 1 /* TEXT */),
-    ($props.name !== '')
-      ? (openBlock(), createBlock("span", _hoisted_3$3, ": "))
-      : createCommentVNode("v-if", true),
-    createVNode("span", _hoisted_4$3, toDisplayString($props.data), 1 /* TEXT */)
-  ]))
-}
-
-script$3.render = render$4;
-script$3.__file = "src/components/NumberWrapper.vue";
-
-var script$4 = {
   props: {
     data: {
       required: true,
@@ -5369,30 +5333,30 @@ var script$4 = {
   },
 };
 
-const _hoisted_1$4 = { class: "string" };
-const _hoisted_2$4 = { class: "key" };
-const _hoisted_3$4 = {
+const _hoisted_1$3 = { class: "string" };
+const _hoisted_2$3 = { class: "key" };
+const _hoisted_3$3 = {
   key: 0,
   class: "separator"
 };
-const _hoisted_4$4 = /*#__PURE__*/createVNode("span", { class: "quotes" }, "\"", -1 /* HOISTED */);
+const _hoisted_4$3 = /*#__PURE__*/createVNode("span", { class: "quotes" }, "\"", -1 /* HOISTED */);
 const _hoisted_5 = { class: "value" };
 const _hoisted_6 = /*#__PURE__*/createVNode("span", { class: "quotes" }, "\"", -1 /* HOISTED */);
 
-function render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("span", _hoisted_1$4, [
-    createVNode("span", _hoisted_2$4, toDisplayString($props.name), 1 /* TEXT */),
+function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createBlock("span", _hoisted_1$3, [
+    createVNode("span", _hoisted_2$3, toDisplayString($props.name), 1 /* TEXT */),
     ($props.name !== '')
-      ? (openBlock(), createBlock("span", _hoisted_3$4, ": "))
+      ? (openBlock(), createBlock("span", _hoisted_3$3, ": "))
       : createCommentVNode("v-if", true),
-    _hoisted_4$4,
+    _hoisted_4$3,
     createVNode("span", _hoisted_5, toDisplayString($props.data), 1 /* TEXT */),
     _hoisted_6
   ]))
 }
 
-script$4.render = render$5;
-script$4.__file = "src/components/StringWrapper.vue";
+script$3.render = render$4;
+script$3.__file = "src/components/StringWrapper.vue";
 
 const cache = new Set();
 
@@ -5449,7 +5413,7 @@ function useExpand(props = { collapseSignal, expandSignal }) {
   };
 }
 
-var script$5 = {
+var script$4 = {
   name: "array-wrapper",
   props: {
     path: {
@@ -5521,20 +5485,20 @@ var script$5 = {
   },
 };
 
-const _hoisted_1$5 = { class: "array" };
-const _hoisted_2$5 = {
+const _hoisted_1$4 = { class: "array" };
+const _hoisted_2$4 = {
   key: 0,
   class: "value"
 };
-const _hoisted_3$5 = {
+const _hoisted_3$4 = {
   key: 1,
   class: "value"
 };
 
-function render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_wrapper = resolveComponent("wrapper");
 
-  return (openBlock(), createBlock("span", _hoisted_1$5, [
+  return (openBlock(), createBlock("span", _hoisted_1$4, [
     createVNode("span", {
       class: "indicator",
       onClick: _cache[1] || (_cache[1] = (...args) => ($setup.handleClick(...args)))
@@ -5558,7 +5522,7 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
     ($setup.isCircular)
       ? (openBlock(), createBlock(Fragment, { key: 0 }, [
           ($setup.isExpanding)
-            ? (openBlock(), createBlock("span", _hoisted_2$5, [
+            ? (openBlock(), createBlock("span", _hoisted_2$4, [
                 (openBlock(true), createBlock(Fragment, null, renderList($setup.keys, (key) => {
                   return (openBlock(), createBlock(_component_wrapper, {
                     key: key,
@@ -5574,7 +5538,7 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
               ]))
             : createCommentVNode("v-if", true)
         ], 64 /* STABLE_FRAGMENT */))
-      : withDirectives((openBlock(), createBlock("span", _hoisted_3$5, [
+      : withDirectives((openBlock(), createBlock("span", _hoisted_3$4, [
           (openBlock(true), createBlock(Fragment, null, renderList($setup.keys, (key) => {
             return (openBlock(), createBlock(_component_wrapper, {
               key: key,
@@ -5593,10 +5557,10 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 
-script$5.render = render$6;
-script$5.__file = "src/components/ArrayWrapper.vue";
+script$4.render = render$5;
+script$4.__file = "src/components/ArrayWrapper.vue";
 
-var script$6 = {
+var script$5 = {
   name: "object-wrapper",
   props: {
     path: {
@@ -5668,20 +5632,20 @@ var script$6 = {
   },
 };
 
-const _hoisted_1$6 = { class: "object" };
-const _hoisted_2$6 = {
+const _hoisted_1$5 = { class: "object" };
+const _hoisted_2$5 = {
   key: 0,
   class: "value"
 };
-const _hoisted_3$6 = {
+const _hoisted_3$5 = {
   key: 1,
   class: "value"
 };
 
-function render$7(_ctx, _cache, $props, $setup, $data, $options) {
+function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_wrapper = resolveComponent("wrapper");
 
-  return (openBlock(), createBlock("span", _hoisted_1$6, [
+  return (openBlock(), createBlock("span", _hoisted_1$5, [
     createVNode("span", {
       class: "indicator",
       onClick: _cache[1] || (_cache[1] = (...args) => ($setup.handleClick(...args)))
@@ -5701,7 +5665,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
     ($setup.isCircular)
       ? (openBlock(), createBlock(Fragment, { key: 0 }, [
           ($setup.isExpanding)
-            ? (openBlock(), createBlock("span", _hoisted_2$6, [
+            ? (openBlock(), createBlock("span", _hoisted_2$5, [
                 (openBlock(true), createBlock(Fragment, null, renderList($setup.keys, (key) => {
                   return (openBlock(), createBlock(_component_wrapper, {
                     key: key,
@@ -5718,7 +5682,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
               ]))
             : createCommentVNode("v-if", true)
         ], 64 /* STABLE_FRAGMENT */))
-      : withDirectives((openBlock(), createBlock("span", _hoisted_3$6, [
+      : withDirectives((openBlock(), createBlock("span", _hoisted_3$5, [
           (openBlock(true), createBlock(Fragment, null, renderList($setup.keys, (key) => {
             return (openBlock(), createBlock(_component_wrapper, {
               key: key,
@@ -5738,8 +5702,8 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 
-script$6.render = render$7;
-script$6.__file = "src/components/ObjectWrapper.vue";
+script$5.render = render$6;
+script$5.__file = "src/components/ObjectWrapper.vue";
 
 const Wrapper = {
   name: "wrapper",
@@ -5787,21 +5751,19 @@ const Wrapper = {
     };
   },
   components: {
-    UndefinedWrapper: script,
-    NullWrapper: script$1,
-    BooleanWrapper: script$2,
-    NumberWrapper: script$3,
-    StringWrapper: script$4,
-    ArrayWrapper: script$5,
-    ObjectWrapper: script$6,
+    NullWrapper: script,
+    BooleanWrapper: script$1,
+    NumberWrapper: script$2,
+    StringWrapper: script$3,
+    ArrayWrapper: script$4,
+    ObjectWrapper: script$5,
   },
 };
 
+script$4.components.Wrapper = Wrapper;
 script$5.components.Wrapper = Wrapper;
-script$6.components.Wrapper = Wrapper;
 
-function render$8(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_undefined_wrapper = resolveComponent("undefined-wrapper");
+function render$7(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_null_wrapper = resolveComponent("null-wrapper");
   const _component_boolean_wrapper = resolveComponent("boolean-wrapper");
   const _component_number_wrapper = resolveComponent("number-wrapper");
@@ -5809,38 +5771,43 @@ function render$8(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_array_wrapper = resolveComponent("array-wrapper");
   const _component_object_wrapper = resolveComponent("object-wrapper");
 
-  return (_ctx.objectToString(_ctx.data) === 'Undefined')
-    ? (openBlock(), createBlock(_component_undefined_wrapper, {
+  return (_ctx.objectToString(_ctx.data) === 'Null')
+    ? (openBlock(), createBlock(_component_null_wrapper, {
         key: 0,
         name: _ctx.name,
         data: _ctx.data
       }, null, 8 /* PROPS */, ["name", "data"]))
-    : (_ctx.objectToString(_ctx.data) === 'Null')
-      ? (openBlock(), createBlock(_component_null_wrapper, {
+    : (_ctx.objectToString(_ctx.data) === 'Boolean')
+      ? (openBlock(), createBlock(_component_boolean_wrapper, {
           key: 1,
           name: _ctx.name,
           data: _ctx.data
         }, null, 8 /* PROPS */, ["name", "data"]))
-      : (_ctx.objectToString(_ctx.data) === 'Boolean')
-        ? (openBlock(), createBlock(_component_boolean_wrapper, {
+      : (_ctx.objectToString(_ctx.data) === 'Number')
+        ? (openBlock(), createBlock(_component_number_wrapper, {
             key: 2,
             name: _ctx.name,
             data: _ctx.data
           }, null, 8 /* PROPS */, ["name", "data"]))
-        : (_ctx.objectToString(_ctx.data) === 'Number')
-          ? (openBlock(), createBlock(_component_number_wrapper, {
+        : (_ctx.objectToString(_ctx.data) === 'String')
+          ? (openBlock(), createBlock(_component_string_wrapper, {
               key: 3,
               name: _ctx.name,
               data: _ctx.data
             }, null, 8 /* PROPS */, ["name", "data"]))
-          : (_ctx.objectToString(_ctx.data) === 'String')
-            ? (openBlock(), createBlock(_component_string_wrapper, {
+          : (_ctx.objectToString(_ctx.data) === 'Array')
+            ? (openBlock(), createBlock(_component_array_wrapper, {
                 key: 4,
                 name: _ctx.name,
-                data: _ctx.data
-              }, null, 8 /* PROPS */, ["name", "data"]))
-            : (_ctx.objectToString(_ctx.data) === 'Array')
-              ? (openBlock(), createBlock(_component_array_wrapper, {
+                path: _ctx.path,
+                data: _ctx.data,
+                "collapse-signal": _ctx.collapseSignal,
+                "expand-signal": _ctx.expandSignal,
+                expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
+                getKeys: _ctx.getKeys
+              }, null, 8 /* PROPS */, ["name", "path", "data", "collapse-signal", "expand-signal", "expandOnCreatedAndUpdated", "getKeys"]))
+            : (_ctx.objectToString(_ctx.data) === 'Object')
+              ? (openBlock(), createBlock(_component_object_wrapper, {
                   key: 5,
                   name: _ctx.name,
                   path: _ctx.path,
@@ -5850,21 +5817,10 @@ function render$8(_ctx, _cache, $props, $setup, $data, $options) {
                   expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
                   getKeys: _ctx.getKeys
                 }, null, 8 /* PROPS */, ["name", "path", "data", "collapse-signal", "expand-signal", "expandOnCreatedAndUpdated", "getKeys"]))
-              : (_ctx.objectToString(_ctx.data) === 'Object')
-                ? (openBlock(), createBlock(_component_object_wrapper, {
-                    key: 6,
-                    name: _ctx.name,
-                    path: _ctx.path,
-                    data: _ctx.data,
-                    "collapse-signal": _ctx.collapseSignal,
-                    "expand-signal": _ctx.expandSignal,
-                    expandOnCreatedAndUpdated: _ctx.expandOnCreatedAndUpdated,
-                    getKeys: _ctx.getKeys
-                  }, null, 8 /* PROPS */, ["name", "path", "data", "collapse-signal", "expand-signal", "expandOnCreatedAndUpdated", "getKeys"]))
-                : createCommentVNode("v-if", true)
+              : createCommentVNode("v-if", true)
 }
 
-Wrapper.render = render$8;
+Wrapper.render = render$7;
 Wrapper.__file = "src/components/Wrapper.vue";
 
 const defaultConfig = Object.freeze({
