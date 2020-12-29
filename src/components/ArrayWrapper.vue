@@ -33,7 +33,7 @@
     </template>
 
     <template v-else>
-      <span v-show="isExpanding" class="value">
+      <span v-if="isExpanding" class="value">
         <template v-for="key of keys" :key="key">
           <wrapper
             :name="key"
