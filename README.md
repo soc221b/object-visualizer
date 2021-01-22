@@ -20,6 +20,8 @@ Visualize the JSON object to the DOM.
 
 ### Expand/Collapse Hot Keys
 
+> Starting from v4.0.0, this feature is only available for objects due to performance issues.
+
 - Recursive expand `Meta+Click`
 - Recursive collapse `Meta+Shift+Click`
 
