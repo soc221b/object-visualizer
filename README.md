@@ -4,6 +4,7 @@ Visualize the JSON object to the DOM.
 
 ![E2E on Chrome](https://github.com/iendeavor/object-visualizer/workflows/E2E%20on%20Chrome/badge.svg)
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=iendeavor.object-visualizer)
+[![donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange)](https://www.paypal.com/paypalme/iendeavor)
 
 ## Live Demo
 
