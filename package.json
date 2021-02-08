@@ -41,7 +41,7 @@
     "@vue/compiler-sfc": "^3.0.2",
     "csso": "^4.0.3",
     "cypress": "^6.0.0",
-    "husky": "^4.3.0",
+    "husky": "^5.0.9",
     "prettier": "^2.1.2",
     "rollup": "^2.33.1",
     "rollup-plugin-copy": "^3.3.0",
