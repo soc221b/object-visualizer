@@ -2,10 +2,20 @@ name: E2E on Chrome
 on: [push, pull_request]
 jobs:
   cypress-run:
-    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+        browser: [electron, chrome, firefox]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     name: Cypress
     steps:
       - uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - run: ls -l
       - run: yarn install
@@ -17,4 +27,4 @@ jobs:
 
       - uses: cypress-io/github-action@v2
         with:
-          browser: chrome
+          browser: ${{ matrix.browser }}
