@@ -3,15 +3,5 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
-    time: "21:00"
-  open-pull-requests-limit: 10
+    interval: daily
   versioning-strategy: lockfile-only
-  ignore:
-  - dependency-name: rollup
-    versions:
-    - 2.41.2
-    - 2.42.3
-  - dependency-name: cypress
-    versions:
-    - 6.7.0
