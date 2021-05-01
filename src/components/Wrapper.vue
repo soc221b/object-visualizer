@@ -8,6 +8,12 @@
     :expand-signal="expandSignal"
     :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     :getKeys="getKeys"
+    :object-visualizer-uid="objectVisualizerUid"
+    :id="`object-visualizer-${objectVisualizerUid}--${
+      path.length === 0 ? 'root' : path.join('-')
+    }`"
+    :role="role"
+    :aria-level="ariaLevel + 1"
   />
 </template>
 
@@ -77,6 +83,19 @@ const Wrapper = {
     getKeys: {
       required: true,
       type: Function,
+    },
+
+    objectVisualizerUid: {
+      required: true,
+      type: Number,
+    },
+    role: {
+      default: "group",
+      type: String,
+    },
+    ariaLevel: {
+      required: true,
+      type: Number,
     },
   },
   setup() {

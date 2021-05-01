@@ -1,5 +1,5 @@
 <template>
-  <span class="string">
+  <span class="string" role="treeitem" :aria-level="ariaLevel" :id="id">
     <span class="key">{{ name }}</span>
     <span v-if="name !== ''" class="separator">:&nbsp;</span>
     <span class="quotes">"</span>
@@ -23,6 +23,15 @@ export default {
     name: {
       required: true,
       type: String,
+    },
+
+    id: {
+      required: true,
+      type: String,
+    },
+    ariaLevel: {
+      required: true,
+      type: Number,
     },
   },
 };

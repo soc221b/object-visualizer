@@ -1,5 +1,11 @@
 <template>
-  <span class="array">
+  <span
+    class="array"
+    :role="role"
+    :aria-expanded="isExpanding"
+    :aria-level="ariaLevel"
+    :id="id"
+  >
     <span class="indicator" @click="handleClick">{{
       isExpanding ? "\u25BC" : "\u25B6"
     }}</span>
@@ -27,6 +33,8 @@
             :collapse-signal="innerCollapseSignal"
             :expandOnCreatedAndUpdated="() => false"
             :getKeys="getKeys"
+            :object-visualizer-uid="objectVisualizerUid"
+            :aria-level="ariaLevel"
           ></wrapper>
         </template>
       </span>
@@ -43,6 +51,8 @@
             :collapse-signal="innerCollapseSignal"
             :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
             :getKeys="getKeys"
+            :object-visualizer-uid="objectVisualizerUid"
+            :aria-level="ariaLevel"
           ></wrapper>
         </template>
       </span>
@@ -96,6 +106,23 @@ export default {
     getKeys: {
       required: true,
       type: Function,
+    },
+
+    objectVisualizerUid: {
+      required: true,
+      type: Number,
+    },
+    id: {
+      required: true,
+      type: String,
+    },
+    role: {
+      required: true,
+      type: String,
+    },
+    ariaLevel: {
+      required: true,
+      type: Number,
     },
   },
   setup(props) {
