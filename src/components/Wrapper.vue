@@ -56,7 +56,6 @@ import ObjectWrapper from "./ObjectWrapper.vue";
 import { objectToString } from "../util";
 
 const Wrapper = {
-  name: "wrapper",
   props: {
     path: {
       required: true,

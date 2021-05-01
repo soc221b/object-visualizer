@@ -53,7 +53,6 @@ import { objectToString } from "../util";
 import { useExpand, cache } from "../hooks";
 
 export default {
-  name: "object-wrapper",
   props: {
     path: {
       required: true,
