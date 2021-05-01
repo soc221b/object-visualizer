@@ -4,9 +4,9 @@
       isExpanding ? "\u25BC" : "\u25B6"
     }}</span>
     <span class="key" @click="handleClick">{{ name === "" ? "" : name }}</span>
-    <span class="separator" @click="handleClick">{{
-      name === "" ? "" : ": "
-    }}</span>
+    <span class="separator" @click="handleClick">
+      {{ name === "" ? "" : ": " }}
+    </span>
     <span class="count" @click="handleClick">
       {{
         isExpanding === false && data.length >= 2 ? "(" + data.length + ")" : ""
