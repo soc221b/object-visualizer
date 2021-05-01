@@ -84,13 +84,13 @@ mount(data, preEl);
 
 ## Options
 
-```js
-// path will be string[]
+```ts
 const options = {
-  getKeys: (object, path) => {
+  rootName: string,
+  getKeys: (object: any, path: string[]) => {
     return Object.keys(object).sort();
   },
-  expandOnCreatedAndUpdated: (path) => {
+  expandOnCreatedAndUpdated: (path: string[]) => {
     return true;
   },
 };
