@@ -35,9 +35,13 @@
 }
 
 .separator {
-  cursor: pointer;
   font-size: 0.8rem;
   color: hsl(0, 0%, 80%);
+}
+
+.array > .separator,
+.object > .separator {
+  cursor: pointer;
 }
 
 .indicator {
@@ -63,7 +67,6 @@
 .count,
 .preview,
 .quotes {
-  cursor: pointer;
   font-size: 0.8rem;
   color: hsl(0, 0%, 80%);
 }
@@ -71,4 +74,5 @@
 .count,
 .preview {
   user-select: none;
+  cursor: pointer;
 }
