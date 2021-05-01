@@ -1,30 +1,6 @@
 <template>
-  <null-wrapper
-    v-if="objectToString(data) === 'Null'"
-    :name="name"
-    :data="data"
-  ></null-wrapper>
-
-  <boolean-wrapper
-    v-else-if="objectToString(data) === 'Boolean'"
-    :name="name"
-    :data="data"
-  ></boolean-wrapper>
-
-  <number-wrapper
-    v-else-if="objectToString(data) === 'Number'"
-    :name="name"
-    :data="data"
-  ></number-wrapper>
-
-  <string-wrapper
-    v-else-if="objectToString(data) === 'String'"
-    :name="name"
-    :data="data"
-  ></string-wrapper>
-
-  <array-wrapper
-    v-else-if="objectToString(data) === 'Array'"
+  <component
+    :is="TYPE_TO_COMPONENT[objectToString(data)]"
     :name="name"
     :path="path"
     :data="data"
@@ -32,18 +8,7 @@
     :expand-signal="expandSignal"
     :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     :getKeys="getKeys"
-  ></array-wrapper>
-
-  <object-wrapper
-    v-else-if="objectToString(data) === 'Object'"
-    :name="name"
-    :path="path"
-    :data="data"
-    :collapse-signal="collapseSignal"
-    :expand-signal="expandSignal"
-    :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
-    :getKeys="getKeys"
-  ></object-wrapper>
+  />
 </template>
 
 <script>
@@ -55,7 +20,17 @@ import ArrayWrapper from "./ArrayWrapper.vue";
 import ObjectWrapper from "./ObjectWrapper.vue";
 import { objectToString } from "../util";
 
+const TYPE_TO_COMPONENT = {
+  Null: "null-wrapper",
+  Boolean: "boolean-wrapper",
+  Number: "number-wrapper",
+  String: "string-wrapper",
+  Array: "array-wrapper",
+  Object: "object-wrapper",
+};
+
 const Wrapper = {
+  inheritAttrs: false,
   props: {
     path: {
       required: true,
@@ -107,6 +82,7 @@ const Wrapper = {
   setup() {
     return {
       objectToString,
+      TYPE_TO_COMPONENT,
     };
   },
   components: {

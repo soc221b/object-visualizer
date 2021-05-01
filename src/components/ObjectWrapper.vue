@@ -53,6 +53,7 @@ import { objectToString } from "../util";
 import { useExpand, cache } from "../hooks";
 
 export default {
+  inheritAttrs: false,
   props: {
     path: {
       required: true,

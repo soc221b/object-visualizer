@@ -10,6 +10,7 @@
 import { objectToString } from "../util";
 
 export default {
+  inheritAttrs: false,
   props: {
     data: {
       required: true,
