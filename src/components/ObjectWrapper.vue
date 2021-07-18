@@ -123,12 +123,8 @@ export default {
     },
   },
   setup(props) {
-    const {
-      isExpanding,
-      innerExpandSignal,
-      innerCollapseSignal,
-      handleClick,
-    } = useExpand(props);
+    const { isExpanding, innerExpandSignal, innerCollapseSignal, handleClick } =
+      useExpand(props);
 
     const keys = computed(() => {
       return props.getKeys(props.data, props.path);
