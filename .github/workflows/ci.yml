@@ -7,13 +7,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - run: ls -l
-      - run: yarn install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7
 
-      - run: ls -l
-      - run: yarn build
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "pnpm"
 
-      - run: ls -l
+      - run: pnpm install
+
+      - run: pnpm run build
 
       - uses: cypress-io/github-action@v2
         with:
