@@ -2,18 +2,30 @@ name: E2E on Chrome
 on: [push, pull_request]
 jobs:
   cypress-run:
-    runs-on: ubuntu-16.04
     name: Cypress
+
+    runs-on: ubuntu-16.04
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
     steps:
       - uses: actions/checkout@v1
 
-      - run: ls -l
-      - run: yarn install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - run: ls -l
-      - run: yarn build
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7
 
-      - run: ls -l
+      - run: pnpm install
+
+      - run: pnpm build
 
       - uses: cypress-io/github-action@v2
         with:
