@@ -2,7 +2,7 @@
   "name": "object-visualizer",
   "version": "4.1.0",
   "engines": {
-    "node": ">=10"
+    "node": "^14 || ^16 || >=18"
   },
   "description": "Visualize JSON object to DOM.",
   "main": "dist/object-visualizer.cjs.min.js",
