@@ -15,22 +15,14 @@
 
 <script lang="ts">
 import NullWrapper from './NullWrapper.vue'
-import BooleanWrapper from './BooleanWrapper.vue'
+import TrueWrapper from './TrueWrapper.vue'
+import FalseWrapper from './FalseWrapper.vue'
 import NumberWrapper from './NumberWrapper.vue'
 import StringWrapper from './StringWrapper.vue'
 import ArrayWrapper from './ArrayWrapper.vue'
 import ObjectWrapper from './ObjectWrapper.vue'
 import { objectToString } from '../util'
 import { computed, defineComponent, PropType } from 'vue'
-
-const TYPE_TO_COMPONENT = {
-  Null: 'null-wrapper',
-  Boolean: 'boolean-wrapper',
-  Number: 'number-wrapper',
-  String: 'string-wrapper',
-  Array: 'array-wrapper',
-  Object: 'object-wrapper',
-}
 
 const Wrapper = defineComponent({
   inheritAttrs: false,
@@ -69,10 +61,23 @@ const Wrapper = defineComponent({
     },
   },
   setup(props) {
-    const type = computed(
-      () => objectToString(props.data) as keyof typeof TYPE_TO_COMPONENT,
-    )
-    const is = computed(() => TYPE_TO_COMPONENT[type.value])
+    const type = computed(() => objectToString(props.data))
+    const is = computed(() => {
+      switch (type.value) {
+        case 'Null':
+          return 'null-wrapper'
+        case 'Boolean':
+          return props.data ? 'true-wrapper' : 'false-wrapper'
+        case 'Number':
+          return 'number-wrapper'
+        case 'String':
+          return 'string-wrapper'
+        case 'Array':
+          return 'array-wrapper'
+        case 'Object':
+          return 'object-wrapper'
+      }
+    })
     const role = computed(() => {
       if (props.ariaLevel === 0) {
         if (type.value === 'Array' || type.value === 'Object') {
@@ -105,7 +110,8 @@ const Wrapper = defineComponent({
   },
   components: {
     NullWrapper,
-    BooleanWrapper,
+    TrueWrapper,
+    FalseWrapper,
     NumberWrapper,
     StringWrapper,
     ArrayWrapper,

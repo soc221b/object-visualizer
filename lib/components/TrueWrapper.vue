@@ -1,5 +1,5 @@
 <template>
-  <span class="boolean" :role="role" :aria-level="ariaLevel">
+  <span class="true" :role="role" :aria-level="ariaLevel">
     <span class="key">{{ name }}</span>
     <span v-if="name !== ''" class="separator">:&nbsp;</span>
     <span class="value">{{ data }}</span>
