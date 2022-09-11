@@ -20,6 +20,7 @@ Visualize the JSON object to the DOM.
 
   - Recursive expand `Meta+Click`
   - Recursive collapse `Meta+Shift+Click`
+
 - Light/Dark mode
 
 ## Installation
