@@ -7,4 +7,8 @@ fetch('https://jsonplaceholder.typicode.com/users')
       getKeys: (object) => Object.keys(object).sort(),
     })
     app.mount(document.getElementById('app'))
+
+    window.onbeforeunload = () => {
+      app.unmount()
+    }
   })
