@@ -12,19 +12,13 @@ Visualize the JSON object to the DOM.
 
 ## Feature
 
-### Reactivity
+- `getKeys`: customize visible keys in any nested data
+- `expandOnCreatedAndUpdated`: expand or collapse after created or updated
 
-### Fully Configurable
+  > Starting from v4.0.0, this feature is only available for objects due to performance issues.
 
-- option.getKeys: customize visible keys in any nested data
-- option.expandOnCreatedAndUpdated: expand or collapse after created or updated
-
-### Expand/Collapse Hot Keys
-
-> Starting from v4.0.0, this feature is only available for objects due to performance issues.
-
-- Recursive expand `Meta+Click`
-- Recursive collapse `Meta+Shift+Click`
+  - Recursive expand `Meta+Click`
+  - Recursive collapse `Meta+Shift+Click`
 
 ## Installation
 
@@ -43,60 +37,33 @@ $ npm install object-visualizer
 
 ## How to use
 
-1. Import the **mount** function from the module
+1. Import component:
 
-```js
-import { mount } from 'object-visualizer'
-```
+   ```ts
+   import { ObjectVisualizer } from 'object-visualizer'
+   ```
 
-2. Query the HTML element to inject the JSON, e.g. `<pre id="app"></pre>`
+   or
 
-```js
-//Vanilla JS
-const preEl = document.getElementById('app')
-//Vanilla JS new dom api
-const preEl = document.querySelector('#app')
-//jQuery
-const preEl = $('#app')
-```
+   ```js
+   const ObjectVisualizer = window.ObjectVisualizer.ObjectVisualizer
+   ```
 
-3. Have your data on a variable
+2. Mount:
 
-```js
-const data = {}
-```
-
-> Optional: To make DOM reactivity, just wrap your data via reactive function before mount it.
-
-```js
-import { reactive } from 'object-visualizer'
-
-const data = reactive({})
-```
-
-4. Use mount function
-
-```js
-mount(data, preEl)
-```
-
-5. Thats it!!
-
-## Options
-
-```ts
-const options = {
-  rootName: string,
-  getKeys: (object: any, path: string[]) => {
-    return Object.keys(object).sort()
-  },
-  expandOnCreatedAndUpdated: (path: string[]) => {
-    return true
-  },
-}
-
-mount(data, preEl, options)
-```
+    ```ts
+    const data = fetch('https://jsonplaceholder.typicode.com/users')
+    const const app = Vue.createApp(ObjectVisualizer, {
+      // required props:
+      data,
+      // optional props with default values:
+      rootName: '',
+      expandOnCreatedAndUpdated: (path: string[]) => false,
+      getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
+      uid: getCurrentInstance()?.uid
+    })
+    app.mount(document.getElementById('app'))
+    ```
 
 ## License
 
