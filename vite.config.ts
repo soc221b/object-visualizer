@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { minify } from 'csso'
 
@@ -23,6 +24,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    dts(),
     viteStaticCopy({
       targets: [
         { src: 'lib/index.css', dest: '.' },
