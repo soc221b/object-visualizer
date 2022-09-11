@@ -3,7 +3,7 @@
     <span class="key">{{ name }}</span>
     <span v-if="name !== ''" class="separator">:&nbsp;</span>
     <span class="quotes">"</span>
-    <span class="value">{{ data }}</span>
+    <span class="value">{{ JSON.stringify(data).slice(1, -1) }}</span>
     <span class="quotes">"</span>
   </span>
 </template>
