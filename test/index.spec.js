@@ -1,3 +1,3 @@
-const preEl = document.getElementById("app");
+const preEl = document.getElementById('app')
 
-ObjectVisualizer.mount(data, preEl);
+ObjectVisualizer.mount(data, preEl)

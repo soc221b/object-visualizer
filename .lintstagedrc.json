@@ -1,0 +1,4 @@
+{
+  "package.json": "sort-package-json --check",
+  "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "prettier --check ."
+}
