@@ -1,58 +1,69 @@
 {
   "name": "object-visualizer",
   "version": "4.1.0",
-  "engines": {
-    "node": "^14 || ^16 || >=18"
-  },
   "description": "Visualize JSON object to DOM.",
-  "main": "dist/object-visualizer.cjs.min.js",
-  "module": "dist/object-visualizer.esm.min.js",
-  "unpkg": "dist/object-visualizer.iife.min.js",
-  "jsdelivr": "dist/object-visualizer.iife.min.js",
-  "files": [
-    "dist"
-  ],
-  "author": "Ernest Chang <iattempt.net@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iendeavor/object-visualizer"
-  },
-  "bugs": {
-    "url": "https://github.com/iendeavor/object-visualizer/issues"
-  },
-  "homepage": "https://github.com/iendeavor/object-visualizer#readme",
   "keywords": [
+    "vue",
     "object",
     "JSON",
     "DOM",
     "visualize",
     "view"
   ],
+  "homepage": "https://github.com/iendeavor/object-visualizer#readme",
+  "bugs": {
+    "url": "https://github.com/iendeavor/object-visualizer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iendeavor/object-visualizer"
+  },
+  "license": "MIT",
+  "author": "Ernest <iedneavor.github.io@gmail.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/object-visualizer.js",
+      "require": "./dist/object-visualizer.umd.cjs"
+    }
+  },
+  "main": "./dist/object-visualizer.umd.cjs",
+  "module": "./dist/object-visualizer.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup --config rollup.config.js",
-    "test": "cypress run",
-    "lint": "prettier --check .",
-    "prepare": "husky install"
+    "build": "vue-tsc --noEmit && vite build",
+    "dev": "vite",
+    "lint-fix": "npm-run-all --aggregate-output -lnp lint-fix:*",
+    "lint-fix:prettier": "prettier --write .",
+    "lint-fix:sort-package-json": "sort-package-json",
+    "prepare": "husky install",
+    "preview": "vite preview",
+    "test": "cypress run"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "@vue/compiler-sfc": "^3.0.2",
-    "csso": "^4.0.3",
-    "cypress": "^6.0.0",
-    "husky": "^6.0.0",
-    "prettier": "^2.1.2",
-    "rollup": "^2.33.1",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-vue": "^6.0.0-beta.11",
-    "vue": "^3.0.2"
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/node": "^18.7.16",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "csso": "^5.0.5",
+    "cypress": "^10.7.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.7.1",
+    "sort-package-json": "^1.57.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-plugin-static-copy": "^0.9.0",
+    "vue": "^3.2.39",
+    "vue-tsc": "^0.40.13"
   },
   "peerDependencies": {
-    "vue": "^3.0.2"
+    "vue": "^3.2.39"
+  },
+  "engines": {
+    "node": "^14 || ^16 || >=18"
   }
 }
