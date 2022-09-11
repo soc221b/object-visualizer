@@ -1,6 +1,6 @@
 {
   "name": "object-visualizer",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0-beta.1",
   "description": "Visualize JSON object to DOM.",
   "keywords": [
     "vue",
