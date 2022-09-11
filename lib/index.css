@@ -1,78 +1,135 @@
+/* common */
 .object-visualizer {
-  border-radius: 4px;
-  overflow-x: auto;
   margin: 0;
   padding: 10px;
   font-family: Menlo;
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1.4;
-  background-color: hsl(0, 0%, 13%);
+  cursor: default;
+  overflow: auto;
 }
 
-.array > .value,
-.object > .value {
+.object-visualizer .value {
+  white-space: nowrap;
+}
+
+.object-visualizer .array > .value,
+.object-visualizer .object > .value {
   display: flex;
   flex-direction: column;
   margin-left: 2rem;
 }
 
-.key {
-  color: hsl(300, 60%, 65%);
+.object-visualizer .array[aria-expanded='false'] > .count,
+.object-visualizer .object[aria-expanded='false'] > .count {
+  margin-right: 0.5rem;
 }
 
-.string > .value {
-  color: hsl(15, 100%, 70%);
-}
-
-.boolean > .value,
-.number > .value {
-  color: hsl(250, 70%, 65%);
-}
-
-.null > .value,
-.undefined > .value {
-  color: hsl(0, 0%, 40%);
-}
-
-.separator {
-  font-size: 0.8rem;
-  color: hsl(0, 0%, 80%);
-}
-
-.array > .separator,
-.object > .separator {
-  cursor: pointer;
-}
-
-.indicator {
-  cursor: pointer;
+.object-visualizer .indicator {
   font-size: 0.8rem;
   padding-right: 0.3rem;
   user-select: none;
   vertical-align: text-bottom;
-  color: hsl(0, 0%, 50%);
 }
 
-.array > .key,
-.object > .key {
-  cursor: pointer;
+.object-visualizer > * > .preview {
+  font-style: italic;
 }
 
-.value > .array,
-.value > .object {
+.object-visualizer .value > .array,
+.object-visualizer .value > .object {
   position: relative;
   left: -0.8rem;
 }
 
-.count,
-.preview,
-.quotes {
-  font-size: 0.8rem;
-  color: hsl(0, 0%, 80%);
+/* light */
+.object-visualizer {
+  background-color: #ffffff;
 }
 
-.count,
-.preview {
-  user-select: none;
-  cursor: pointer;
+.object-visualizer .null > .value {
+  color: #80868a;
+}
+
+.object-visualizer .boolean > .value {
+  color: #1a1aa6;
+}
+
+.object-visualizer .number > .value {
+  color: #1a1aa6;
+}
+
+.object-visualizer .string > .value {
+  color: #c80200;
+}
+
+.object-visualizer .quotes {
+  color: #c80200;
+}
+
+.object-visualizer .indicator {
+  color: #5f6367;
+}
+
+.object-visualizer .key {
+  color: #881180;
+}
+
+.object-visualizer .separator {
+  color: #202124;
+}
+
+.object-visualizer .count {
+  color: #5f6367;
+}
+
+.object-visualizer .preview {
+  color: #202124;
+}
+
+/* dark */
+@media (prefers-color-scheme: dark) {
+  .object-visualizer {
+    background-color: #202124;
+  }
+
+  .object-visualizer .null > .value {
+    color: #80868a;
+  }
+
+  .object-visualizer .boolean > .value {
+    color: #9980ff;
+  }
+
+  .object-visualizer .number > .value {
+    color: #9980ff;
+  }
+
+  .object-visualizer .string > .value {
+    color: #36d4c7;
+  }
+
+  .object-visualizer .quotes {
+    color: #36d4c7;
+  }
+
+  .object-visualizer .indicator {
+    color: #9aa0a6;
+  }
+
+  .object-visualizer .key {
+    color: #5db0d7;
+  }
+
+  .object-visualizer .separator {
+    color: #e8eaed;
+  }
+
+  .object-visualizer .count {
+    color: #9aa0a6;
+  }
+
+  .object-visualizer .preview {
+    color: #e8eaed;
+  }
 }
