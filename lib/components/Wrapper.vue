@@ -12,9 +12,8 @@
     :id="`object-visualizer-${objectVisualizerUid}--${
       path.length === 0 ? 'root' : path.join('-')
     }`"
-    :role="role"
-    :aria-level="role ? ariaLevel + 1 : void 0"
     :class="ariaLevel === 0 ? 'object-visualizer' : void 0"
+    v-bind="attrs"
   />
 </template>
 
@@ -117,10 +116,19 @@ const Wrapper = defineComponent({
         }
       }
     })
+    const attrs = computed(() => {
+      const attrs: { role?: string; ariaLevel?: number } = {}
+      if (role.value !== void 0) {
+        attrs.role = role.value
+        attrs.ariaLevel = props.ariaLevel
+      }
+      return attrs
+    })
 
     return {
       is,
       role,
+      attrs,
       objectToString,
       TYPE_TO_COMPONENT,
     }
