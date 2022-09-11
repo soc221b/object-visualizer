@@ -25,48 +25,54 @@ Visualize the JSON object to the DOM.
 
 ## Installation
 
+### NPM
+
 ```
 $ npm install object-visualizer
 ```
+
+```ts
+import { ObjectVisualizer } from 'object-visualizer'
+import 'object-visualizer/dist/index.min.css'
+```
+
+### CDN
 
 ```html
 <script src="https://unpkg.com/object-visualizer"></script>
 <link
   type="text/css"
   rel="stylesheet"
-  href="https://unpkg.com/object-visualizer/dist/index.css"
+  href="https://unpkg.com/object-visualizer/dist/index.min.css"
 />
+
+<script>
+  const ObjectVisualizer = window.ObjectVisualizer.ObjectVisualizer
+</script>
 ```
 
 ## How to use
 
-1. Import component:
+```ts
+const data = await fetch('https://jsonplaceholder.typicode.com/users').then(
+  (response) => response.json(),
+)
 
-   ```ts
-   import { ObjectVisualizer } from 'object-visualizer'
-   ```
+const app = Vue.createApp(ObjectVisualizer, {
+  // required props:
+  data,
+  // optional props with default values:
+  rootName: '',
+  expandOnCreatedAndUpdated: (path: string[]) => false,
+  getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
+  uid: getCurrentInstance()?.uid,
+})
 
-   or
+app.mount(document.getElementById('app'))
 
-   ```js
-   const ObjectVisualizer = window.ObjectVisualizer.ObjectVisualizer
-   ```
-
-2. Mount:
-
-   ```ts
-   const data = fetch('https://jsonplaceholder.typicode.com/users')
-   const const app = Vue.createApp(ObjectVisualizer, {
-     // required props:
-     data,
-     // optional props with default values:
-     rootName: '',
-     expandOnCreatedAndUpdated: (path: string[]) => false,
-     getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
-     uid: getCurrentInstance()?.uid
-   })
-   app.mount(document.getElementById('app'))
-   ```
+// remember to unmount before unload
+app.unmount()
+```
 
 ## License
 
