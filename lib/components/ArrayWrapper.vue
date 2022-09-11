@@ -60,7 +60,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { objectToString } from '../util'
 import { useExpand, cache } from '../hooks'
 
 export default defineComponent({
@@ -69,23 +68,10 @@ export default defineComponent({
     path: {
       required: true,
       type: Array as PropType<string[]>,
-      validator(path: unknown) {
-        return (
-          objectToString(path) === 'Array' &&
-          (path as unknown[]).every(
-            (key: unknown) =>
-              objectToString(key) === 'String' ||
-              objectToString(key) === 'Number',
-          )
-        )
-      },
     },
     data: {
       required: true,
       type: Array,
-      validator(data: any) {
-        return objectToString(data) === 'Array'
-      },
     },
     name: {
       required: true,

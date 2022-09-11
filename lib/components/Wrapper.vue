@@ -37,30 +37,10 @@ const Wrapper = defineComponent({
   props: {
     path: {
       required: true,
-      type: Array as PropType<string[]>,
-      validator(path: unknown) {
-        return (
-          objectToString(path) === 'Array' &&
-          (path as unknown[]).every(
-            (key: unknown) =>
-              objectToString(key) === 'String' ||
-              objectToString(key) === 'Number',
-          )
-        )
-      },
+      type: Array as PropType<(string | number)[]>,
     },
     data: {
       required: true,
-      validator(data: any) {
-        return (
-          objectToString(data) === 'Null' ||
-          objectToString(data) === 'Boolean' ||
-          objectToString(data) === 'Number' ||
-          objectToString(data) === 'String' ||
-          objectToString(data) === 'Array' ||
-          objectToString(data) === 'Object'
-        )
-      },
     },
     name: {
       required: true,
@@ -121,8 +101,6 @@ const Wrapper = defineComponent({
       is,
       role,
       attrs,
-      objectToString,
-      TYPE_TO_COMPONENT,
     }
   },
   components: {
