@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { getCurrentInstance } from 'vue'
 import Wrapper from './components/Wrapper.vue'
 
 withDefaults(
@@ -8,14 +7,12 @@ withDefaults(
     rootName?: string
     expandOnCreatedAndUpdated?: (path: string[]) => boolean
     getKeys?: (object: Record<string, any>, path: string[]) => string[]
-    uid?: number
   }>(),
   {
     rootName: '',
     expandOnCreatedAndUpdated: () => false,
     getKeys: (object: Record<string, any>, path: string[]) =>
       Object.keys(object),
-    uid: getCurrentInstance()?.uid,
   },
 )
 </script>
@@ -27,7 +24,6 @@ withDefaults(
       :name="rootName"
       :expand-on-created-and-updated="expandOnCreatedAndUpdated"
       :get-keys="getKeys"
-      :object-visualizer-uid="0"
       :path="[]"
       :aria-level="0"
     >

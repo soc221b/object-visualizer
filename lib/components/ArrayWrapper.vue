@@ -4,7 +4,6 @@
     :role="role"
     :aria-expanded="isExpanding"
     :aria-level="ariaLevel"
-    :id="id"
     @click.self="handleClick"
   >
     <span class="indicator" @click="handleClick">{{
@@ -34,7 +33,6 @@
             :collapse-signal="innerCollapseSignal"
             :expandOnCreatedAndUpdated="() => false"
             :getKeys="getKeys"
-            :object-visualizer-uid="objectVisualizerUid"
             :aria-level="ariaLevel"
           ></wrapper>
         </template>
@@ -52,7 +50,6 @@
             :collapse-signal="innerCollapseSignal"
             :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
             :getKeys="getKeys"
-            :object-visualizer-uid="objectVisualizerUid"
             :aria-level="ariaLevel"
           ></wrapper>
         </template>
@@ -111,14 +108,6 @@ export default defineComponent({
       type: Function,
     },
 
-    objectVisualizerUid: {
-      required: true,
-      type: Number,
-    },
-    id: {
-      required: true,
-      type: String,
-    },
     role: {
       required: true,
       type: String,

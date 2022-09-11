@@ -8,10 +8,6 @@
     :expand-signal="expandSignal"
     :expandOnCreatedAndUpdated="expandOnCreatedAndUpdated"
     :getKeys="getKeys"
-    :object-visualizer-uid="objectVisualizerUid"
-    :id="`object-visualizer-${objectVisualizerUid}--${
-      path.length === 0 ? 'root' : path.join('-')
-    }`"
     :class="ariaLevel === 0 ? 'object-visualizer' : void 0"
     v-bind="attrs"
   />
@@ -87,10 +83,6 @@ const Wrapper = defineComponent({
       type: Function,
     },
 
-    objectVisualizerUid: {
-      required: true,
-      type: Number,
-    },
     ariaLevel: {
       required: true,
       type: Number,

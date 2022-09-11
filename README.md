@@ -65,7 +65,6 @@ const app = Vue.createApp(ObjectVisualizer, {
   rootName: '',
   expandOnCreatedAndUpdated: (path: string[]) => false,
   getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
-  uid: getCurrentInstance()?.uid,
 })
 
 app.mount(document.getElementById('app'))
