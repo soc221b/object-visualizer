@@ -1,5 +1,5 @@
 <template>
-  <span class="number" role="treeitem" :aria-level="ariaLevel" :id="id">
+  <span class="number" :role="role" :aria-level="ariaLevel" :id="id">
     <span class="key">{{ name }}</span>
     <span v-if="name !== ''" class="separator">:&nbsp;</span>
     <span class="value">{{ data }}</span>
@@ -22,6 +22,10 @@ export default defineComponent({
     },
 
     id: {
+      required: true,
+      type: String,
+    },
+    role: {
       required: true,
       type: String,
     },

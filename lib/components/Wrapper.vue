@@ -13,7 +13,8 @@
       path.length === 0 ? 'root' : path.join('-')
     }`"
     :role="role"
-    :aria-level="ariaLevel + 1"
+    :aria-level="role ? ariaLevel + 1 : void 0"
+    :class="ariaLevel === 0 ? 'object-visualizer' : void 0"
   />
 </template>
 
@@ -25,7 +26,7 @@ import StringWrapper from './StringWrapper.vue'
 import ArrayWrapper from './ArrayWrapper.vue'
 import ObjectWrapper from './ObjectWrapper.vue'
 import { objectToString } from '../util'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 
 const TYPE_TO_COMPONENT = {
   Null: 'null-wrapper',
@@ -40,13 +41,13 @@ const Wrapper = defineComponent({
   inheritAttrs: false,
   props: {
     path: {
-      type: Array,
       required: true,
+      type: Array as PropType<string[]>,
       validator(path: unknown) {
         return (
           objectToString(path) === 'Array' &&
           (path as unknown[]).every(
-            (key) =>
+            (key: unknown) =>
               objectToString(key) === 'String' ||
               objectToString(key) === 'Number',
           )
@@ -91,24 +92,35 @@ const Wrapper = defineComponent({
       required: true,
       type: Number,
     },
-    role: {
-      default: 'group',
-      type: String,
-    },
     ariaLevel: {
       required: true,
       type: Number,
     },
   },
   setup(props) {
-    const is = computed(
-      () =>
-        TYPE_TO_COMPONENT[
-          objectToString(props.data) as keyof typeof TYPE_TO_COMPONENT
-        ],
+    const type = computed(
+      () => objectToString(props.data) as keyof typeof TYPE_TO_COMPONENT,
     )
+    const is = computed(() => TYPE_TO_COMPONENT[type.value])
+    const role = computed(() => {
+      if (props.ariaLevel === 0) {
+        if (type.value === 'Array' || type.value === 'Object') {
+          return 'tree'
+        } else {
+          return void 0
+        }
+      } else {
+        if (type.value === 'Array' || type.value === 'Object') {
+          return 'group'
+        } else {
+          return 'treeitem'
+        }
+      }
+    })
+
     return {
       is,
+      role,
       objectToString,
       TYPE_TO_COMPONENT,
     }

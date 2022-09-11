@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import path from 'path'
-import { mount } from '../../../dist/object-visualizer.esm'
+import { mount } from '../../utils/index'
 
 const options = {
   rootName: '$',

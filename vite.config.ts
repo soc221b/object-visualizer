@@ -8,7 +8,7 @@ import { minify } from 'csso'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'lib/index.ts'),
+      entry: path.resolve(__dirname, 'lib/main.ts'),
       name: 'ObjectVisualizer',
       fileName: 'object-visualizer',
     },

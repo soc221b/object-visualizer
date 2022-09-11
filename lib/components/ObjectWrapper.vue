@@ -72,7 +72,7 @@ export default defineComponent({
         return (
           objectToString(path) === 'Array' &&
           (path as unknown[]).every(
-            (key) =>
+            (key: unknown) =>
               objectToString(key) === 'String' ||
               objectToString(key) === 'Number',
           )
