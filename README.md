@@ -65,7 +65,7 @@ const app = Vue.createApp(ObjectVisualizer, {
   rootName: '',
   expandOnCreatedAndUpdated: (path: PropertyKey[]): boolean => false,
   getKeys: (
-    object: Record<string, unknown> | unknown[],
+    object: Record<PropertyKey, unknown> | unknown[],
     path: PropertyKey[],
   ): string[] => Object.keys(object),
 })
