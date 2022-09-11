@@ -8,7 +8,8 @@ Visualize the JSON object to the DOM.
 
 ## Live Demo
 
-[![As same as Chrome's object tree](./screenshot.png)](https://codesandbox.io/s/object-visualizer-5bji4)
+[![As same as Chrome's object tree](./dark.png)](https://codesandbox.io/s/object-visualizer-5bji4)
+[![As same as Chrome's object tree](./light.png)](https://codesandbox.io/s/object-visualizer-5bji4)
 
 ## Feature
 
@@ -19,6 +20,7 @@ Visualize the JSON object to the DOM.
 
   - Recursive expand `Meta+Click`
   - Recursive collapse `Meta+Shift+Click`
+- Light/Dark mode
 
 ## Installation
 
@@ -51,19 +53,19 @@ $ npm install object-visualizer
 
 2. Mount:
 
-    ```ts
-    const data = fetch('https://jsonplaceholder.typicode.com/users')
-    const const app = Vue.createApp(ObjectVisualizer, {
-      // required props:
-      data,
-      // optional props with default values:
-      rootName: '',
-      expandOnCreatedAndUpdated: (path: string[]) => false,
-      getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
-      uid: getCurrentInstance()?.uid
-    })
-    app.mount(document.getElementById('app'))
-    ```
+   ```ts
+   const data = fetch('https://jsonplaceholder.typicode.com/users')
+   const const app = Vue.createApp(ObjectVisualizer, {
+     // required props:
+     data,
+     // optional props with default values:
+     rootName: '',
+     expandOnCreatedAndUpdated: (path: string[]) => false,
+     getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
+     uid: getCurrentInstance()?.uid
+   })
+   app.mount(document.getElementById('app'))
+   ```
 
 ## License
 
