@@ -1,24 +1,20 @@
 <template>
-  <span class="string" role="treeitem" :aria-level="ariaLevel" :id="id">
+  <span class="boolean" role="treeitem" :aria-level="ariaLevel" :id="id">
     <span class="key">{{ name }}</span>
     <span v-if="name !== ''" class="separator">:&nbsp;</span>
-    <span class="quotes">"</span>
     <span class="value">{{ data }}</span>
-    <span class="quotes">"</span>
   </span>
 </template>
 
-<script>
-import { objectToString } from "../util";
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   inheritAttrs: false,
   props: {
     data: {
+      type: Boolean,
       required: true,
-      validator(data) {
-        return objectToString(data) === "String";
-      },
     },
     name: {
       required: true,
@@ -34,5 +30,5 @@ export default {
       type: Number,
     },
   },
-};
+})
 </script>

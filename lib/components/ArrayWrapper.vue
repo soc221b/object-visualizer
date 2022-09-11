@@ -7,19 +7,19 @@
     :id="id"
   >
     <span class="indicator" @click="handleClick">{{
-      isExpanding ? "\u25BC" : "\u25B6"
+      isExpanding ? '\u25BC' : '\u25B6'
     }}</span>
-    <span class="key" @click="handleClick">{{ name === "" ? "" : name }}</span>
+    <span class="key" @click="handleClick">{{ name === '' ? '' : name }}</span>
     <span class="separator" @click="handleClick">
-      {{ name === "" ? "" : ": " }}
+      {{ name === '' ? '' : ': ' }}
     </span>
     <span class="count" @click="handleClick">
       {{
-        isExpanding === false && data.length >= 2 ? "(" + data.length + ")" : ""
+        isExpanding === false && data.length >= 2 ? '(' + data.length + ')' : ''
       }}
     </span>
     <span class="preview" @click="handleClick">
-      {{ isExpanding ? "Array(" + data.length + ")" : "[...]" }}
+      {{ isExpanding ? 'Array(' + data.length + ')' : '[...]' }}
     </span>
 
     <template v-if="isCircular">
@@ -60,31 +60,33 @@
   </span>
 </template>
 
-<script>
-import { computed } from "vue";
-import { objectToString } from "../util";
-import { useExpand, cache } from "../hooks";
+<script lang="ts">
+import { computed, defineComponent, PropType } from 'vue'
+import { objectToString } from '../util'
+import { useExpand, cache } from '../hooks'
 
-export default {
+export default defineComponent({
   inheritAttrs: false,
   props: {
     path: {
       required: true,
-      validator(path) {
+      type: Array as PropType<string[]>,
+      validator(path: unknown) {
         return (
-          objectToString(path) === "Array" &&
-          path.every(
-            (key) =>
-              objectToString(key) === "String" ||
-              objectToString(key) === "Number"
+          objectToString(path) === 'Array' &&
+          (path as unknown[]).every(
+            (key: unknown) =>
+              objectToString(key) === 'String' ||
+              objectToString(key) === 'Number',
           )
-        );
+        )
       },
     },
     data: {
       required: true,
-      validator(data) {
-        return objectToString(data) === "Array";
+      type: Array,
+      validator(data: any) {
+        return objectToString(data) === 'Array'
       },
     },
     name: {
@@ -101,7 +103,7 @@ export default {
     },
     expandOnCreatedAndUpdated: {
       required: true,
-      type: Function,
+      type: Function as PropType<(path: string[]) => boolean>,
     },
     getKeys: {
       required: true,
@@ -127,14 +129,14 @@ export default {
   },
   setup(props) {
     const { isExpanding, innerExpandSignal, innerCollapseSignal, handleClick } =
-      useExpand(props);
+      useExpand(props)
 
     const keys = computed(() => {
-      return props.getKeys(props.data, props.path);
-    });
+      return props.getKeys(props.data, props.path)
+    })
 
-    const isCircular = cache.has(props.data);
-    cache.add(props.data);
+    const isCircular = cache.has(props.data)
+    cache.add(props.data)
 
     return {
       keys,
@@ -143,10 +145,10 @@ export default {
       innerCollapseSignal,
       handleClick,
       isCircular,
-    };
+    }
   },
   components: {
     // Wrapper,
   },
-};
+})
 </script>
