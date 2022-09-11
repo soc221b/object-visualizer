@@ -26,11 +26,9 @@ export default defineComponent({
       type: String,
     },
     role: {
-      required: true,
       type: String,
     },
     ariaLevel: {
-      required: true,
       type: Number,
     },
   },
