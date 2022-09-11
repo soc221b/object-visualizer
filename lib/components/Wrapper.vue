@@ -120,7 +120,7 @@ const Wrapper = defineComponent({
       const attrs: { role?: string; ariaLevel?: number } = {}
       if (role.value !== void 0) {
         attrs.role = role.value
-        attrs.ariaLevel = props.ariaLevel
+        attrs.ariaLevel = props.ariaLevel + 1
       }
       return attrs
     })
