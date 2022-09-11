@@ -1,11 +1,12 @@
 import { ref, watch } from 'vue'
+import type { Path } from './util'
 
 export const cache = new Set()
 
 export function useExpand<T>(props: {
-  path: string[]
+  path: Path
   data: T
-  expandOnCreatedAndUpdated: (path: string[]) => boolean
+  expandOnCreatedAndUpdated: (path: Path) => boolean
   collapseSignal: boolean
   expandSignal: boolean
 }) {

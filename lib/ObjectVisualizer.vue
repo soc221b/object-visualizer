@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import Wrapper from './components/Wrapper.vue'
+import type { Path } from './util'
 
 withDefaults(
   defineProps<{
-    data: any
+    data: unknown
     rootName?: string
-    expandOnCreatedAndUpdated?: (path: string[]) => boolean
-    getKeys?: (object: Record<string, any>, path: string[]) => string[]
+    expandOnCreatedAndUpdated?: (path: Path) => boolean
+    getKeys?: (
+      object: Record<PropertyKey, unknown> | unknown[],
+      path: Path,
+    ) => string[]
   }>(),
   {
     rootName: '',
     expandOnCreatedAndUpdated: () => false,
-    getKeys: (object: Record<string, any>, path: string[]) =>
+    getKeys: (object: Record<PropertyKey, unknown> | unknown[], path: Path) =>
       Object.keys(object),
   },
 )

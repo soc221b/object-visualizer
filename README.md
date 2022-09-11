@@ -63,8 +63,11 @@ const app = Vue.createApp(ObjectVisualizer, {
   data,
   // optional props with default values:
   rootName: '',
-  expandOnCreatedAndUpdated: (path: string[]) => false,
-  getKeys: (object: Record<string, any>, path: string[]) => Object.keys(object),
+  expandOnCreatedAndUpdated: (path: PropertyKey[]): boolean => false,
+  getKeys: (
+    object: Record<string, unknown> | unknown[],
+    path: PropertyKey[],
+  ): string[] => Object.keys(object),
 })
 
 app.mount(document.getElementById('app'))

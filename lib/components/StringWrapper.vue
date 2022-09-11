@@ -1,3 +1,20 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  inheritAttrs: false,
+})
+</script>
+
+<script setup lang="ts">
+defineProps<{
+  data: string
+  name: string
+  role?: string
+  ariaLevel?: number
+}>()
+</script>
+
 <template>
   <span class="string" :role="role" :aria-level="ariaLevel">
     <span class="key">{{ name }}</span>
@@ -7,28 +24,3 @@
     <span class="quotes">"</span>
   </span>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  inheritAttrs: false,
-  props: {
-    data: {
-      type: String,
-      required: true,
-    },
-    name: {
-      required: true,
-      type: String,
-    },
-
-    role: {
-      type: String,
-    },
-    ariaLevel: {
-      type: Number,
-    },
-  },
-})
-</script>

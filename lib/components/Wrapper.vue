@@ -21,15 +21,15 @@ import NumberWrapper from './NumberWrapper.vue'
 import StringWrapper from './StringWrapper.vue'
 import ArrayWrapper from './ArrayWrapper.vue'
 import ObjectWrapper from './ObjectWrapper.vue'
-import { objectToString } from '../util'
-import { computed, defineComponent, PropType } from 'vue'
+import { objectToString, type Path } from '../util'
+import { computed, defineComponent, type PropType } from 'vue'
 
 const Wrapper = defineComponent({
   inheritAttrs: false,
   props: {
     path: {
       required: true,
-      type: Array as PropType<(string | number)[]>,
+      type: Array as PropType<Path>,
     },
     data: {
       required: true,
@@ -52,7 +52,12 @@ const Wrapper = defineComponent({
     },
     getKeys: {
       required: true,
-      type: Function,
+      type: Function as PropType<
+        (
+          object: Record<PropertyKey, unknown> | unknown[],
+          path: Path,
+        ) => string[]
+      >,
     },
 
     ariaLevel: {

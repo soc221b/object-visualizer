@@ -1,3 +1,46 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  inheritAttrs: false,
+  components: {},
+})
+</script>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useExpand, cache } from '../hooks'
+import type { Path } from '../util'
+
+const props = withDefaults(
+  defineProps<{
+    path: Path
+    data: Record<PropertyKey, unknown>
+    name: string
+    expandOnCreatedAndUpdated: (path: Path) => boolean
+    getKeys: (object: Record<PropertyKey, unknown>, path: Path) => string[]
+    role: string
+    ariaLevel: number
+    collapseSignal?: boolean
+    expandSignal?: boolean
+  }>(),
+  {
+    collapseSignal: false,
+    expandSignal: false,
+  },
+)
+
+const { isExpanding, innerExpandSignal, innerCollapseSignal, handleClick } =
+  useExpand(props)
+
+const keys = computed(() => {
+  return props.getKeys(props.data, props.path)
+})
+
+const isCircular = cache.has(props.data)
+cache.add(props.data)
+</script>
+
 <template>
   <span
     class="object"
@@ -23,7 +66,7 @@
           <wrapper
             class="value"
             :name="key"
-            :path="path.concat(key)"
+            :path="[...path, key]"
             :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
@@ -41,7 +84,7 @@
           <wrapper
             class="value"
             :name="key"
-            :path="path.concat(key)"
+            :path="[...path, key]"
             :data="data[key]"
             :expand-signal="innerExpandSignal"
             :collapse-signal="innerCollapseSignal"
@@ -54,74 +97,3 @@
     </template>
   </span>
 </template>
-
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { useExpand, cache } from '../hooks'
-
-export default defineComponent({
-  inheritAttrs: false,
-  props: {
-    path: {
-      required: true,
-      type: Array as PropType<string[]>,
-    },
-    data: {
-      type: Object as PropType<Record<PropertyKey, unknown>>,
-      required: true,
-    },
-    name: {
-      required: true,
-      type: String,
-    },
-    collapseSignal: {
-      default: false,
-      type: Boolean,
-    },
-    expandSignal: {
-      default: false,
-      type: Boolean,
-    },
-    expandOnCreatedAndUpdated: {
-      required: true,
-      type: Function as PropType<(path: string[]) => boolean>,
-    },
-    getKeys: {
-      required: true,
-      type: Function,
-    },
-
-    role: {
-      required: true,
-      type: String,
-    },
-    ariaLevel: {
-      required: true,
-      type: Number,
-    },
-  },
-  setup(props) {
-    const { isExpanding, innerExpandSignal, innerCollapseSignal, handleClick } =
-      useExpand(props)
-
-    const keys = computed(() => {
-      return props.getKeys(props.data, props.path)
-    })
-
-    const isCircular = cache.has(props.data)
-    cache.add(props.data)
-
-    return {
-      keys,
-      isExpanding,
-      innerExpandSignal,
-      innerCollapseSignal,
-      handleClick,
-      isCircular,
-    }
-  },
-  components: {
-    // Wrapper,
-  },
-})
-</script>
