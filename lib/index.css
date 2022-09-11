@@ -9,6 +9,11 @@
   overflow: auto;
 }
 
+.object-visualizer > * {
+  width: 100%;
+  display: inline-block;
+}
+
 .object-visualizer .value {
   white-space: nowrap;
 }

@@ -5,6 +5,7 @@
     :aria-expanded="isExpanding"
     :aria-level="ariaLevel"
     :id="id"
+    @click.self="handleClick"
   >
     <span class="indicator" @click="handleClick">{{
       isExpanding ? '\u25BC' : '\u25B6'
