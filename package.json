@@ -25,6 +25,14 @@
     ".": {
       "import": "./dist/object-visualizer.js",
       "require": "./dist/object-visualizer.umd.cjs"
+    },
+    "./dist/index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    },
+    "./dist/index.min.css": {
+      "import": "./dist/index.min.css",
+      "require": "./dist/index.min.css"
     }
   },
   "main": "./dist/object-visualizer.umd.cjs",
