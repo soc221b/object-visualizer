@@ -6,7 +6,7 @@ specifiers:
   '@types/node': ^18.7.16
   '@vitejs/plugin-vue': ^3.1.0
   csso: ^5.0.5
-  cypress: ^9
+  cypress: ^11.2.0
   husky: ^8.0.1
   lint-staged: ^13.0.3
   npm-run-all: ^4.1.5
@@ -25,7 +25,7 @@ devDependencies:
   '@types/node': 18.7.16
   '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
   csso: 5.0.5
-  cypress: 9.7.0
+  cypress: 11.2.0
   husky: 8.0.1
   lint-staged: 13.0.3
   npm-run-all: 4.1.5
@@ -283,13 +283,11 @@ packages:
       uuid: 8.3.2
     dev: true
 
-  /@cypress/xvfb/1.2.4_supports-color@8.1.1:
+  /@cypress/xvfb/1.2.4:
     resolution: {integrity: sha512-skbBzPggOVYCbnGgV+0dmBdW/s77ZkAOXIC1knS8NagwDjBrNC1LuXtQJeiN6l+m7lzmHtaoUw/ctJKdqkG57Q==}
     dependencies:
-      debug: 3.2.7_supports-color@8.1.1
+      debug: 3.2.7
       lodash.once: 4.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@esbuild/linux-loong64/0.15.7:
@@ -917,8 +915,9 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /ci-info/3.4.0:
-    resolution: {integrity: sha512-t5QdPT5jq3o262DOQ8zA6E1tlH2upmUc4Hlvrbx1pGYJuiiHl7O7rvVNI+l8HTVhd/q3Qc9vqimkNk5yiXsAug==}
+  /ci-info/3.7.0:
+    resolution: {integrity: sha512-2CpRNYmImPx+RXKLq6jko/L07phmS9I02TyqkcNU20GCF/GgaWvc58hPtjxDX8lPpkdwc9sNh72V9k00S7ezog==}
+    engines: {node: '>=8'}
     dev: true
 
   /clean-stack/2.2.0:
@@ -933,8 +932,8 @@ packages:
       restore-cursor: 3.1.0
     dev: true
 
-  /cli-table3/0.6.2:
-    resolution: {integrity: sha512-QyavHCaIC80cMivimWu4aWHilIpiDpfm3hGmqAmXVL1UsnbLuBSMd21hTX6VY4ZSDSM73ESLeF8TOYId3rBTbw==}
+  /cli-table3/0.6.3:
+    resolution: {integrity: sha512-w5Jac5SykAeZJKntOxJCrm63Eg5/4dhMWIcuTbo9rpE+brgaSZo0RuNJZeOyMgsUdhDeojvgyQLmjI+K50ZGyg==}
     engines: {node: 10.* || >= 12.*}
     dependencies:
       string-width: 4.2.3
@@ -1061,8 +1060,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      JSONStream: 1.3.5
       is-text-path: 1.0.1
+      JSONStream: 1.3.5
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -1142,14 +1141,14 @@ packages:
     resolution: {integrity: sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==}
     dev: true
 
-  /cypress/9.7.0:
-    resolution: {integrity: sha512-+1EE1nuuuwIt/N1KXRR2iWHU+OiIt7H28jJDyyI4tiUftId/DrXYEwoDa5+kH2pki1zxnA0r6HrUGHV5eLbF5Q==}
+  /cypress/11.2.0:
+    resolution: {integrity: sha512-u61UGwtu7lpsNWLUma/FKNOsrjcI6wleNmda/TyKHe0dOBcVjbCPlp1N6uwFZ0doXev7f/91YDpU9bqDCFeBLA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@cypress/request': 2.88.10
-      '@cypress/xvfb': 1.2.4_supports-color@8.1.1
+      '@cypress/xvfb': 1.2.4
       '@types/node': 14.18.28
       '@types/sinonjs__fake-timers': 8.1.1
       '@types/sizzle': 2.3.3
@@ -1161,13 +1160,13 @@ packages:
       chalk: 4.1.2
       check-more-types: 2.24.0
       cli-cursor: 3.1.0
-      cli-table3: 0.6.2
+      cli-table3: 0.6.3
       commander: 5.1.0
       common-tags: 1.8.2
-      dayjs: 1.11.5
+      dayjs: 1.11.6
       debug: 4.3.4_supports-color@8.1.1
       enquirer: 2.3.6
-      eventemitter2: 6.4.8
+      eventemitter2: 6.4.7
       execa: 4.1.0
       executable: 4.1.1
       extract-zip: 2.0.1_supports-color@8.1.1
@@ -1204,20 +1203,14 @@ packages:
       assert-plus: 1.0.0
     dev: true
 
-  /dayjs/1.11.5:
-    resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
     dev: true
 
-  /debug/3.2.7_supports-color@8.1.1:
+  /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
     dependencies:
       ms: 2.1.2
-      supports-color: 8.1.1
     dev: true
 
   /debug/4.3.4:
@@ -1599,8 +1592,8 @@ packages:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
-  /eventemitter2/6.4.8:
-    resolution: {integrity: sha512-pAJurPyD+Nj/pfz8m0usKF1RW0E9gfY4Dfdem2l6jZbqcZlK8SP93qUMCv9V9FgOn+GSZEW6qeaglpf/vQ9D5A==}
+  /eventemitter2/6.4.7:
+    resolution: {integrity: sha512-tYUSVOGeQPKt/eC1ABfhHy5Xd96N3oIijJvN3O9+TsC28T5V9yX9oEfEK5faP0EFSNVOG97qtAS68GBrQB2hDg==}
     dev: true
 
   /execa/4.1.0:
@@ -1896,8 +1889,8 @@ packages:
       ini: 1.3.8
     dev: true
 
-  /global-dirs/3.0.0:
-    resolution: {integrity: sha512-v8ho2DS5RiCjftj1nD9NmnfaOzTdud7RRnVd9kFNOjqZbISlx5DQ+OrTkywgd0dIt7oFCvKetZSHoHcP3sDdiA==}
+  /global-dirs/3.0.1:
+    resolution: {integrity: sha512-NBcGGFbBA9s1VzD41QXDG+3++t9Mn5t1FpLdhESY6oKY4gYTFpX4wO3sqGUa0Srjtbfj3szX0RnemmrVRUdULA==}
     engines: {node: '>=10'}
     dependencies:
       ini: 2.0.0
@@ -2096,7 +2089,7 @@ packages:
     resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==}
     hasBin: true
     dependencies:
-      ci-info: 3.4.0
+      ci-info: 3.7.0
     dev: true
 
   /is-core-module/2.10.0:
@@ -2138,7 +2131,7 @@ packages:
     resolution: {integrity: sha512-iwGqO3J21aaSkC7jWnHP/difazwS7SFeIqxv6wEtLU8Y5KlzFTjyqcSIT0d8s4+dDhKytsk9PJZ2BkS5eZwQRQ==}
     engines: {node: '>=10'}
     dependencies:
-      global-dirs: 3.0.0
+      global-dirs: 3.0.1
       is-path-inside: 3.0.3
     dev: true
 
