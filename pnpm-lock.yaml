@@ -15,7 +15,7 @@ specifiers:
   typescript: ^4.6.4
   vite: ^3.1.0
   vite-plugin-dts: ^1.4.1
-  vite-plugin-static-copy: ^0.9.0
+  vite-plugin-static-copy: ^0.12.0
   vue: ^3.2.39
   vue-tsc: ^0.40.13
 
@@ -34,7 +34,7 @@ devDependencies:
   typescript: 4.8.3
   vite: 3.1.0
   vite-plugin-dts: 1.4.1_vite@3.1.0
-  vite-plugin-static-copy: 0.9.0_vite@3.1.0
+  vite-plugin-static-copy: 0.12.0_vite@3.1.0
   vue: 3.2.39
   vue-tsc: 0.40.13_typescript@4.8.3
 
@@ -283,11 +283,13 @@ packages:
       uuid: 8.3.2
     dev: true
 
-  /@cypress/xvfb/1.2.4:
+  /@cypress/xvfb/1.2.4_supports-color@8.1.1:
     resolution: {integrity: sha512-skbBzPggOVYCbnGgV+0dmBdW/s77ZkAOXIC1knS8NagwDjBrNC1LuXtQJeiN6l+m7lzmHtaoUw/ctJKdqkG57Q==}
     dependencies:
-      debug: 3.2.7
+      debug: 3.2.7_supports-color@8.1.1
       lodash.once: 4.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@esbuild/linux-loong64/0.15.7:
@@ -1060,8 +1062,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -1148,7 +1150,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@cypress/request': 2.88.10
-      '@cypress/xvfb': 1.2.4
+      '@cypress/xvfb': 1.2.4_supports-color@8.1.1
       '@types/node': 14.18.28
       '@types/sinonjs__fake-timers': 8.1.1
       '@types/sizzle': 2.3.3
@@ -1207,10 +1209,16 @@ packages:
     resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
     dev: true
 
-  /debug/3.2.7:
+  /debug/3.2.7_supports-color@8.1.1:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.2
+      supports-color: 8.1.1
     dev: true
 
   /debug/4.3.4:
@@ -3560,8 +3568,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-static-copy/0.9.0_vite@3.1.0:
-    resolution: {integrity: sha512-0h8esPoZn6zdTK8KoDbiZPJum7+Nw2t4oLTpu2i2haP2HmgysRH+Xy6FaE6lLyCpgODYR5RiRjbLH0UKUZpIPw==}
+  /vite-plugin-static-copy/0.12.0_vite@3.1.0:
+    resolution: {integrity: sha512-5a8hCjYJdf/rl8s7ct/YWt97gXdGPGNSOoJtkY5IYhbnSq04X1gTt5GpFHKfAxhHoed1Grfw3Ed13t7AjJi7gw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
