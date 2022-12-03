@@ -4,22 +4,22 @@ jobs:
   cypress-run:
     name: Cypress
 
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Use pnpm
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v2
         with:
           version: 7
 
@@ -27,6 +27,6 @@ jobs:
 
       - run: pnpm build
 
-      - uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v5
         with:
           browser: chrome
