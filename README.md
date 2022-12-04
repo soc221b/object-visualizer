@@ -1,6 +1,6 @@
 # Object Visualizer
 
-Visualize the JSON object to the DOM.
+A vue component to visualize the JSON object to the DOM.
 
 ![E2E on Chrome](https://github.com/iendeavor/object-visualizer/workflows/E2E%20on%20Chrome/badge.svg)
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=iendeavor.object-visualizer)
@@ -47,33 +47,19 @@ import 'object-visualizer/dist/index.min.css'
 />
 
 <script>
-  const ObjectVisualizer = window.ObjectVisualizer.ObjectVisualizer
+  const { ObjectVisualizer } = window.ObjectVisualizer
 </script>
 ```
 
-## How to use
+## Usage
 
-```ts
-const data = await fetch('https://jsonplaceholder.typicode.com/users').then(
-  (response) => response.json(),
-)
-
-const app = Vue.createApp(ObjectVisualizer, {
-  // required props:
-  data,
-  // optional props with default values:
-  rootName: '',
-  expandOnCreatedAndUpdated: (path: PropertyKey[]): boolean => false,
-  getKeys: (
-    object: Record<PropertyKey, unknown> | unknown[],
-    path: PropertyKey[],
-  ): string[] => Object.keys(object),
-})
-
-app.mount(document.getElementById('app'))
-
-// remember to unmount before unload
-app.unmount()
+```vue
+<ObjectVisualizer
+  :data="['foo', 'bar']"
+  rootName="Data"
+  :expandOnCreatedAndUpdated="(path) => false"
+  :getKeys="(object, path) => Object.keys(object)"
+></ObjectVisualizer>
 ```
 
 ## License
