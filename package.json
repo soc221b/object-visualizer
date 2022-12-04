@@ -49,7 +49,7 @@
     "lint-fix:sort-package-json": "sort-package-json",
     "prepare": "husky install",
     "preview": "vite preview",
-    "release": "git fetch && pnpm exec standard-version",
+    "release": "pnpm exec standard-version --skip.tag",
     "test": "cypress run"
   },
   "devDependencies": {
