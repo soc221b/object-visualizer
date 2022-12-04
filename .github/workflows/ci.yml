@@ -30,3 +30,14 @@ jobs:
       - uses: cypress-io/github-action@v5
         with:
           browser: chrome
+
+      - uses: JS-DevTools/npm-publish@v1
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./package.json
+          tag: latest
+          access: public
+          dry-run: false
+          check-version: true
+          greater-version-only: true
