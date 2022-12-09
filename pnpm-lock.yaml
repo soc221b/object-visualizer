@@ -4,7 +4,7 @@ specifiers:
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
   '@types/node': ^18.7.16
-  '@vitejs/plugin-vue': ^3.1.0
+  '@vitejs/plugin-vue': ^4.0.0
   csso: ^5.0.5
   cypress: ^12.0.0
   husky: ^8.0.1
@@ -24,7 +24,7 @@ devDependencies:
   '@commitlint/cli': 17.1.2
   '@commitlint/config-conventional': 17.1.0
   '@types/node': 18.7.16
-  '@vitejs/plugin-vue': 3.1.0_vite@4.0.0+vue@3.2.39
+  '@vitejs/plugin-vue': 4.0.0_vite@4.0.0+vue@3.2.39
   csso: 5.0.5
   cypress: 12.0.0
   husky: 8.0.1
@@ -671,11 +671,11 @@ packages:
     dev: true
     optional: true
 
-  /@vitejs/plugin-vue/3.1.0_vite@4.0.0+vue@3.2.39:
-    resolution: {integrity: sha512-fmxtHPjSOEIRg6vHYDaem+97iwCUg/uSIaTzp98lhELt2ISOQuDo2hbkBdXod0g15IhfPMQmAxh4heUks2zvDA==}
+  /@vitejs/plugin-vue/4.0.0_vite@4.0.0+vue@3.2.39:
+    resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: ^3.0.0
+      vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
       vite: 4.0.0_@types+node@18.7.16
