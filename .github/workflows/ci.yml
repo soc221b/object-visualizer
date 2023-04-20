@@ -31,7 +31,7 @@ jobs:
         with:
           browser: chrome
 
-      - uses: JS-DevTools/npm-publish@v1
+      - uses: JS-DevTools/npm-publish@v2
         id: publish
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
