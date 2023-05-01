@@ -2,10 +2,6 @@
 
 A vue component to visualize the JSON object to the DOM.
 
-![E2E on Chrome](https://github.com/iendeavor/object-visualizer/workflows/E2E%20on%20Chrome/badge.svg)
-![visitors](https://visitor-badge.glitch.me/badge?page_id=iendeavor.object-visualizer)
-[![donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange)](https://www.paypal.com/paypalme/iendeavor)
-
 ## Live Demo
 
 [![As same as Chrome's object tree](./dark.png)](https://codesandbox.io/s/object-visualizer-5bji4)
@@ -62,12 +58,10 @@ import 'object-visualizer/dist/index.min.css'
 ></ObjectVisualizer>
 ```
 
-## License
+## About
 
-[MIT](https://github.com/iendeavor/object-visualizer/blob/master/LICENSE)
+<a href="https://www.buymeacoffee.com/iendeavor" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-## Donate
+Distributed under the MIT license. See LICENSE for more information.
 
-If this library helped you out feel free to donate.
-
-<a href="https://www.buymeacoffee.com/iendeavor"><img src="https://img.buymeacoffee.com/button-api/?text=Help me keep working on OSS&emoji=&slug=iendeavor&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00"></a>
+https://github.com/iendeavor
