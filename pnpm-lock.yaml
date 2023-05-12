@@ -47,8 +47,8 @@ devDependencies:
     specifier: ^2.0.0
     version: 2.1.0(@types/node@18.7.16)(vite@4.0.0)
   vite-plugin-static-copy:
-    specifier: ^0.14.0
-    version: 0.14.0(vite@4.0.0)
+    specifier: ^0.15.0
+    version: 0.15.0(vite@4.0.0)
   vue:
     specifier: ^3.2.39
     version: 3.2.39
@@ -4015,8 +4015,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-static-copy@0.14.0(vite@4.0.0):
-    resolution: {integrity: sha512-RMFmb4czomcrsbQBiUZs9HcDGN3kxGvF+OrtkfTVocp12CuoUCuJQhcY26RK35A6KS4WasGzEwcYZqHMjkAvVw==}
+  /vite-plugin-static-copy@0.15.0(vite@4.0.0):
+    resolution: {integrity: sha512-Ww+/Ug9guV45oIfIi/lA2z8v3K+lLHV9zCJqTVO4FTdqrJoZBj68VgGBSH1fi0N4q/EHW32RsL3ympi4Wlsq5w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0
