@@ -53,8 +53,8 @@
     "test": "cypress run"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@types/node": "^18.7.16",
     "@vitejs/plugin-vue": "^4.0.0",
     "csso": "^5.0.5",
