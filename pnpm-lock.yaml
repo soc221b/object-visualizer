@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 devDependencies:
   '@commitlint/cli':
     specifier: ^17.1.2
@@ -47,8 +51,8 @@ devDependencies:
     specifier: ^2.0.0
     version: 2.1.0(@types/node@18.7.16)(vite@4.0.0)
   vite-plugin-static-copy:
-    specifier: ^0.15.0
-    version: 0.15.0(vite@4.0.0)
+    specifier: ^1.0.0
+    version: 1.0.2(vite@4.0.0)
   vue:
     specifier: ^3.2.39
     version: 3.2.39
@@ -4015,11 +4019,11 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-static-copy@0.15.0(vite@4.0.0):
-    resolution: {integrity: sha512-Ww+/Ug9guV45oIfIi/lA2z8v3K+lLHV9zCJqTVO4FTdqrJoZBj68VgGBSH1fi0N4q/EHW32RsL3ympi4Wlsq5w==}
-    engines: {node: ^14.18.0 || >=16.0.0}
+  /vite-plugin-static-copy@1.0.2(vite@4.0.0):
+    resolution: {integrity: sha512-AfmEF+a/mfjsUsrgjbCkhzUCeIUF4EKQXXt3Ie1cour9MBpy6f6GphbdW2td28oYfOrwCyRzFCksgLkpk58q6Q==}
+    engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
-      vite: ^3.0.0 || ^4.0.0
+      vite: ^5.0.0
     dependencies:
       chokidar: 3.5.3
       fast-glob: 3.2.12
