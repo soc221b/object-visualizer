@@ -56,7 +56,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/node": "^18.7.16",
-    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue": "^5.0.0",
     "csso": "^5.0.5",
     "cypress": "^12.0.0",
     "husky": "^8.0.1",
